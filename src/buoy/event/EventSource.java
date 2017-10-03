@@ -47,27 +47,27 @@ public class EventSource {
      * @param eventType the event class or interface which the target method
      * wants to receive
      * @param target the object to send the events to
-     * @param method the name of the method to invoke on the target object. The
+     * @param methodName the name of the method to invoke on the target object. The
      * method must either take no arguments, or take an object of class
      * eventType (or any of its superclasses or interfaces) as its only
      * argument.
      */
-    public void addEventLink(Class eventType, Object target, String method) {
+    public void addEventLink(Class eventType, Object target, String methodName) {
         Class cls = target.getClass();
         while (cls != null) {
-            Method m[] = cls.getDeclaredMethods();
-            for (int i = 0; i < m.length; i++) {
-                if (m[i].getName().equals(method)) {
-                    Class param[] = m[i].getParameterTypes();
+
+            for (Method method : cls.getDeclaredMethods()) {
+                if (method.getName().equals(methodName)) {
+                    Class[] param = method.getParameterTypes();
                     if (param.length == 0 || (param.length == 1 && param[0].isAssignableFrom(eventType))) {
-                        addEventLink(eventType, target, m[i]);
+                        addEventLink(eventType, target, method);
                         return;
                     }
                 }
             }
             cls = cls.getSuperclass();
         }
-        throw new IllegalArgumentException("No method found which matches " + method + "(" + eventType.getName() + ")");
+        throw new IllegalArgumentException("No method found which matches " + methodName + "(" + eventType.getName() + ")");
     }
 
     /**

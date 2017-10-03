@@ -56,11 +56,10 @@ public class GridContainer extends WidgetContainer {
     @Override
     public int getChildCount() {
         int count = 0;
-        for (int i = 0; i < child.length; i++) {
-            for (int j = 0; j < child[i].length; j++) {
-                if (child[i][j] != null) {
-                    count++;
-                }
+        for (Widget[] child1 : child) {
+            for (Widget item : child1) {
+                if(item == null) continue;
+                count++;
             }
         }
         return count;
@@ -72,11 +71,10 @@ public class GridContainer extends WidgetContainer {
     @Override
     public Collection<Widget> getChildren() {
         ArrayList<Widget> ls = new ArrayList<Widget>(numCols * numRows);
-        for (int i = 0; i < child.length; i++) {
-            for (int j = 0; j < child[i].length; j++) {
-                if (child[i][j] != null) {
-                    ls.add(child[i][j]);
-                }
+        for (Widget[] child1 : child) {
+            for (Widget item : child1) {
+                if(item == null) continue;
+                ls.add(item);
             }
         }
         return ls;
@@ -403,16 +401,15 @@ public class GridContainer extends WidgetContainer {
     @Override
     public Dimension getMinimumSize() {
         int x = 0, y = 0;
-        for (int i = 0; i < child.length; i++) {
-            for (int j = 0; j < child[i].length; j++) {
-                if (child[i][j] != null) {
-                    Dimension dim = child[i][j].getMinimumSize();
-                    if (dim.width > x) {
-                        x = dim.width;
-                    }
-                    if (dim.height > y) {
-                        y = dim.height;
-                    }
+        for (Widget[] child1 : child) {
+            for (Widget item : child1) {
+                if(item == null) continue;
+                Dimension dim = item.getMinimumSize();
+                if (dim.width > x) {
+                    x = dim.width;
+                }
+                if (dim.height > y) {
+                    y = dim.height;
                 }
             }
         }

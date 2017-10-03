@@ -169,8 +169,8 @@ public class DragManager {
                 }
 
                 // Remove them from the container.
-                for (int i = 0; i < widget.length; i++) {
-                    originalContainer.remove(widget[i]);
+                for (DockableWidget widget1 : widget) {
+                    originalContainer.remove(widget1);
                 }
 
                 // Now add them at the appropriate location.

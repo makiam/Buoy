@@ -60,10 +60,9 @@ public class BorderContainer extends WidgetContainer {
     @Override
     public int getChildCount() {
         int count = 0;
-        for (int i = 0; i < child.length; i++) {
-            if (child[i] != null) {
-                count++;
-            }
+        for (Widget child1 : child) {
+            if(child1 == null) continue;
+            count++;
         }
         return count;
     }
@@ -74,10 +73,9 @@ public class BorderContainer extends WidgetContainer {
     @Override
     public Collection<Widget> getChildren() {
         ArrayList<Widget> ls = new ArrayList<Widget>(5);
-        for (int i = 0; i < child.length; i++) {
-            if (child[i] != null) {
-                ls.add(child[i]);
-            }
+        for (Widget child1 : child) {
+            if(child1 == null) continue;
+            ls.add(child1);
         }
         return ls;
     }
@@ -100,9 +98,9 @@ public class BorderContainer extends WidgetContainer {
      * specified Widget is not a child of this container.
      */
     public Position getChildPosition(Widget widget) {
-        for (int i = 0; i < ALL_POSITIONS.length; i++) {
-            if (child[ALL_POSITIONS[i].value] == widget) {
-                return ALL_POSITIONS[i];
+        for (Position ALL_POSITIONS1 : ALL_POSITIONS) {
+            if (child[ALL_POSITIONS1.value] == widget) {
+                return ALL_POSITIONS1;
             }
         }
         return null;

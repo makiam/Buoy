@@ -31,12 +31,11 @@ public class StaticFieldDelegate extends PersistenceDelegate {
 
     @Override
     protected Expression instantiate(Object oldInstance, Encoder out) {
-        Field field[] = cls.getFields();
-        for (int i = 0; i < field.length; i++) {
-            int mod = field[i].getModifiers();
+        for (Field field1 : cls.getFields()) {
+            int mod = field1.getModifiers();
             try {
-                if (Modifier.isStatic(mod) && Modifier.isPublic(mod) && Modifier.isFinal(mod) && field[i].get(null) == oldInstance) {
-                    return new Expression(oldInstance, field[i], "get", new Object[]{null});
+                if (Modifier.isStatic(mod) && Modifier.isPublic(mod) && Modifier.isFinal(mod) && field1.get(null) == oldInstance) {
+                    return new Expression(oldInstance, field1, "get", new Object[]{null});
                 }
             } catch (Exception ex) {
             }

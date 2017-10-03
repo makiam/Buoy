@@ -216,8 +216,8 @@ public class BSplitPane extends WidgetContainer {
     @Override
     public int getChildCount() {
         int count = 0;
-        for (int i = 0; i < child.length; i++) {
-            if (child[i] != null) {
+        for (Widget child1 : child) {
+            if (child1 != null) {
                 count++;
             }
         }
@@ -230,10 +230,9 @@ public class BSplitPane extends WidgetContainer {
     @Override
     public Collection<Widget> getChildren() {
         ArrayList<Widget> ls = new ArrayList<Widget>(2);
-        for (int i = 0; i < child.length; i++) {
-            if (child[i] != null) {
-                ls.add(child[i]);
-            }
+        for (Widget child1 : child) {
+            if(child1 == null) continue;
+            ls.add(child1);
         }
         return ls;
     }
@@ -257,9 +256,9 @@ public class BSplitPane extends WidgetContainer {
     @Override
     public void layoutChildren() {
         getComponent().validate();
-        for (int i = 0; i < child.length; i++) {
-            if (child[i] instanceof WidgetContainer) {
-                ((WidgetContainer) child[i]).layoutChildren();
+        for (Widget child1 : child) {
+            if (child1 instanceof WidgetContainer) {
+                ((WidgetContainer) child1).layoutChildren();
             }
         }
     }

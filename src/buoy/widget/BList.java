@@ -99,8 +99,8 @@ public class BList extends Widget {
      */
     public void setContents(Object o[]) {
         defaultModel.clear();
-        for (int i = 0; i < o.length; i++) {
-            defaultModel.addElement(o[i]);
+        for (Object o1 : o) {
+            defaultModel.addElement(o1);
         }
         updateScrollPane();
     }
