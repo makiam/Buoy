@@ -55,7 +55,7 @@ public class ToolTipMonitor {
             timer.setInitialDelay(UPDATE_DELAY);
             timer.restart();
         } else if (ev instanceof MouseMovedEvent) {
-            lastMoveEvent = (MouseMovedEvent) ev;
+            lastMoveEvent = ev;
             timer.setInitialDelay(BToolTip.getShowingToolTip() == null ? SHOW_DELAY : UPDATE_DELAY);
             timer.restart();
         }

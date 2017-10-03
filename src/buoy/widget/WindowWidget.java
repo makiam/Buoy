@@ -179,7 +179,7 @@ public abstract class WindowWidget extends WidgetContainer {
      */
     public void setDefaultButton(BButton button) {
         defaultButton = button;
-        getRootPane().setDefaultButton(button == null ? null : (JButton) button.getComponent());
+        getRootPane().setDefaultButton(button == null ? null : button.getComponent());
     }
 
     /**

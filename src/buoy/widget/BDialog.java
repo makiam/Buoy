@@ -54,7 +54,7 @@ public class BDialog extends WindowWidget {
      * @param modal specifies whether this is a modal dialog
      */
     public BDialog(WindowWidget parent, boolean modal) {
-        component = createComponent((Window) parent.getComponent(), null, modal);
+        component = createComponent(parent.getComponent(), null, modal);
         setParent(parent);
         initInternal();
     }
@@ -67,7 +67,7 @@ public class BDialog extends WindowWidget {
      * @param modal specifies whether this is a modal dialog
      */
     public BDialog(WindowWidget parent, String title, boolean modal) {
-        component = createComponent((Window) parent.getComponent(), title, modal);
+        component = createComponent(parent.getComponent(), title, modal);
         setParent(parent);
         initInternal();
     }
@@ -149,7 +149,7 @@ public class BDialog extends WindowWidget {
             menus.getParent().remove(menus);
         }
         menubar = menus;
-        getComponent().setJMenuBar((JMenuBar) menubar.getComponent());
+        getComponent().setJMenuBar(menubar.getComponent());
         setAsParent(menubar);
     }
 
@@ -259,7 +259,7 @@ public class BDialog extends WindowWidget {
      */
     @Override
     protected JRootPane getRootPane() {
-        return ((JDialog) getComponent()).getRootPane();
+        return getComponent().getRootPane();
     }
 
     /**

@@ -46,12 +46,12 @@ public class DockingContainer extends WidgetContainer {
     public DockingContainer() {
         component = new WidgetContainerPanel(this);
         splitPane = new BSplitPane(BSplitPane.HORIZONTAL);
-        ((JSplitPane) splitPane.getComponent()).setBorder(null);
+        splitPane.getComponent().setBorder(null);
         tabPosition = BTabbedPane.TOP;
         ((Container) getComponent()).add(splitPane.getComponent());
         setAsParent(splitPane);
         childrenInTab = new ArrayList<ArrayList<DockableWidget>>();
-        visibleDividerSize = ((JSplitPane) splitPane.getComponent()).getDividerSize();
+        visibleDividerSize = splitPane.getComponent().getDividerSize();
     }
 
     /**
@@ -272,12 +272,12 @@ public class DockingContainer extends WidgetContainer {
         }
         Rectangle tabBounds;
         if (index < getTabCount()) {
-            tabBounds = ((JTabbedPane) tabs.getComponent()).getBoundsAt(index);
+            tabBounds = tabs.getComponent().getBoundsAt(index);
         } else {
             int lastVisibleTab = getTabCount() - 1;
             Rectangle lastTabBounds;
             do {
-                lastTabBounds = ((JTabbedPane) tabs.getComponent()).getBoundsAt(lastVisibleTab);
+                lastTabBounds = tabs.getComponent().getBoundsAt(lastVisibleTab);
                 if (lastTabBounds == null) {
                     lastVisibleTab--;
                 }
@@ -326,10 +326,10 @@ public class DockingContainer extends WidgetContainer {
         if (getDockedChildCount() == 0) {
             tabs = null;
             splitPane.remove(1 - mainPosition);
-            ((JSplitPane) splitPane.getComponent()).setDividerSize(0);
+            splitPane.getComponent().setDividerSize(0);
             return;
         }
-        ((JSplitPane) splitPane.getComponent()).setDividerSize(visibleDividerSize);
+        splitPane.getComponent().setDividerSize(visibleDividerSize);
         Widget tabContents[] = new Widget[childrenInTab.size()];
         for (int i = 0; i < tabContents.length; i++) {
             ArrayList<DockableWidget> children = childrenInTab.get(i);
@@ -343,7 +343,7 @@ public class DockingContainer extends WidgetContainer {
                 split.add(children.get(0), 0);
                 for (int j = 1; j < children.size() - 1; j++) {
                     BSplitPane nextSplit = new BSplitPane(splitOrient);
-                    ((JSplitPane) nextSplit.getComponent()).setBorder(null);
+                    nextSplit.getComponent().setBorder(null);
                     nextSplit.setResizeWeight(1.0 / (children.size() - j));
                     split.add(nextSplit, 1);
                     split = nextSplit;
@@ -394,7 +394,7 @@ public class DockingContainer extends WidgetContainer {
 
     private void mousePressedOnTab(MousePressedEvent ev) {
         Point pos = ev.getPoint();
-        JTabbedPane tp = (JTabbedPane) tabs.getComponent();
+        JTabbedPane tp = tabs.getComponent();
         for (int i = 0; i < getTabCount(); i++) {
             Rectangle bounds = tp.getBoundsAt(i);
             if (bounds.contains(pos)) {
@@ -446,7 +446,7 @@ public class DockingContainer extends WidgetContainer {
             setContent(null);
         } else {
             for (int i = 0; i < childrenInTab.size(); i++) {
-                ArrayList thisTab = (ArrayList) childrenInTab.get(i);
+                ArrayList thisTab = childrenInTab.get(i);
                 int index = thisTab.indexOf(widget);
                 if (index > -1) {
                     thisTab.remove(index);

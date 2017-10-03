@@ -21,7 +21,7 @@ public abstract class WidgetWindowEvent extends WindowEvent implements WidgetEve
      * @param id the event ID
      */
     public WidgetWindowEvent(WindowWidget source, int id) {
-        super((Window) source.getComponent(), id);
+        super(source.getComponent(), id);
         widget = source;
     }
 

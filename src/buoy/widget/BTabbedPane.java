@@ -199,7 +199,7 @@ public class BTabbedPane extends WidgetContainer {
     public void removeAll() {
         getComponent().removeAll();
         for (Widget aChild : child) {
-            removeAsParent((Widget) aChild);
+            removeAsParent(aChild);
         }
         child.clear();
         invalidateSize();

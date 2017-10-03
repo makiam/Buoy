@@ -251,7 +251,7 @@ public class BFrame extends WindowWidget {
      */
     @Override
     protected JRootPane getRootPane() {
-        return ((JFrame) getComponent()).getRootPane();
+        return getComponent().getRootPane();
     }
 
     /**

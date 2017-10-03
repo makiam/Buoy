@@ -95,7 +95,7 @@ public class BWindow extends WindowWidget {
      */
     @Override
     protected JRootPane getRootPane() {
-        return ((JWindow) getComponent()).getRootPane();
+        return getComponent().getRootPane();
     }
 
     /**

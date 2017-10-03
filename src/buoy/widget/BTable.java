@@ -778,7 +778,7 @@ public class BTable extends Widget {
     public class BTableHeader extends Widget {
 
         private BTableHeader() {
-            component = ((JTable) BTable.this.getComponent()).getTableHeader();
+            component = BTable.this.getComponent().getTableHeader();
             getComponent().addComponentListener(new ComponentAdapter() {
                 @Override
                 public void componentResized(ComponentEvent ev) {

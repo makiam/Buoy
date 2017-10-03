@@ -91,7 +91,7 @@ public class BSpinner extends Widget {
      */
     public BSpinner(Date date) {
         this(new SpinnerDateModel());
-        ((SpinnerDateModel) getModel()).setValue(date);
+        getModel().setValue(date);
     }
 
     /**

@@ -67,7 +67,7 @@ public class EventLinkRecord {
                 if (argsList.get(i)) {
                     targetMethodList.get(i).invoke(targetList.get(i), event);
                 } else {
-                    targetMethodList.get(i).invoke(targetList.get(i), new Object[0]);
+                    targetMethodList.get(i).invoke(targetList.get(i));
                 }
             } catch (InvocationTargetException ex) {
                 ex.getCause().printStackTrace();

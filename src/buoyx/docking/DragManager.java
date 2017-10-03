@@ -138,7 +138,7 @@ public class DragManager {
                 parent = parent.getParent();
             }
             if (parent instanceof DetachedDockingContainer) {
-                parent = ((DetachedDockingContainer) parent).getParent();
+                parent = parent.getParent();
             }
             detachedWindow = new DetachedDockingContainer((WindowWidget) parent);
             dragTarget = new DragTarget(detachedWindow.dock, 0, 0);
@@ -230,7 +230,7 @@ public class DragManager {
             parent = parent.getParent();
         }
         if (parent instanceof DetachedDockingContainer) {
-            parent = ((DetachedDockingContainer) parent).getParent();
+            parent = parent.getParent();
         }
         DragTarget target = null;
 

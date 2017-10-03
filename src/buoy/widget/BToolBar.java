@@ -65,7 +65,7 @@ public class BToolBar extends WidgetContainer {
      * Get the orientation of this toolbar.
      */
     public Orientation getOrientation() {
-        int orientation = ((JToolBar) getComponent()).getOrientation();
+        int orientation = getComponent().getOrientation();
         return (orientation == SwingConstants.HORIZONTAL ? HORIZONTAL : VERTICAL);
     }
 
@@ -73,7 +73,7 @@ public class BToolBar extends WidgetContainer {
      * Set the orientation of this toolbar.
      */
     public void setOrientation(Orientation orientation) {
-        ((JToolBar) getComponent()).setOrientation(orientation.value);
+        getComponent().setOrientation(orientation.value);
     }
 
     /**
@@ -96,8 +96,8 @@ public class BToolBar extends WidgetContainer {
             widget.getParent().remove(widget);
         }
         child.add(index, widget);
-        getComponent().add(new SingleWidgetPanel((Widget) widget), index);
-        setAsParent((Widget) widget);
+        getComponent().add(new SingleWidgetPanel(widget), index);
+        setAsParent(widget);
     }
 
     /**
@@ -146,7 +146,7 @@ public class BToolBar extends WidgetContainer {
     @Override
     public void removeAll() {
         for (Widget aChild : child) {
-            removeAsParent((Widget) aChild);
+            removeAsParent(aChild);
         }
         getComponent().removeAll();
         child.clear();
