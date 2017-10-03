@@ -58,7 +58,7 @@ public class EventSource {
 
             for (Method method : cls.getDeclaredMethods()) {
                 if (method.getName().equals(methodName)) {
-                    Class[] param = method.getParameterTypes();
+                    Class<?>[] param = method.getParameterTypes();
                     if (param.length == 0 || (param.length == 1 && param[0].isAssignableFrom(eventType))) {
                         addEventLink(eventType, target, method);
                         return;
