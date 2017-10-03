@@ -71,8 +71,10 @@ public class EventLinkRecord {
                 }
             } catch (InvocationTargetException ex) {
                 ex.getCause().printStackTrace();
-            } catch (Exception ex) {
+            } catch (IllegalAccessException ex) {
                 ex.printStackTrace();
+            } catch(IllegalArgumentException iae) {
+                iae.printStackTrace();
             }
         }
     }
