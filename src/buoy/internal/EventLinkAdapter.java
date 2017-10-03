@@ -12,10 +12,11 @@ import java.awt.event.*;
  *
  * @author Peter Eastman
  */
+@SuppressWarnings("unchecked")
 public class EventLinkAdapter implements FocusListener, KeyListener, MouseListener,
         MouseMotionListener, MouseWheelListener, WindowListener {
 
-    private Widget widget;
+    private final Widget widget;
     private int eventFlags;
 
     private static final int MOUSE_EVENT = 1;
