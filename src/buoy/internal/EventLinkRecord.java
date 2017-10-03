@@ -11,17 +11,16 @@ import java.util.*;
  */
 public class EventLinkRecord {
 
-    private Class eventClass;
-    private ArrayList targetList, targetMethodList, argsList;
+    private final Class eventClass;
+    private final List<Object> targetList = new ArrayList<Object>();
+    private final List<Method> targetMethodList = new ArrayList<Method>();
+    private final List<Boolean> argsList = new ArrayList<Boolean>();
 
     /**
      * Create an EventLinkRecord for storing links for a particular event class.
      */
     public EventLinkRecord(Class eventType) {
         eventClass = eventType;
-        targetList = new ArrayList();
-        targetMethodList = new ArrayList();
-        argsList = new ArrayList();
     }
 
     /**
@@ -65,11 +64,10 @@ public class EventLinkRecord {
     public void dispatchEvent(Object event) {
         for (int i = 0; i < targetList.size(); i++) {
             try {
-                boolean hasArgs = (argsList.get(i) == Boolean.TRUE);
-                if (hasArgs) {
-                    ((Method) targetMethodList.get(i)).invoke(targetList.get(i), new Object[]{event});
+                if (argsList.get(i)) {
+                    targetMethodList.get(i).invoke(targetList.get(i), new Object[]{event});
                 } else {
-                    ((Method) targetMethodList.get(i)).invoke(targetList.get(i), new Object[0]);
+                    targetMethodList.get(i).invoke(targetList.get(i), new Object[0]);
                 }
             } catch (InvocationTargetException ex) {
                 ex.getCause().printStackTrace();

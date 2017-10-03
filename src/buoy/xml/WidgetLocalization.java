@@ -69,7 +69,7 @@ import java.lang.ref.*;
  */
 public class WidgetLocalization {
 
-    private static HashSet localizedStringSet = new HashSet();
+    private static HashSet<WeakIdentityReference> localizedStringSet = new HashSet<WeakIdentityReference>();
     private static ResourceBundle currentBundle;
 
     /**
@@ -111,16 +111,16 @@ public class WidgetLocalization {
      */
     public static String[] getAllLocalizedStrings() {
         Iterator entries = localizedStringSet.iterator();
-        ArrayList strings = new ArrayList();
+        List<String> strings = new ArrayList<String>();
         while (entries.hasNext()) {
             Object obj = ((Reference) entries.next()).get();
-            if (obj != null) {
-                strings.add(obj);
-            } else {
+            if (obj == null) {
                 entries.remove();
+            } else {
+                strings.add(obj.toString());
             }
         }
-        return (String[]) strings.toArray(new String[strings.size()]);
+        return strings.toArray(new String[strings.size()]);
     }
 
     /**
