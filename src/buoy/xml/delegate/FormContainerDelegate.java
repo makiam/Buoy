@@ -32,8 +32,7 @@ public class FormContainerDelegate extends EventSourceDelegate {
         }
         for (int i = 0; i < oldC.getRowCount(); i++) {
             if (oldC.getRowWeight(i) != newC.getRowWeight(i)) {
-                out.writeStatement(new Statement(oldC, "setRowWeight", new Object[]{
-                    new Integer(i), oldC.getRowWeight(i)}));
+                out.writeStatement(new Statement(oldC, "setRowWeight", new Object[]{i, oldC.getRowWeight(i)}));
             }
         }
         if (oldC.getChildCount() != newC.getChildCount()) {
