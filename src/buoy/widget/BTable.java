@@ -90,7 +90,7 @@ public class BTable extends Widget {
         defaultModel = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return ((Boolean) columnEditable.get(column)).booleanValue();
+                return columnEditable.get(column);
             }
         };
         component = createComponent();
@@ -346,7 +346,7 @@ public class BTable extends Widget {
      * @param index the index of the column
      */
     public boolean isColumnEditable(int index) {
-        return ((Boolean) columnEditable.get(index)).booleanValue();
+        return columnEditable.get(index);
     }
 
     /**

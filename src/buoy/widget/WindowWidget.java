@@ -139,7 +139,7 @@ public abstract class WindowWidget extends WidgetContainer {
         if (mockVisible != null) {
             // This window was created internally in the process of encoding a window as XML.
 
-            return mockVisible.booleanValue();
+            return mockVisible;
         }
         return getComponent().isVisible();
     }
