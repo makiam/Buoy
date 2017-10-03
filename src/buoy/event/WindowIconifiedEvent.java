@@ -8,17 +8,15 @@ import java.awt.event.*;
  *
  * @author Peter Eastman
  */
+public class WindowIconifiedEvent extends WidgetWindowEvent {
 
-public class WindowIconifiedEvent extends WidgetWindowEvent
-{
-  /**
-   * Create a WindowIconifiedEvent.
-   *
-   * @param source      the window to which this event occurred
-   */
-  
-  public WindowIconifiedEvent(WindowWidget source)
-  {
-    super(source, WindowEvent.WINDOW_ICONIFIED);
-  }
+    /**
+     * Create a WindowIconifiedEvent.
+     *
+     * @param source the window to which this event occurred
+     */
+
+    public WindowIconifiedEvent(WindowWidget source) {
+        super(source, WindowEvent.WINDOW_ICONIFIED);
+    }
 }

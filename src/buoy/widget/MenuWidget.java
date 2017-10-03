@@ -5,7 +5,5 @@ package buoy.widget;
  *
  * @author Peter Eastman
  */
-
-public interface MenuWidget
-{
+public interface MenuWidget {
 }

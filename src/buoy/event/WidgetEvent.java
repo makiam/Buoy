@@ -7,12 +7,11 @@ import buoy.widget.*;
  *
  * @author Peter Eastman
  */
+public interface WidgetEvent {
 
-public interface WidgetEvent
-{
-  /**
-   * Get the Widget which generated this event.
-   */
-  
-  public Widget getWidget();
+    /**
+     * Get the Widget which generated this event.
+     */
+
+    public Widget getWidget();
 }
