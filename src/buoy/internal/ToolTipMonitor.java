@@ -15,7 +15,7 @@ import javax.swing.*;
 public class ToolTipMonitor {
 
     private static WidgetMouseEvent lastMoveEvent;
-    private static Timer timer;
+    private static final Timer timer;
 
     private static final int SHOW_DELAY = 1500;
     private static final int UPDATE_DELAY = 250;
