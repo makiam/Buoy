@@ -1,7 +1,7 @@
 package buoy.event;
 
-import buoy.widget.*;
-import java.awt.event.*;
+import buoy.widget.Widget;
+import java.awt.event.FocusEvent;
 
 /**
  * This is an event corresponding to a Widget gaining keyboard focus.

@@ -26,8 +26,8 @@ public class DragManager {
     private DragMarker dragMarker;
 
     private static DragManager manager;
-    private static TexturePaint ditheredPaint;
-    private static WeakHashMap<WidgetContainer, HashSet<DetachedDockingContainer>> detachedDocks;
+    private static final TexturePaint ditheredPaint;
+    private static final WeakHashMap<WidgetContainer, HashSet<DetachedDockingContainer>> detachedDocks;
 
     static {
         // Created a dithered TexturePaint that will be used to hilighting potential drop targets.

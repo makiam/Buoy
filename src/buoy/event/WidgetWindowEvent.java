@@ -12,7 +12,7 @@ import java.awt.event.*;
  */
 public abstract class WidgetWindowEvent extends WindowEvent implements WidgetEvent {
 
-    private Widget widget;
+    private final Widget widget;
 
     /**
      * Create a WidgetWindowEvent.

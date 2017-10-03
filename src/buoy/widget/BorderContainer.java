@@ -22,8 +22,9 @@ import javax.swing.JPanel;
  */
 public class BorderContainer extends WidgetContainer {
 
-    private Widget child[];
-    private LayoutInfo childLayout[], defaultLayout;
+    private final Widget child[];
+    private final LayoutInfo[] childLayout;
+    private LayoutInfo defaultLayout;
     private boolean cornersVertical;
 
     public static final Position CENTER = new Position(0);

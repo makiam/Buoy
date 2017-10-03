@@ -21,8 +21,8 @@ import javax.swing.JPanel;
  */
 public class RowContainer extends WidgetContainer {
 
-    private ArrayList<Widget> child;
-    private ArrayList<LayoutInfo> childLayout;
+    private final ArrayList<Widget> child;
+    private final ArrayList<LayoutInfo> childLayout;
     private LayoutInfo defaultLayout;
 
     static {

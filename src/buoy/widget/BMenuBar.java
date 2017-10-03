@@ -12,7 +12,7 @@ import javax.swing.*;
  */
 public class BMenuBar extends WidgetContainer {
 
-    private ArrayList<BMenu> menus;
+    private final ArrayList<BMenu> menus;
 
     static {
         WidgetEncoder.setPersistenceDelegate(BMenuBar.class, new IndexedContainerDelegate(new String[]{"getChild"}));

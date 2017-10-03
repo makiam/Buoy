@@ -10,7 +10,7 @@ import java.awt.event.*;
  */
 public class MouseScrolledEvent extends MouseWheelEvent implements WidgetEvent {
 
-    private Widget widget;
+    private final Widget widget;
 
     /**
      * Create a MouseScrolledEvent.

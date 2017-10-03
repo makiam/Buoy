@@ -18,7 +18,7 @@ import java.beans.*;
  */
 public class StaticFieldDelegate extends PersistenceDelegate {
 
-    private Class cls;
+    private final Class cls;
 
     /**
      * Create a StaticFieldDelegate.

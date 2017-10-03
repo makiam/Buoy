@@ -27,7 +27,7 @@ import javax.swing.*;
  */
 public class BPopupMenu extends WidgetContainer implements MenuWidget {
 
-    private ArrayList<MenuWidget> elements;
+    private final ArrayList<MenuWidget> elements;
 
     static {
         WidgetEncoder.setPersistenceDelegate(BPopupMenu.class, new IndexedContainerDelegate(new String[]{"getChild"}));

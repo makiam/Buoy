@@ -11,7 +11,7 @@ import java.awt.event.*;
  */
 public abstract class WidgetMouseEvent extends MouseEvent implements WidgetEvent {
 
-    private Widget widget;
+    private final Widget widget;
 
     /**
      * Create a WidgetMouseEvent.

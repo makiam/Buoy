@@ -21,9 +21,9 @@ import javax.swing.JPanel;
  */
 public class ExplicitContainer extends WidgetContainer {
 
-    private ArrayList<Widget> children;
-    private ArrayList<Rectangle> childBounds;
-    private Dimension requiredSize;
+    private final ArrayList<Widget> children;
+    private final ArrayList<Rectangle> childBounds;
+    private final Dimension requiredSize;
 
     static {
         WidgetEncoder.setPersistenceDelegate(ExplicitContainer.class, new IndexedContainerDelegate(new String[]{"getChild", "getChildBounds"}));

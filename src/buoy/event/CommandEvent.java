@@ -1,7 +1,7 @@
 package buoy.event;
 
-import buoy.widget.*;
-import java.awt.event.*;
+import buoy.widget.Widget;
+import java.awt.event.ActionEvent;
 
 /**
  * This event represents a user action that issues a command, such as pressing a

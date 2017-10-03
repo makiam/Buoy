@@ -16,7 +16,7 @@ public abstract class WindowWidget extends WidgetContainer {
 
     private Boolean mockVisible;
     private BButton defaultButton;
-    private static ThreadLocal encodingInProgress = new ThreadLocal();
+    private static final ThreadLocal encodingInProgress = new ThreadLocal();
 
     @Override
     public Window getComponent() {

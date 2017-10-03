@@ -1,10 +1,13 @@
 package buoy.widget;
 
-import buoy.internal.*;
-import buoy.xml.*;
-import buoy.xml.delegate.*;
-import java.awt.*;
-import java.util.*;
+import buoy.internal.WidgetContainerPanel;
+import buoy.xml.WidgetEncoder;
+import buoy.xml.delegate.OverlayContainerDelegate;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.swing.JPanel;
 
 /**
@@ -62,7 +65,7 @@ import javax.swing.JPanel;
  */
 public class OverlayContainer extends WidgetContainer {
 
-    private ArrayList<Widget> children;
+    private final List<Widget> children;
     private Dimension minSize, prefSize;
 
     static {

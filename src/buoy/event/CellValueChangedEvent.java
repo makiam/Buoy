@@ -1,7 +1,7 @@
 package buoy.event;
 
-import buoy.widget.*;
-import java.util.*;
+import buoy.widget.Widget;
+import java.util.EventObject;
 
 /**
  * A CellValueChangedEvent is generated when the user edits the value in a cell
@@ -11,8 +11,9 @@ import java.util.*;
  */
 public class CellValueChangedEvent extends EventObject implements WidgetEvent {
 
-    private Widget widget;
-    private int row, col;
+    private final Widget widget;
+    private final int row;
+    private final int col;
 
     /**
      * Create a CellValueChangedEvent.

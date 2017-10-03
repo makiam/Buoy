@@ -11,8 +11,9 @@ import java.util.*;
  */
 public class DockingEvent {
 
-    private DockingContainer source, target;
-    private DockableWidget widget[];
+    private final DockingContainer source;
+    private DockingContainer target;
+    private final DockableWidget widget[];
 
     /**
      * Create a new DockingEvent.

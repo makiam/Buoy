@@ -14,8 +14,8 @@ import javax.swing.event.*;
  */
 public class DocumentLinkEvent extends EventObject implements WidgetEvent {
 
-    private Widget widget;
-    private HyperlinkEvent event;
+    private final Widget widget;
+    private final HyperlinkEvent event;
 
     /**
      * Create a DocumentLinkEvent.

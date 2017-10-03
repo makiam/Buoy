@@ -14,7 +14,7 @@ import javax.swing.JPanel;
  */
 public class WidgetContainerPanel extends JPanel {
 
-    private WidgetContainer container;
+    private final WidgetContainer container;
 
     /**
      * Create a new WidgetContainerPanel.

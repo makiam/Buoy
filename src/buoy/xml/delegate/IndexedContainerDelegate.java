@@ -15,7 +15,7 @@ import java.lang.reflect.*;
  */
 public class IndexedContainerDelegate extends EventSourceDelegate {
 
-    private String propertyMethods[];
+    private final String propertyMethods[];
 
     /**
      * Create an IndexedContainerDelegate.

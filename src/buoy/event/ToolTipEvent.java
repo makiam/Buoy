@@ -1,8 +1,8 @@
 package buoy.event;
 
-import buoy.widget.*;
-import java.awt.*;
-import java.util.*;
+import buoy.widget.Widget;
+import java.awt.Point;
+import java.util.EventObject;
 
 /**
  * This event indicates that the user has performed the series of actions which
@@ -17,9 +17,10 @@ import java.util.*;
  */
 public class ToolTipEvent extends EventObject implements WidgetEvent {
 
-    private Widget widget;
-    private long when;
-    private Point pos, tipPos;
+    private final Widget widget;
+    private final long when;
+    private final Point pos;
+    private final Point tipPos;
 
     /**
      * Create a ToolTipEvent.

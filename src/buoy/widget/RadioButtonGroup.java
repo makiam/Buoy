@@ -21,7 +21,7 @@ import javax.swing.*;
  */
 public class RadioButtonGroup extends EventSource {
 
-    private ArrayList buttons;
+    private final ArrayList buttons;
 
     /**
      * Create a new RadioButtonGroup.
