@@ -1,7 +1,6 @@
 package buoy.widget;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * A BCheckBoxMenuItem is a menu item for making simple boolean selectons.

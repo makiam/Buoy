@@ -4,7 +4,6 @@ import buoy.xml.*;
 import buoy.xml.delegate.*;
 
 import java.awt.event.*;
-import java.awt.*;
 import javax.swing.*;
 
 /**

@@ -1,7 +1,6 @@
 package buoy.xml.delegate;
 
 import buoy.widget.*;
-import java.awt.*;
 import java.awt.event.*;
 import java.beans.*;
 

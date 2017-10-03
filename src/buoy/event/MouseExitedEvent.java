@@ -1,7 +1,6 @@
 package buoy.event;
 
 import buoy.widget.*;
-import java.awt.event.*;
 
 /**
  * This is an event corresponding to the mouse exiting a Widget.
