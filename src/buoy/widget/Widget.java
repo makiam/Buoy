@@ -264,6 +264,7 @@ public abstract class Widget extends EventSource {
      * its superclasses or interfaces) as its only argument.
      */
     @Override
+    @SuppressWarnings("unchecked")
     public void addEventLink(Class eventType, Object target, Method method) {
         super.addEventLink(eventType, target, method);
         if (eventAdapter == null) {
