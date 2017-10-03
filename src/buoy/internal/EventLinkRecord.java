@@ -65,7 +65,7 @@ public class EventLinkRecord {
         for (int i = 0; i < targetList.size(); i++) {
             try {
                 if (argsList.get(i)) {
-                    targetMethodList.get(i).invoke(targetList.get(i), new Object[]{event});
+                    targetMethodList.get(i).invoke(targetList.get(i), event);
                 } else {
                     targetMethodList.get(i).invoke(targetList.get(i), new Object[0]);
                 }

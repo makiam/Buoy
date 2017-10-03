@@ -37,9 +37,9 @@ public class IndexedContainerDelegate extends EventSourceDelegate {
                 // Find the list of methods to get property values.
 
                 Method methods[] = new Method[propertyMethods.length];
-                Class objClass = old.getClass();
+                Class<?> objClass = old.getClass();
                 for (int i = 0; i < methods.length; i++) {
-                    methods[i] = objClass.getMethod(propertyMethods[i], new Class[]{Integer.TYPE});
+                    methods[i] = objClass.getMethod(propertyMethods[i], Integer.TYPE);
                 }
 
                 // Add the children to the container.
