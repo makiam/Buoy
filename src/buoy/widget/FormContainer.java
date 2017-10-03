@@ -126,9 +126,7 @@ public class FormContainer extends WidgetContainer {
     public void setRowCount(int rows) {
         double newWeight[] = new double[rows];
         if (rows > rowWeight.length) {
-            for (int i = 0; i < rowWeight.length; i++) {
-                newWeight[i] = rowWeight[i];
-            }
+            System.arraycopy(rowWeight, 0, newWeight, 0, rowWeight.length);
             for (int i = rowWeight.length; i < newWeight.length; i++) {
                 newWeight[i] = 1.0;
             }
@@ -139,9 +137,7 @@ public class FormContainer extends WidgetContainer {
                     remove(i);
                 }
             }
-            for (int i = 0; i < newWeight.length; i++) {
-                newWeight[i] = rowWeight[i];
-            }
+            System.arraycopy(rowWeight, 0, newWeight, 0, newWeight.length);
         }
         rowWeight = newWeight;
     }
@@ -155,9 +151,7 @@ public class FormContainer extends WidgetContainer {
     public void setColumnCount(int columns) {
         double newWeight[] = new double[columns];
         if (columns > colWeight.length) {
-            for (int i = 0; i < colWeight.length; i++) {
-                newWeight[i] = colWeight[i];
-            }
+            System.arraycopy(colWeight, 0, newWeight, 0, colWeight.length);
             for (int i = colWeight.length; i < newWeight.length; i++) {
                 newWeight[i] = 1.0;
             }
@@ -168,9 +162,7 @@ public class FormContainer extends WidgetContainer {
                     remove(i);
                 }
             }
-            for (int i = 0; i < newWeight.length; i++) {
-                newWeight[i] = colWeight[i];
-            }
+            System.arraycopy(colWeight, 0, newWeight, 0, newWeight.length);
         }
         colWeight = newWeight;
     }
