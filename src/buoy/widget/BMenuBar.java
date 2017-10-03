@@ -103,8 +103,8 @@ public class BMenuBar extends WidgetContainer {
      */
     @Override
     public void removeAll() {
-        for (int i = 0; i < menus.size(); i++) {
-            removeAsParent((Widget) menus.get(i));
+        for (BMenu menu : menus) {
+            removeAsParent((Widget) menu);
         }
         getComponent().removeAll();
         menus.clear();

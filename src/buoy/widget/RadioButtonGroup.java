@@ -77,8 +77,8 @@ public class RadioButtonGroup extends EventSource {
      * Select a particular radio button, and deselect all others in the group.
      */
     public void setSelection(Object sel) {
-        for (int i = 0; i < buttons.size(); i++) {
-            Widget radio = (Widget) buttons.get(i);
+        for (Object button : buttons) {
+            Widget radio = (Widget) button;
             boolean state = (radio == sel);
             if (radio instanceof BRadioButton) {
                 ((JRadioButton) radio.getComponent()).setSelected(state);

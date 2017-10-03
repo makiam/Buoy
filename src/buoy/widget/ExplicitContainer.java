@@ -189,8 +189,8 @@ public class ExplicitContainer extends WidgetContainer {
     @Override
     public void removeAll() {
         getComponent().removeAll();
-        for (int i = 0; i < children.size(); i++) {
-            removeAsParent((Widget) children.get(i));
+        for (Widget aChildren : children) {
+            removeAsParent((Widget) aChildren);
         }
         children.clear();
         childBounds.clear();

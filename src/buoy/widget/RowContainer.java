@@ -264,8 +264,8 @@ public class RowContainer extends WidgetContainer {
     @Override
     public Dimension getMinimumSize() {
         Dimension minSize = new Dimension(0, 0);
-        for (int i = 0; i < child.size(); i++) {
-            Dimension dim = child.get(i).getMinimumSize();
+        for (Widget aChild : child) {
+            Dimension dim = aChild.getMinimumSize();
             minSize.width += dim.width;
             if (minSize.height < dim.height) {
                 minSize.height = dim.height;

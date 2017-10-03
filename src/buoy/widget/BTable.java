@@ -132,7 +132,7 @@ public class BTable extends Widget {
     public BTable(Object cellData[][], Object columnTitle[]) {
         this();
         defaultModel.setDataVector(cellData, columnTitle);
-        for (int i = 0; i < columnTitle.length; i++) {
+        for (Object aColumnTitle : columnTitle) {
             columnEditable.add(Boolean.FALSE);
         }
     }
@@ -244,8 +244,8 @@ public class BTable extends Widget {
             }
         }
         Vector data = defaultModel.getDataVector();
-        for (int i = 0; i < data.size(); i++) {
-            ((Vector) data.get(i)).remove(index);
+        for (Object aData : data) {
+            ((Vector) aData).remove(index);
         }
         defaultModel.setDataVector(data, columnNames);
         if (index < columnEditable.size()) {

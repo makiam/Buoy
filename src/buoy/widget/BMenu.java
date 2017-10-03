@@ -161,8 +161,8 @@ public class BMenu extends WidgetContainer implements MenuWidget {
      */
     @Override
     public void removeAll() {
-        for (int i = 0; i < elements.size(); i++) {
-            removeAsParent((Widget) elements.get(i));
+        for (MenuWidget element : elements) {
+            removeAsParent((Widget) element);
         }
         getComponent().removeAll();
         elements.clear();

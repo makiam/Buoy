@@ -125,8 +125,7 @@ public class OverlayContainer extends WidgetContainer {
     @Override
     public void layoutChildren() {
         Rectangle bounds = getBounds();
-        for (int i = 0; i < children.size(); i++) {
-            Widget child = children.get(i);
+        for (Widget child : children) {
             Dimension max = child.getMaximumSize();
             child.getComponent().setBounds(new Rectangle(0, 0, Math.min(bounds.width, max.width), Math.min(bounds.height, max.height)));
             if (child instanceof WidgetContainer) {

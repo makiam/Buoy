@@ -97,8 +97,8 @@ public class FormContainer extends WidgetContainer {
     @Override
     public Collection<Widget> getChildren() {
         ArrayList<Widget> list = new ArrayList<Widget>(child.size());
-        for (int i = 0; i < child.size(); i++) {
-            list.add(child.get(i).widget);
+        for (ChildInfo aChild : child) {
+            list.add(aChild.widget);
         }
         return list;
     }
@@ -221,8 +221,7 @@ public class FormContainer extends WidgetContainer {
         int rowPos[] = calculatePositions(minRowSize, prefRowSize, rowWeight, size.height);
         int colPos[] = calculatePositions(minColSize, prefColSize, colWeight, size.width);
         Rectangle cell = new Rectangle();
-        for (int i = 0; i < child.size(); i++) {
-            ChildInfo info = child.get(i);
+        for (ChildInfo info : child) {
             LayoutInfo layout = (info.layout == null ? defaultLayout : info.layout);
             cell.x = (info.x == 0 ? 0 : colPos[info.x - 1]);
             cell.y = (info.y == 0 ? 0 : rowPos[info.y - 1]);
@@ -279,8 +278,8 @@ public class FormContainer extends WidgetContainer {
 
             double realWeight[] = new double[weight.length];
             double totalWeight = 0.0;
-            for (int i = 0; i < weight.length; i++) {
-                totalWeight += weight[i];
+            for (double aWeight : weight) {
+                totalWeight += aWeight;
             }
             if (totalWeight > 0.0) {
                 for (int i = 0; i < realWeight.length; i++) {
@@ -520,8 +519,8 @@ public class FormContainer extends WidgetContainer {
     @Override
     public void removeAll() {
         getComponent().removeAll();
-        for (int i = 0; i < child.size(); i++) {
-            removeAsParent(child.get(i).widget);
+        for (ChildInfo aChild : child) {
+            removeAsParent(aChild.widget);
         }
         child.clear();
         invalidateSize();
@@ -553,11 +552,11 @@ public class FormContainer extends WidgetContainer {
             calculateSizes();
         }
         Dimension minSize = new Dimension(0, 0);
-        for (int i = 0; i < minColSize.length; i++) {
-            minSize.width += minColSize[i];
+        for (int aMinColSize : minColSize) {
+            minSize.width += aMinColSize;
         }
-        for (int i = 0; i < minRowSize.length; i++) {
-            minSize.height += minRowSize[i];
+        for (int aMinRowSize : minRowSize) {
+            minSize.height += aMinRowSize;
         }
         return minSize;
     }
@@ -573,11 +572,11 @@ public class FormContainer extends WidgetContainer {
             calculateSizes();
         }
         Dimension prefSize = new Dimension(0, 0);
-        for (int i = 0; i < prefColSize.length; i++) {
-            prefSize.width += prefColSize[i];
+        for (int aPrefColSize : prefColSize) {
+            prefSize.width += aPrefColSize;
         }
-        for (int i = 0; i < prefRowSize.length; i++) {
-            prefSize.height += prefRowSize[i];
+        for (int aPrefRowSize : prefRowSize) {
+            prefSize.height += aPrefRowSize;
         }
         return prefSize;
     }

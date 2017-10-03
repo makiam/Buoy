@@ -237,8 +237,8 @@ public class ColumnContainer extends WidgetContainer {
     @Override
     public void removeAll() {
         getComponent().removeAll();
-        for (int i = 0; i < child.size(); i++) {
-            removeAsParent(child.get(i));
+        for (Widget aChild : child) {
+            removeAsParent(aChild);
         }
         child.clear();
         childLayout.clear();
@@ -264,8 +264,8 @@ public class ColumnContainer extends WidgetContainer {
     @Override
     public Dimension getMinimumSize() {
         Dimension minSize = new Dimension(0, 0);
-        for (int i = 0; i < child.size(); i++) {
-            Dimension dim = child.get(i).getMinimumSize();
+        for (Widget aChild : child) {
+            Dimension dim = aChild.getMinimumSize();
             minSize.height += dim.height;
             if (minSize.width < dim.width) {
                 minSize.width = dim.width;

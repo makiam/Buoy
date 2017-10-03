@@ -145,8 +145,8 @@ public class BToolBar extends WidgetContainer {
      */
     @Override
     public void removeAll() {
-        for (int i = 0; i < child.size(); i++) {
-            removeAsParent((Widget) child.get(i));
+        for (Widget aChild : child) {
+            removeAsParent((Widget) aChild);
         }
         getComponent().removeAll();
         child.clear();
@@ -173,8 +173,7 @@ public class BToolBar extends WidgetContainer {
     @Override
     public void layoutChildren() {
         getComponent().validate();
-        for (int i = 0; i < child.size(); i++) {
-            Widget w = child.get(i);
+        for (Widget w : child) {
             if (w instanceof WidgetContainer) {
                 ((WidgetContainer) w).layoutChildren();
             }
