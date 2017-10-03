@@ -45,6 +45,7 @@ public class BSeparator extends Widget implements MenuWidget {
         return new JSeparator();
     }
 
+    @Override
     public JSeparator getComponent() {
         return (JSeparator) component;
     }

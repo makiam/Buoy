@@ -41,6 +41,7 @@ public class BList extends Widget {
         defaultModel = new DefaultListModel();
         component = createComponent();
         getComponent().addListSelectionListener(new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent ev) {
                 dispatchEvent(new SelectionChangedEvent(BList.this, ev.getValueIsAdjusting()));
             }
@@ -81,6 +82,7 @@ public class BList extends Widget {
         return new JList(defaultModel);
     }
 
+    @Override
     public JList getComponent() {
         return (JList) component;
     }
@@ -334,6 +336,7 @@ public class BList extends Widget {
      * WidgetContainer lays out its contents, it will attempt never to make this
      * Widget larger than its maximum size.
      */
+    @Override
     public Dimension getMaximumSize() {
         return new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE);
     }

@@ -28,6 +28,7 @@ public abstract class WidgetWindowEvent extends WindowEvent implements WidgetEve
     /**
      * Get the object which generated this event.
      */
+    @Override
     public Object getSource() {
         // The superclass requires the source to be a Window.  This is overridden so getSource()
         // will still return the Widget itself.
@@ -38,6 +39,7 @@ public abstract class WidgetWindowEvent extends WindowEvent implements WidgetEve
     /**
      * Get the Widget which generated this event.
      */
+    @Override
     public Widget getWidget() {
         return widget;
     }

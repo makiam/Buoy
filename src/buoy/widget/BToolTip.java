@@ -87,6 +87,7 @@ public class BToolTip extends Widget {
         return new JToolTip();
     }
 
+    @Override
     public JToolTip getComponent() {
         return (JToolTip) component;
     }

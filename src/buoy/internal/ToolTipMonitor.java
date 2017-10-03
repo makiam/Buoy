@@ -22,8 +22,10 @@ public class ToolTipMonitor {
 
     static {
         timer = new Timer(SHOW_DELAY, new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ev) {
                 SwingUtilities.invokeLater(new Runnable() {
+                    @Override
                     public void run() {
                         if (lastMoveEvent == null) {
                             BToolTip.hide();

@@ -39,6 +39,7 @@ public class ExplicitContainer extends WidgetContainer {
         requiredSize = new Dimension(0, 0);
     }
 
+    @Override
     public JPanel getComponent() {
         return (JPanel) component;
     }
@@ -46,6 +47,7 @@ public class ExplicitContainer extends WidgetContainer {
     /**
      * Get the number of children in this container.
      */
+    @Override
     public int getChildCount() {
         return children.size();
     }
@@ -60,6 +62,7 @@ public class ExplicitContainer extends WidgetContainer {
     /**
      * Get a Collection containing all child Widgets of this container.
      */
+    @Override
     public Collection<Widget> getChildren() {
         return new ArrayList<Widget>(children);
     }
@@ -71,6 +74,7 @@ public class ExplicitContainer extends WidgetContainer {
      * child is itself a WidgetContainer, its layoutChildren() method will be
      * called in turn.
      */
+    @Override
     public void layoutChildren() {
         for (int i = 0; i < children.size(); i++) {
             Widget child = children.get(i);
@@ -167,6 +171,7 @@ public class ExplicitContainer extends WidgetContainer {
      *
      * @param widget the Widget to remove
      */
+    @Override
     public void remove(Widget widget) {
         int index = children.indexOf(widget);
         if (index > -1) {
@@ -181,6 +186,7 @@ public class ExplicitContainer extends WidgetContainer {
     /**
      * Remove all child Widgets from this container.
      */
+    @Override
     public void removeAll() {
         getComponent().removeAll();
         for (int i = 0; i < children.size(); i++) {
@@ -210,6 +216,7 @@ public class ExplicitContainer extends WidgetContainer {
      * a WidgetContainer lays out its contents, it will attempt never to make
      * this Widget smaller than its minimum size.
      */
+    @Override
     public Dimension getMinimumSize() {
         return requiredSize;
     }
@@ -219,6 +226,7 @@ public class ExplicitContainer extends WidgetContainer {
      * WidgetContainer lays out its contents, it will attempt to make this
      * Widget as close as possible to its preferred size.
      */
+    @Override
     public Dimension getPreferredSize() {
         return requiredSize;
     }

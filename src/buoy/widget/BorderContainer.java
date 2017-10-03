@@ -49,6 +49,7 @@ public class BorderContainer extends WidgetContainer {
         defaultLayout = new LayoutInfo(LayoutInfo.CENTER, LayoutInfo.BOTH, null, null);
     }
 
+    @Override
     public JPanel getComponent() {
         return (JPanel) component;
     }
@@ -56,6 +57,7 @@ public class BorderContainer extends WidgetContainer {
     /**
      * Get the number of children in this container.
      */
+    @Override
     public int getChildCount() {
         int count = 0;
         for (int i = 0; i < child.length; i++) {
@@ -69,6 +71,7 @@ public class BorderContainer extends WidgetContainer {
     /**
      * Get a Collection containing all child Widgets of this container.
      */
+    @Override
     public Collection<Widget> getChildren() {
         ArrayList<Widget> ls = new ArrayList<Widget>(5);
         for (int i = 0; i < child.length; i++) {
@@ -112,6 +115,7 @@ public class BorderContainer extends WidgetContainer {
      * child is itself a WidgetContainer, its layoutChildren() method will be
      * called in turn.
      */
+    @Override
     public void layoutChildren() {
         Dimension size = getComponent().getSize();
         Rectangle bounds[] = new Rectangle[5];
@@ -267,6 +271,7 @@ public class BorderContainer extends WidgetContainer {
      *
      * @param widget the Widget to remove
      */
+    @Override
     public void remove(Widget widget) {
         for (int i = 0; i < child.length; i++) {
             if (child[i] == widget) {
@@ -305,6 +310,7 @@ public class BorderContainer extends WidgetContainer {
     /**
      * Remove all child Widgets from this container.
      */
+    @Override
     public void removeAll() {
         for (int i = 0; i < child.length; i++) {
             remove(i);
@@ -333,6 +339,7 @@ public class BorderContainer extends WidgetContainer {
      * a WidgetContainer lays out its contents, it will attempt never to make
      * this Widget smaller than its minimum size.
      */
+    @Override
     public Dimension getMinimumSize() {
         Dimension size = (child[CENTER.value] == null ? new Dimension() : child[CENTER.value].getMinimumSize());
         if (cornersVertical) {
@@ -402,6 +409,7 @@ public class BorderContainer extends WidgetContainer {
      * WidgetContainer lays out its contents, it will attempt to make this
      * Widget as close as possible to its preferred size.
      */
+    @Override
     public Dimension getPreferredSize() {
         Dimension size;
         if (child[CENTER.value] == null) {

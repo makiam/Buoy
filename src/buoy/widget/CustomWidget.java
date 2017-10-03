@@ -82,6 +82,7 @@ public class CustomWidget extends Widget {
      */
     private class CustomWidgetComponent extends JComponent {
 
+        @Override
         public void paintComponent(Graphics g) {
             if (opaque) {
                 Dimension size = getSize();
@@ -92,6 +93,7 @@ public class CustomWidget extends Widget {
             CustomWidget.this.dispatchEvent(new RepaintEvent(CustomWidget.this, (Graphics2D) g));
         }
 
+        @Override
         public boolean isOpaque() {
             return opaque;
         }

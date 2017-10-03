@@ -21,14 +21,17 @@ public class SingleWidgetPanel extends JPanel {
         add(widget.getComponent(), BorderLayout.CENTER);
     }
 
+    @Override
     public Dimension getMinimumSize() {
         return widget.getMinimumSize();
     }
 
+    @Override
     public Dimension getMaximumSize() {
         return widget.getMaximumSize();
     }
 
+    @Override
     public Dimension getPreferredSize() {
         return widget.getPreferredSize();
     }

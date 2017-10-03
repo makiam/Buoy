@@ -18,6 +18,7 @@ public class GridContainerDelegate extends EventSourceDelegate {
         super(new String[]{"columnCount", "rowCount"});
     }
 
+    @Override
     protected void initialize(Class type, Object oldInstance, Object newInstance, Encoder out) {
         super.initialize(type, oldInstance, newInstance, out);
         GridContainer oldC = (GridContainer) oldInstance;

@@ -30,6 +30,7 @@ public class WidgetContainerPanel extends JPanel {
      * Optionally fill the component with its background color, then send out a
      * RepaintEvent.
      */
+    @Override
     public void paintComponent(Graphics g) {
         if (container.isOpaque()) {
             Dimension size = getSize();
@@ -43,6 +44,7 @@ public class WidgetContainerPanel extends JPanel {
     /**
      * This component is opaque if its WidgetContainer is set to be opaque.
      */
+    @Override
     public boolean isOpaque() {
         return container.isOpaque();
     }

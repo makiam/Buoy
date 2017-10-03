@@ -155,10 +155,12 @@ public class WidgetLocalization {
             hash = obj.hashCode();
         }
 
+        @Override
         public int hashCode() {
             return hash;
         }
 
+        @Override
         public boolean equals(Object obj) {
             obj = ((Reference) obj).get();
             Object thisObj = get();

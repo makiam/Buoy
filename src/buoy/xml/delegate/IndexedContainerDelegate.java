@@ -29,6 +29,7 @@ public class IndexedContainerDelegate extends EventSourceDelegate {
         this.propertyMethods = propertyMethods;
     }
 
+    @Override
     protected void initialize(Class type, Object oldInstance, Object newInstance, Encoder out) {
         WidgetContainer old = (WidgetContainer) oldInstance;
         if (old.getChildCount() != ((WidgetContainer) newInstance).getChildCount()) {

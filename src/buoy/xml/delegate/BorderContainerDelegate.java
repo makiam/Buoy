@@ -17,6 +17,7 @@ public class BorderContainerDelegate extends EventSourceDelegate {
     public BorderContainerDelegate() {
     }
 
+    @Override
     protected void initialize(Class type, Object oldInstance, Object newInstance, Encoder out) {
         super.initialize(type, oldInstance, newInstance, out);
         BorderContainer oldC = (BorderContainer) oldInstance;

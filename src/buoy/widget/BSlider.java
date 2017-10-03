@@ -50,6 +50,7 @@ public class BSlider extends Widget {
         component = createComponent(orientation);
         getComponent().setModel(new DefaultBoundedRangeModel(value, 0, minimum, maximum));
         getComponent().addChangeListener(new ChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent ev) {
                 if (suppressEvents == 0) {
                     dispatchEvent(new ValueChangedEvent(BSlider.this, getComponent().getValueIsAdjusting()));
@@ -71,6 +72,7 @@ public class BSlider extends Widget {
         return new JSlider(orientation.value);
     }
 
+    @Override
     public JSlider getComponent() {
         return (JSlider) component;
     }

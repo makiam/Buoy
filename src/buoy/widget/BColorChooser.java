@@ -53,6 +53,7 @@ public class BColorChooser extends Widget {
         setColor(color);
         setTitle(title);
         getComponent().getSelectionModel().addChangeListener(new ChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent ev) {
                 dispatchEvent(new ValueChangedEvent(BColorChooser.this));
             }
@@ -67,6 +68,7 @@ public class BColorChooser extends Widget {
         return new JColorChooser();
     }
 
+    @Override
     public JColorChooser getComponent() {
         return (JColorChooser) component;
     }

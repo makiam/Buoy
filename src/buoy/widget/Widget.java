@@ -263,6 +263,7 @@ public abstract class Widget extends EventSource {
      * either take no arguments, or take an object of class eventType (or any of
      * its superclasses or interfaces) as its only argument.
      */
+    @Override
     public void addEventLink(Class eventType, Object target, Method method) {
         super.addEventLink(eventType, target, method);
         if (eventAdapter == null) {
@@ -278,6 +279,7 @@ public abstract class Widget extends EventSource {
      * Send out an object representing an event to every appropriate event link
      * that has been added to this object.
      */
+    @Override
     public void dispatchEvent(Object event) {
         super.dispatchEvent(event);
         if (wantsToolTipEvents && event instanceof WidgetMouseEvent) {

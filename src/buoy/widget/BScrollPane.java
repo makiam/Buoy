@@ -91,6 +91,7 @@ public class BScrollPane extends WidgetContainer {
         hPolicy = horizontalPolicy;
         vPolicy = verticalPolicy;
         ChangeListener scrollListener = new ChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
                 Point pos = contentPort.getViewPosition();
                 if (hPolicy != SCROLLBAR_NEVER) {
@@ -105,6 +106,7 @@ public class BScrollPane extends WidgetContainer {
             }
         };
         MouseWheelListener wheelListener = new MouseWheelListener() {
+            @Override
             public void mouseWheelMoved(MouseWheelEvent ev) {
                 BScrollBar bar = null;
                 if (ev.getSource() == vscroll.getComponent()) {
@@ -172,6 +174,7 @@ public class BScrollPane extends WidgetContainer {
         return new ScrollPaneComponent();
     }
 
+    @Override
     public JScrollPane getComponent() {
         return (JScrollPane) component;
     }
@@ -379,6 +382,7 @@ public class BScrollPane extends WidgetContainer {
     /**
      * Get the number of children in this container.
      */
+    @Override
     public int getChildCount() {
         int count = 2;
         if (content != null) {
@@ -396,6 +400,7 @@ public class BScrollPane extends WidgetContainer {
     /**
      * Get a Collection containing all child Widgets of this container.
      */
+    @Override
     public Collection<Widget> getChildren() {
         ArrayList<Widget> ls = new ArrayList<Widget>(5);
         if (content != null) {
@@ -417,6 +422,7 @@ public class BScrollPane extends WidgetContainer {
      * the scroll pane and may never be removed, although they can be hidden by
      * setting the appropriate scrollbar policy to SCROLLBAR_NEVER.
      */
+    @Override
     public void remove(Widget widget) {
         if (content == widget) {
             setContent(null);
@@ -436,6 +442,7 @@ public class BScrollPane extends WidgetContainer {
      * removed, although they can be hidden by setting the appropriate scrollbar
      * policy to SCROLLBAR_NEVER.
      */
+    @Override
     public void removeAll() {
         setContent(null);
         setRowHeader(null);
@@ -449,6 +456,7 @@ public class BScrollPane extends WidgetContainer {
      * child is itself a WidgetContainer, its layoutChildren() method will be
      * called in turn.
      */
+    @Override
     public void layoutChildren() {
         int topMargin = 0, leftMargin = 0, bottomMargin = 0, rightMargin = 0;
         Dimension colHeaderSize = (colHeader == null ? null : colHeader.getPreferredSize());
@@ -589,6 +597,7 @@ public class BScrollPane extends WidgetContainer {
      * a WidgetContainer lays out its contents, it will attempt never to make
      * this Widget smaller than its minimum size.
      */
+    @Override
     public Dimension getMinimumSize() {
         if (minSize == null) {
             // Add the row and column headers.
@@ -622,6 +631,7 @@ public class BScrollPane extends WidgetContainer {
      * WidgetContainer lays out its contents, it will attempt to make this
      * Widget as close as possible to its preferred size.
      */
+    @Override
     public Dimension getPreferredSize() {
         if (prefSize == null) {
             // Find the preferred size for the content viewport.
@@ -676,6 +686,7 @@ public class BScrollPane extends WidgetContainer {
      * Set the background color of this Widget. If this is set to null, the
      * Widget will use the background color of its parent WidgetContainer.
      */
+    @Override
     public void setBackground(Color background) {
         super.setBackground(background);
         contentPort.setBackground(background);
@@ -686,6 +697,7 @@ public class BScrollPane extends WidgetContainer {
     /**
      * Discard the cached sizes when any child's size changes.
      */
+    @Override
     protected void invalidateSize() {
         prefSize = minSize = null;
         super.invalidateSize();
@@ -702,6 +714,7 @@ public class BScrollPane extends WidgetContainer {
             setLayout(null);
         }
 
+        @Override
         public void paintComponent(Graphics g) {
             if (BScrollPane.this.isOpaque()) {
                 Dimension size = getSize();
@@ -712,6 +725,7 @@ public class BScrollPane extends WidgetContainer {
             BScrollPane.this.dispatchEvent(new RepaintEvent(BScrollPane.this, (Graphics2D) g));
         }
 
+        @Override
         public boolean isOpaque() {
             return BScrollPane.this.isOpaque();
         }
@@ -729,6 +743,7 @@ public class BScrollPane extends WidgetContainer {
             super(value, extent, minimum, maximum, orientation);
         }
 
+        @Override
         public int getUnitIncrement(int direction) {
             if (content != null && content.getComponent() instanceof Scrollable) {
                 return ((Scrollable) content.getComponent()).getScrollableUnitIncrement(contentPort.getViewRect(), getOrientation().value, direction);
@@ -736,6 +751,7 @@ public class BScrollPane extends WidgetContainer {
             return super.getUnitIncrement(direction);
         }
 
+        @Override
         public int getBlockIncrement(int direction) {
             if (content != null && content.getComponent() instanceof Scrollable) {
                 return ((Scrollable) content.getComponent()).getScrollableBlockIncrement(contentPort.getViewRect(), getOrientation().value, direction);
@@ -752,6 +768,7 @@ public class BScrollPane extends WidgetContainer {
         public ContentViewport() {
         }
 
+        @Override
         public void setViewPosition(Point p) {
             hscroll.setValue(p.x);
             vscroll.setValue(p.y);
@@ -761,6 +778,7 @@ public class BScrollPane extends WidgetContainer {
             super.setViewPosition(p);
         }
 
+        @Override
         public void doLayout() {
             layoutChildren();
         }

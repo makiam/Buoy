@@ -126,6 +126,7 @@ public class WidgetEncoder {
             super(out);
         }
 
+        @Override
         public PersistenceDelegate getPersistenceDelegate(Class cls) {
             if (cls != null) {
                 PersistenceDelegate delegate = (PersistenceDelegate) delegateTable.get(cls);

@@ -18,6 +18,7 @@ public abstract class WindowWidget extends WidgetContainer {
     private BButton defaultButton;
     private static ThreadLocal encodingInProgress = new ThreadLocal();
 
+    @Override
     public Window getComponent() {
         return (Window) component;
     }
@@ -85,6 +86,7 @@ public abstract class WindowWidget extends WidgetContainer {
      * child is itself a WidgetContainer, its layoutChildren() method will be
      * called in turn.
      */
+    @Override
     public void layoutChildren() {
         if (content != null) {
             Container contentPane = ((RootPaneContainer) getComponent()).getContentPane();
@@ -132,6 +134,7 @@ public abstract class WindowWidget extends WidgetContainer {
     /**
      * Determine whether this Widget is currently visible.
      */
+    @Override
     public boolean isVisible() {
         if (mockVisible != null) {
             // This window was created internally in the process of encoding a window as XML.
@@ -144,6 +147,7 @@ public abstract class WindowWidget extends WidgetContainer {
     /**
      * Set whether this Widget should be visible.
      */
+    @Override
     public void setVisible(boolean visible) {
         if (encodingInProgress.get() == Boolean.TRUE) {
             // This window was created internally in the process of encoding a window as XML.

@@ -89,6 +89,7 @@ public class BTextArea extends TextWidget {
         return new JTextArea();
     }
 
+    @Override
     public JTextArea getComponent() {
         return (JTextArea) component;
     }
@@ -237,6 +238,7 @@ public class BTextArea extends TextWidget {
      * a WidgetContainer lays out its contents, it will attempt never to make
      * this Widget smaller than its minimum size.
      */
+    @Override
     public Dimension getMinimumSize() {
         // Workaround for a Swing bug which prevents text areas from being made smaller if wrapping
         // is enabled.
@@ -253,10 +255,12 @@ public class BTextArea extends TextWidget {
      * text area is contained inside a BScrollPane, we need to update its
      * layout.
      */
+    @Override
     protected void textChanged() {
         super.textChanged();
         if (getParent() instanceof BScrollPane) {
             SwingUtilities.invokeLater(new Runnable() {
+                @Override
                 public void run() {
                     getParent().layoutChildren();
                 }

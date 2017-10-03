@@ -92,6 +92,7 @@ public class BDialog extends WindowWidget {
         }
     }
 
+    @Override
     public JDialog getComponent() {
         return (JDialog) component;
     }
@@ -107,6 +108,7 @@ public class BDialog extends WindowWidget {
     /**
      * Get the number of children in this container.
      */
+    @Override
     public int getChildCount() {
         return ((menubar == null ? 0 : 1) + (content == null ? 0 : 1));
     }
@@ -114,6 +116,7 @@ public class BDialog extends WindowWidget {
     /**
      * Get a Collection containing all child Widgets of this container.
      */
+    @Override
     public Collection<Widget> getChildren() {
         ArrayList<Widget> ls = new ArrayList<Widget>(3);
         if (menubar != null) {
@@ -153,6 +156,7 @@ public class BDialog extends WindowWidget {
     /**
      * Remove a child Widget from this container.
      */
+    @Override
     public void remove(Widget widget) {
         if (menubar == widget) {
             getComponent().setJMenuBar(null);
@@ -168,6 +172,7 @@ public class BDialog extends WindowWidget {
     /**
      * Remove all child Widgets from this container.
      */
+    @Override
     public void removeAll() {
         if (menubar != null) {
             remove(menubar);
@@ -228,6 +233,7 @@ public class BDialog extends WindowWidget {
      * the dialog relative to its parent (or the screen if it does not have a
      * parent).
      */
+    @Override
     public void pack() {
         boolean center = !getComponent().isDisplayable();
         super.pack();
@@ -251,6 +257,7 @@ public class BDialog extends WindowWidget {
     /**
      * Get the JRootPane for this Widget's component.
      */
+    @Override
     protected JRootPane getRootPane() {
         return ((JDialog) getComponent()).getRootPane();
     }
@@ -277,12 +284,14 @@ public class BDialog extends WindowWidget {
             BDialog.this.dispatchEvent(new RepaintEvent(BDialog.this, (Graphics2D) g));
         }
 
+        @Override
         public void validate() {
             super.validate();
             layoutChildren();
             if (!BDialog.this.getComponent().getSize().equals(lastSize)) {
                 lastSize = BDialog.this.getComponent().getSize();
                 EventQueue.invokeLater(new Runnable() {
+                    @Override
                     public void run() {
                         BDialog.this.dispatchEvent(new WindowResizedEvent(BDialog.this));
                     }

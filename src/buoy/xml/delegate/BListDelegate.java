@@ -18,6 +18,7 @@ public class BListDelegate extends EventSourceDelegate {
     public BListDelegate() {
     }
 
+    @Override
     protected Expression instantiate(Object oldInstance, Encoder out) {
         BList old = (BList) oldInstance;
         ListModel defaultModel = (ListModel) getField(old, "defaultModel");

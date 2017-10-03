@@ -58,6 +58,7 @@ public class BFrame extends WindowWidget {
         return new BFrameComponent();
     }
 
+    @Override
     public JFrame getComponent() {
         return (JFrame) component;
     }
@@ -65,6 +66,7 @@ public class BFrame extends WindowWidget {
     /**
      * Get the number of children in this container.
      */
+    @Override
     public int getChildCount() {
         return ((menubar == null ? 0 : 1) + (content == null ? 0 : 1));
     }
@@ -72,6 +74,7 @@ public class BFrame extends WindowWidget {
     /**
      * Get a Collection containing all child Widgets of this container.
      */
+    @Override
     public Collection<Widget> getChildren() {
         ArrayList<Widget> ls = new ArrayList<Widget>(3);
         if (menubar != null) {
@@ -111,6 +114,7 @@ public class BFrame extends WindowWidget {
     /**
      * Remove a child Widget from this container.
      */
+    @Override
     public void remove(Widget widget) {
         if (menubar == widget) {
             getComponent().setJMenuBar(null);
@@ -126,6 +130,7 @@ public class BFrame extends WindowWidget {
     /**
      * Remove all child Widgets from this container.
      */
+    @Override
     public void removeAll() {
         if (menubar != null) {
             remove(menubar);
@@ -244,6 +249,7 @@ public class BFrame extends WindowWidget {
     /**
      * Get the JRootPane for this Widget's component.
      */
+    @Override
     protected JRootPane getRootPane() {
         return ((JFrame) getComponent()).getRootPane();
     }
@@ -278,12 +284,14 @@ public class BFrame extends WindowWidget {
             BFrame.this.dispatchEvent(new RepaintEvent(BFrame.this, (Graphics2D) g));
         }
 
+        @Override
         public void validate() {
             super.validate();
             layoutChildren();
             if (!BFrame.this.getComponent().getSize().equals(lastSize)) {
                 lastSize = BFrame.this.getComponent().getSize();
                 EventQueue.invokeLater(new Runnable() {
+                    @Override
                     public void run() {
                         BFrame.this.dispatchEvent(new WindowResizedEvent(BFrame.this));
                     }

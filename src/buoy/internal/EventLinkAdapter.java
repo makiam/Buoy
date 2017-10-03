@@ -88,85 +88,105 @@ public class EventLinkAdapter implements FocusListener, KeyListener, MouseListen
         }
     }
 
+    @Override
     public void mousePressed(MouseEvent ev) {
         dispatchEvent(ev, new MousePressedEvent(widget, ev.getWhen(), ev.getModifiersEx(), ev.getX(), ev.getY(),
                 ev.getClickCount(), ev.isPopupTrigger(), ev.getButton()));
     }
 
+    @Override
     public void mouseReleased(MouseEvent ev) {
         dispatchEvent(ev, new MouseReleasedEvent(widget, ev.getWhen(), ev.getModifiersEx(), ev.getX(), ev.getY(),
                 ev.getClickCount(), ev.isPopupTrigger(), ev.getButton()));
     }
 
+    @Override
     public void mouseClicked(MouseEvent ev) {
         dispatchEvent(ev, new MouseClickedEvent(widget, ev.getWhen(), ev.getModifiersEx(), ev.getX(), ev.getY(),
                 ev.getClickCount(), ev.isPopupTrigger(), ev.getButton()));
     }
 
+    @Override
     public void mouseEntered(MouseEvent ev) {
         dispatchEvent(ev, new MouseEnteredEvent(widget, ev.getWhen(), ev.getModifiersEx(), ev.getX(), ev.getY()));
     }
 
+    @Override
     public void mouseExited(MouseEvent ev) {
         dispatchEvent(ev, new MouseExitedEvent(widget, ev.getWhen(), ev.getModifiersEx(), ev.getX(), ev.getY()));
     }
 
+    @Override
     public void mouseMoved(MouseEvent ev) {
         dispatchEvent(ev, new MouseMovedEvent(widget, ev.getWhen(), ev.getModifiersEx(), ev.getX(), ev.getY()));
     }
 
+    @Override
     public void mouseDragged(MouseEvent ev) {
         dispatchEvent(ev, new MouseDraggedEvent(widget, ev.getWhen(), ev.getModifiersEx(), ev.getX(), ev.getY()));
     }
 
+    @Override
     public void mouseWheelMoved(MouseWheelEvent ev) {
         dispatchEvent(ev, new MouseScrolledEvent(widget, ev.getWhen(), ev.getModifiersEx(), ev.getX(), ev.getY(), ev.getScrollType(), ev.getScrollAmount(), ev.getWheelRotation()));
     }
 
+    @Override
     public void keyPressed(KeyEvent ev) {
         dispatchEvent(ev, new KeyPressedEvent(widget, ev.getWhen(), ev.getModifiersEx(), ev.getKeyCode()));
     }
 
+    @Override
     public void keyReleased(KeyEvent ev) {
         dispatchEvent(ev, new KeyReleasedEvent(widget, ev.getWhen(), ev.getModifiersEx(), ev.getKeyCode()));
     }
 
+    @Override
     public void keyTyped(KeyEvent ev) {
         dispatchEvent(ev, new KeyTypedEvent(widget, ev.getWhen(), ev.getModifiersEx(), ev.getKeyChar()));
     }
 
+    @Override
     public void focusGained(FocusEvent ev) {
         widget.dispatchEvent(new FocusGainedEvent(widget, ev.isTemporary()));
     }
 
+    @Override
     public void focusLost(FocusEvent ev) {
         widget.dispatchEvent(new FocusLostEvent(widget, ev.isTemporary()));
     }
 
+    @Override
     public void windowActivated(WindowEvent ev) {
         widget.dispatchEvent(new WindowActivatedEvent((WindowWidget) widget));
     }
 
+    @Override
     public void windowClosed(WindowEvent ev) {
         // This event is ignored, since it does not represent a user action.
     }
 
+    @Override
     public void windowClosing(WindowEvent ev) {
         widget.dispatchEvent(new WindowClosingEvent((WindowWidget) widget));
     }
 
+    @Override
     public void windowDeactivated(WindowEvent ev) {
         widget.dispatchEvent(new WindowDeactivatedEvent((WindowWidget) widget));
     }
 
+    @Override
     public void windowDeiconified(WindowEvent ev) {
         widget.dispatchEvent(new WindowDeiconifiedEvent((WindowWidget) widget));
     }
 
+    @Override
     public void windowIconified(WindowEvent ev) {
         widget.dispatchEvent(new WindowIconifiedEvent((WindowWidget) widget));
     }
 
+    @Override
     public void windowOpened(WindowEvent ev) {
         // This event is ignored, since it does not represent a user action.
     }

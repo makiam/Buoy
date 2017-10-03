@@ -77,6 +77,7 @@ public class OverlayContainer extends WidgetContainer {
         children = new ArrayList<Widget>();
     }
 
+    @Override
     public JPanel getComponent() {
         return (JPanel) component;
     }
@@ -84,6 +85,7 @@ public class OverlayContainer extends WidgetContainer {
     /**
      * Get the number of children in this container.
      */
+    @Override
     public int getChildCount() {
         return children.size();
     }
@@ -98,6 +100,7 @@ public class OverlayContainer extends WidgetContainer {
     /**
      * Get a Collection containing all child Widgets of this container.
      */
+    @Override
     public Collection<Widget> getChildren() {
         return new ArrayList<Widget>(children);
     }
@@ -119,6 +122,7 @@ public class OverlayContainer extends WidgetContainer {
      * child is itself a WidgetContainer, its layoutChildren() method will be
      * called in turn.
      */
+    @Override
     public void layoutChildren() {
         Rectangle bounds = getBounds();
         for (int i = 0; i < children.size(); i++) {
@@ -163,6 +167,7 @@ public class OverlayContainer extends WidgetContainer {
      *
      * @param widget the Widget to remove
      */
+    @Override
     public void remove(Widget widget) {
         int index = children.indexOf(widget);
         if (index > -1) {
@@ -176,6 +181,7 @@ public class OverlayContainer extends WidgetContainer {
     /**
      * Remove all child Widgets from this container.
      */
+    @Override
     public void removeAll() {
         getComponent().removeAll();
         for (Widget w : children) {
@@ -210,6 +216,7 @@ public class OverlayContainer extends WidgetContainer {
      * a WidgetContainer lays out its contents, it will attempt never to make
      * this Widget smaller than its minimum size.
      */
+    @Override
     public Dimension getMinimumSize() {
         if (minSize == null) {
             minSize = new Dimension();
@@ -231,6 +238,7 @@ public class OverlayContainer extends WidgetContainer {
      * WidgetContainer lays out its contents, it will attempt to make this
      * Widget as close as possible to its preferred size.
      */
+    @Override
     public Dimension getPreferredSize() {
         if (prefSize == null) {
             prefSize = new Dimension();
@@ -250,6 +258,7 @@ public class OverlayContainer extends WidgetContainer {
     /**
      * Discard the cached sizes when any child's size changes.
      */
+    @Override
     protected void invalidateSize() {
         minSize = prefSize = null;
         super.invalidateSize();

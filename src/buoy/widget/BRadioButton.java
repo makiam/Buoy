@@ -48,6 +48,7 @@ public class BRadioButton extends Widget {
     public BRadioButton(String text, boolean state, RadioButtonGroup group) {
         component = createComponent(text, state);
         getComponent().addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ev) {
                 dispatchEvent(new ValueChangedEvent(BRadioButton.this));
             }
@@ -67,6 +68,7 @@ public class BRadioButton extends Widget {
         return new JRadioButton(text, state);
     }
 
+    @Override
     public JRadioButton getComponent() {
         return (JRadioButton) component;
     }
@@ -132,6 +134,7 @@ public class BRadioButton extends Widget {
      * WidgetContainer lays out its contents, it will attempt never to make this
      * Widget larger than its maximum size.
      */
+    @Override
     public Dimension getMaximumSize() {
         return new Dimension(32767, 32767);
     }

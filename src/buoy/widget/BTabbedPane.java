@@ -50,6 +50,7 @@ public class BTabbedPane extends WidgetContainer {
     public BTabbedPane(TabPosition pos) {
         component = createComponent(pos);
         getComponent().addChangeListener(new ChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent ev) {
                 if (suppressEvents == 0) {
                     dispatchEvent(new SelectionChangedEvent(BTabbedPane.this));
@@ -57,8 +58,10 @@ public class BTabbedPane extends WidgetContainer {
             }
         });
         getComponent().addComponentListener(new ComponentAdapter() {
+            @Override
             public void componentResized(ComponentEvent ev) {
                 SwingUtilities.invokeLater(new Runnable() {
+                    @Override
                     public void run() {
                         layoutChildren();
                     }
@@ -79,6 +82,7 @@ public class BTabbedPane extends WidgetContainer {
         return new JTabbedPane(pos.value);
     }
 
+    @Override
     public JTabbedPane getComponent() {
         return (JTabbedPane) component;
     }
@@ -86,6 +90,7 @@ public class BTabbedPane extends WidgetContainer {
     /**
      * Get the number of children in this container.
      */
+    @Override
     public int getChildCount() {
         return child.size();
     }
@@ -100,6 +105,7 @@ public class BTabbedPane extends WidgetContainer {
     /**
      * Get a Collection containing all child Widgets of this container.
      */
+    @Override
     public Collection<Widget> getChildren() {
         return new ArrayList<Widget>(child);
     }
@@ -111,6 +117,7 @@ public class BTabbedPane extends WidgetContainer {
      * child is itself a WidgetContainer, its layoutChildren() method will be
      * called in turn.
      */
+    @Override
     public void layoutChildren() {
         getComponent().validate();
         for (int i = 0; i < child.size(); i++) {
@@ -165,6 +172,7 @@ public class BTabbedPane extends WidgetContainer {
      *
      * @param widget the Widget to remove
      */
+    @Override
     public void remove(Widget widget) {
         int index = child.indexOf(widget);
         if (index > -1) {
@@ -188,6 +196,7 @@ public class BTabbedPane extends WidgetContainer {
     /**
      * Remove all child Widgets from this container.
      */
+    @Override
     public void removeAll() {
         getComponent().removeAll();
         for (int i = 0; i < child.size(); i++) {

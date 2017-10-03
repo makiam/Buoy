@@ -76,6 +76,7 @@ public class BScrollBar extends Widget {
         return new BScrollBarComponent(orientation);
     }
 
+    @Override
     public JScrollBar getComponent() {
         return (JScrollBar) component;
     }
@@ -230,16 +231,19 @@ public class BScrollBar extends Widget {
             addAdjustmentListener(this);
         }
 
+        @Override
         public void adjustmentValueChanged(AdjustmentEvent ev) {
             if (suppressEvents == 0) {
                 BScrollBar.this.dispatchEvent(new ValueChangedEvent(BScrollBar.this, BScrollBar.this.getComponent().getValueIsAdjusting()));
             }
         }
 
+        @Override
         public int getUnitIncrement(int direction) {
             return BScrollBar.this.getUnitIncrement(direction);
         }
 
+        @Override
         public int getBlockIncrement(int direction) {
             return BScrollBar.this.getBlockIncrement(direction);
         }

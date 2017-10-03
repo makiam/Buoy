@@ -29,6 +29,7 @@ public class StaticFieldDelegate extends PersistenceDelegate {
         this.cls = cls;
     }
 
+    @Override
     protected Expression instantiate(Object oldInstance, Encoder out) {
         Field field[] = cls.getFields();
         for (int i = 0; i < field.length; i++) {
@@ -43,6 +44,7 @@ public class StaticFieldDelegate extends PersistenceDelegate {
         return null;
     }
 
+    @Override
     protected boolean mutatesTo(Object oldInstance, Object newInstance) {
         return (oldInstance == newInstance);
     }

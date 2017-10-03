@@ -28,6 +28,7 @@ public class EventSourceDelegate extends DefaultPersistenceDelegate {
         super(constructorPropertyNames);
     }
 
+    @Override
     protected void initialize(Class type, Object oldInstance, Object newInstance, Encoder out) {
         super.initialize(type, oldInstance, newInstance, out);
         initializeEventLinks(oldInstance, newInstance, out);

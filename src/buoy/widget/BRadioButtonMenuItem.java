@@ -91,10 +91,12 @@ public class BRadioButtonMenuItem extends BMenuItem {
      * Create the JRadioButtonMenuItem which serves as this Widget's Component.
      * This method is protected so that subclasses can override it.
      */
+    @Override
     protected JRadioButtonMenuItem createComponent() {
         return new JRadioButtonMenuItem();
     }
 
+    @Override
     public JRadioButtonMenuItem getComponent() {
         return (JRadioButtonMenuItem) component;
     }

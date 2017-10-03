@@ -25,25 +25,30 @@ public abstract class TextWidget extends Widget {
      */
     protected TextWidget() {
         caretListener = new CaretListener() {
+            @Override
             public void caretUpdate(CaretEvent e) {
                 caretMoved();
             }
         };
         documentListener = new DocumentListener() {
+            @Override
             public void insertUpdate(DocumentEvent e) {
                 textChanged();
             }
 
+            @Override
             public void removeUpdate(DocumentEvent e) {
                 textChanged();
             }
 
+            @Override
             public void changedUpdate(DocumentEvent e) {
                 textChanged();
             }
         };
     }
 
+    @Override
     public JTextComponent getComponent() {
         return (JTextComponent) component;
     }
@@ -170,6 +175,7 @@ public abstract class TextWidget extends Widget {
     protected void caretMoved() {
         if (suppressEvents == 0) {
             SwingUtilities.invokeLater(new Runnable() {
+                @Override
                 public void run() {
                     dispatchEvent(new SelectionChangedEvent(TextWidget.this));
                 }
@@ -187,6 +193,7 @@ public abstract class TextWidget extends Widget {
         invalidateSize();
         if (suppressEvents == 0) {
             SwingUtilities.invokeLater(new Runnable() {
+                @Override
                 public void run() {
                     dispatchEvent(new ValueChangedEvent(TextWidget.this));
                 }

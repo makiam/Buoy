@@ -17,6 +17,7 @@ public class BSplitPaneDelegate extends EventSourceDelegate {
     public BSplitPaneDelegate() {
     }
 
+    @Override
     protected void initialize(Class type, Object oldInstance, Object newInstance, Encoder out) {
         super.initialize(type, oldInstance, newInstance, out);
         BSplitPane old = (BSplitPane) oldInstance;

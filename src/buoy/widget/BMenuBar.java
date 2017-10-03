@@ -34,6 +34,7 @@ public class BMenuBar extends WidgetContainer {
         return new JMenuBar();
     }
 
+    @Override
     public JMenuBar getComponent() {
         return (JMenuBar) component;
     }
@@ -66,6 +67,7 @@ public class BMenuBar extends WidgetContainer {
     /**
      * Get the number of children in this container.
      */
+    @Override
     public int getChildCount() {
         return menus.size();
     }
@@ -80,6 +82,7 @@ public class BMenuBar extends WidgetContainer {
     /**
      * Get a Collection containing all child Widgets of this container.
      */
+    @Override
     public Collection<Widget> getChildren() {
         return new ArrayList<Widget>(menus);
     }
@@ -87,6 +90,7 @@ public class BMenuBar extends WidgetContainer {
     /**
      * Remove a child Widget from this container.
      */
+    @Override
     public void remove(Widget widget) {
         menus.remove(widget);
         getComponent().remove(widget.getComponent());
@@ -97,6 +101,7 @@ public class BMenuBar extends WidgetContainer {
     /**
      * Remove all child Widgets from this container.
      */
+    @Override
     public void removeAll() {
         for (int i = 0; i < menus.size(); i++) {
             removeAsParent((Widget) menus.get(i));
@@ -113,6 +118,7 @@ public class BMenuBar extends WidgetContainer {
      * child is itself a WidgetContainer, its layoutChildren() method will be
      * called in turn.
      */
+    @Override
     public void layoutChildren() {
     }
 }

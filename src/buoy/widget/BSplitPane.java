@@ -62,10 +62,12 @@ public class BSplitPane extends WidgetContainer {
     public BSplitPane(Orientation orient, Widget child1, Widget child2) {
         component = createComponent();
         getComponent().addPropertyChangeListener(JSplitPane.DIVIDER_LOCATION_PROPERTY, new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent ev) {
                 layoutChildren();
                 if (suppressEvents == 0) {
                     SwingUtilities.invokeLater(new Runnable() {
+                        @Override
                         public void run() {
                             dispatchEvent(new ValueChangedEvent(BSplitPane.this));
                         }
@@ -91,6 +93,7 @@ public class BSplitPane extends WidgetContainer {
         return new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, false);
     }
 
+    @Override
     public JSplitPane getComponent() {
         return (JSplitPane) component;
     }
@@ -210,6 +213,7 @@ public class BSplitPane extends WidgetContainer {
     /**
      * Get the number of children in this container.
      */
+    @Override
     public int getChildCount() {
         int count = 0;
         for (int i = 0; i < child.length; i++) {
@@ -223,6 +227,7 @@ public class BSplitPane extends WidgetContainer {
     /**
      * Get a Collection containing all child Widgets of this container.
      */
+    @Override
     public Collection<Widget> getChildren() {
         ArrayList<Widget> ls = new ArrayList<Widget>(2);
         for (int i = 0; i < child.length; i++) {
@@ -249,6 +254,7 @@ public class BSplitPane extends WidgetContainer {
      * child is itself a WidgetContainer, its layoutChildren() method will be
      * called in turn.
      */
+    @Override
     public void layoutChildren() {
         getComponent().validate();
         for (int i = 0; i < child.length; i++) {
@@ -287,6 +293,7 @@ public class BSplitPane extends WidgetContainer {
      *
      * @param widget the Widget to remove
      */
+    @Override
     public void remove(Widget widget) {
         for (int i = 0; i < child.length; i++) {
             if (child[i] == widget) {
@@ -314,6 +321,7 @@ public class BSplitPane extends WidgetContainer {
     /**
      * Remove all child Widgets from this container.
      */
+    @Override
     public void removeAll() {
         getComponent().removeAll();
     }
@@ -323,6 +331,7 @@ public class BSplitPane extends WidgetContainer {
      * a WidgetContainer lays out its contents, it will attempt never to make
      * this Widget smaller than its minimum size.
      */
+    @Override
     public Dimension getMinimumSize() {
         Dimension dim0 = (child[0] == null ? new Dimension() : child[0].getMinimumSize());
         Dimension dim1 = (child[1] == null ? new Dimension() : child[1].getMinimumSize());
@@ -339,6 +348,7 @@ public class BSplitPane extends WidgetContainer {
      * WidgetContainer lays out its contents, it will attempt to make this
      * Widget as close as possible to its preferred size.
      */
+    @Override
     public Dimension getPreferredSize() {
         Dimension dim0 = (child[0] == null ? new Dimension() : child[0].getPreferredSize());
         Dimension dim1 = (child[1] == null ? new Dimension() : child[1].getPreferredSize());

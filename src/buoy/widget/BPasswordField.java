@@ -60,10 +60,12 @@ public class BPasswordField extends BTextField {
      * Create the JTextField which serves as this Widget's Component. This
      * overrides the implementation in BTextField.
      */
+    @Override
     protected JPasswordField createComponent() {
         return new JPasswordField();
     }
 
+    @Override
     public JPasswordField getComponent() {
         return (JPasswordField) component;
     }
@@ -85,6 +87,7 @@ public class BPasswordField extends BTextField {
     /**
      * Get the text contained in the Widget.
      */
+    @Override
     public String getText() {
         return new String(getComponent().getPassword());
     }

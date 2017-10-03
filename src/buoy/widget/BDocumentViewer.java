@@ -62,6 +62,7 @@ public class BDocumentViewer extends Widget {
         JEditorPane ep = getComponent();
         ep.setEditable(false);
         ep.addPropertyChangeListener("page", new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent ev) {
                 if (getComponent().isDisplayable()) {
                     updateScrollPane();
@@ -70,6 +71,7 @@ public class BDocumentViewer extends Widget {
             }
         });
         ep.addComponentListener(new ComponentAdapter() {
+            @Override
             public void componentResized(ComponentEvent ev) {
                 if (getComponent().isDisplayable()) {
                     updateScrollPane();
@@ -77,6 +79,7 @@ public class BDocumentViewer extends Widget {
             }
         });
         ep.addHyperlinkListener(new HyperlinkListener() {
+            @Override
             public void hyperlinkUpdate(HyperlinkEvent e) {
                 if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
                     dispatchEvent(new DocumentLinkEvent(BDocumentViewer.this, e));
@@ -110,6 +113,7 @@ public class BDocumentViewer extends Widget {
         return new JEditorPane();
     }
 
+    @Override
     public JEditorPane getComponent() {
         return (JEditorPane) component;
     }

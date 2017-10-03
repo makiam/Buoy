@@ -42,6 +42,7 @@ public class BButton extends Widget {
     public BButton() {
         component = createComponent();
         getComponent().addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ev) {
                 dispatchEvent(new CommandEvent(BButton.this, ev.getWhen(), ev.getModifiers(), ((JButton) component).getActionCommand()));
             }
@@ -88,6 +89,7 @@ public class BButton extends Widget {
         return new JButton();
     }
 
+    @Override
     public JButton getComponent() {
         return (JButton) component;
     }
@@ -143,6 +145,7 @@ public class BButton extends Widget {
      * WidgetContainer lays out its contents, it will attempt never to make this
      * Widget larger than its maximum size.
      */
+    @Override
     public Dimension getMaximumSize() {
         return new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE);
     }

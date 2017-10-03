@@ -54,6 +54,7 @@ public class FormContainer extends WidgetContainer {
         defaultLayout = new LayoutInfo();
     }
 
+    @Override
     public JPanel getComponent() {
         return (JPanel) component;
     }
@@ -78,6 +79,7 @@ public class FormContainer extends WidgetContainer {
     /**
      * Get the number of children in this container.
      */
+    @Override
     public int getChildCount() {
         return child.size();
     }
@@ -92,6 +94,7 @@ public class FormContainer extends WidgetContainer {
     /**
      * Get a Collection containing all child Widgets of this container.
      */
+    @Override
     public Collection<Widget> getChildren() {
         ArrayList<Widget> list = new ArrayList<Widget>(child.size());
         for (int i = 0; i < child.size(); i++) {
@@ -217,6 +220,7 @@ public class FormContainer extends WidgetContainer {
      * child is itself a WidgetContainer, its layoutChildren() method will be
      * called in turn.
      */
+    @Override
     public void layoutChildren() {
         if (minColSize == null) {
             calculateSizes();
@@ -497,6 +501,7 @@ public class FormContainer extends WidgetContainer {
      *
      * @param widget the Widget to remove
      */
+    @Override
     public void remove(Widget widget) {
         int index = getWidgetIndex(widget);
         if (index > -1) {
@@ -520,6 +525,7 @@ public class FormContainer extends WidgetContainer {
     /**
      * Remove all child Widgets from this container.
      */
+    @Override
     public void removeAll() {
         getComponent().removeAll();
         for (int i = 0; i < child.size(); i++) {
@@ -549,6 +555,7 @@ public class FormContainer extends WidgetContainer {
      * a WidgetContainer lays out its contents, it will attempt never to make
      * this Widget smaller than its minimum size.
      */
+    @Override
     public Dimension getMinimumSize() {
         if (minColSize == null) {
             calculateSizes();
@@ -568,6 +575,7 @@ public class FormContainer extends WidgetContainer {
      * WidgetContainer lays out its contents, it will attempt to make this
      * Widget as close as possible to its preferred size.
      */
+    @Override
     public Dimension getPreferredSize() {
         if (prefColSize == null) {
             calculateSizes();
@@ -585,6 +593,7 @@ public class FormContainer extends WidgetContainer {
     /**
      * Discard the cached row and column sizes when any child's size changes.
      */
+    @Override
     protected void invalidateSize() {
         minRowSize = minColSize = prefRowSize = prefColSize = null;
         super.invalidateSize();

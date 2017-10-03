@@ -34,6 +34,7 @@ public class BComboBox extends Widget {
     public BComboBox() {
         component = createComponent();
         getComponent().addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ev) {
                 if (suppressEvents == 0) {
                     dispatchEvent(new ValueChangedEvent(BComboBox.this));
@@ -75,6 +76,7 @@ public class BComboBox extends Widget {
      */
     protected JComboBox createComponent() {
         return new JComboBox() {
+            @Override
             public void reshape(int x, int y, int width, int height) {
                 super.reshape(x, y, width, height);
                 validate();
@@ -82,6 +84,7 @@ public class BComboBox extends Widget {
         };
     }
 
+    @Override
     public JComboBox getComponent() {
         return (JComboBox) component;
     }

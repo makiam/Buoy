@@ -37,6 +37,7 @@ public class BSpinner extends Widget {
     public BSpinner() {
         component = createComponent();
         getComponent().addChangeListener(new ChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent ev) {
                 if (suppressEvents == 0) {
                     dispatchEvent(new ValueChangedEvent(BSpinner.this));
@@ -111,6 +112,7 @@ public class BSpinner extends Widget {
         return new JSpinner();
     }
 
+    @Override
     public JSpinner getComponent() {
         return (JSpinner) component;
     }

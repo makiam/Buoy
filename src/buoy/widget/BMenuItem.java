@@ -82,6 +82,7 @@ public class BMenuItem extends Widget implements MenuWidget {
     public BMenuItem(String text, Shortcut shortcut, Icon image) {
         component = createComponent();
         getComponent().addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ev) {
                 dispatchEvent(new CommandEvent(BMenuItem.this, ev.getWhen(), ev.getModifiers(), getComponent().getActionCommand()));
             }
@@ -102,6 +103,7 @@ public class BMenuItem extends Widget implements MenuWidget {
         return new JMenuItem();
     }
 
+    @Override
     public JMenuItem getComponent() {
         return (JMenuItem) component;
     }

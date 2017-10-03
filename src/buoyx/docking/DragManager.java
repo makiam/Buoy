@@ -386,6 +386,7 @@ public class DragManager {
                 setBackground(Color.WHITE);
             }
             add(new JPanel() {
+                @Override
                 public void paintComponent(Graphics g) {
                     Dimension size = getSize();
                     Graphics2D g2 = (Graphics2D) g;
@@ -437,6 +438,7 @@ public class DragManager {
             return dock;
         }
 
+        @Override
         public void dispose() {
             detachedDocks.get(getParent()).remove(this);
             super.dispose();

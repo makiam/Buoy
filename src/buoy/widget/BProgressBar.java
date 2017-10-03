@@ -72,6 +72,7 @@ public class BProgressBar extends Widget {
         return new JProgressBar();
     }
 
+    @Override
     public JProgressBar getComponent() {
         return (JProgressBar) component;
     }

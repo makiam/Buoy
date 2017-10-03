@@ -124,6 +124,7 @@ public class BOutline extends WidgetContainer {
     /**
      * Get the number of children in this container.
      */
+    @Override
     public int getChildCount() {
         return (content == null ? 0 : 1);
     }
@@ -131,6 +132,7 @@ public class BOutline extends WidgetContainer {
     /**
      * Get a Collection containing all child Widgets of this container.
      */
+    @Override
     public Collection<Widget> getChildren() {
         ArrayList<Widget> ls = new ArrayList<Widget>(1);
         if (content != null) {
@@ -142,6 +144,7 @@ public class BOutline extends WidgetContainer {
     /**
      * Remove a child Widget from this container.
      */
+    @Override
     public void remove(Widget widget) {
         if (content == widget) {
             ((JComponent) component).remove(widget.component);
@@ -154,6 +157,7 @@ public class BOutline extends WidgetContainer {
     /**
      * Remove the content Widget from this container.
      */
+    @Override
     public void removeAll() {
         setContent(null);
     }
@@ -165,6 +169,7 @@ public class BOutline extends WidgetContainer {
      * child is itself a WidgetContainer, its layoutChildren() method will be
      * called in turn.
      */
+    @Override
     public void layoutChildren() {
         Rectangle bounds = getBounds();
         Insets insets = ((JComponent) component).getInsets();
@@ -182,6 +187,7 @@ public class BOutline extends WidgetContainer {
      * a WidgetContainer lays out its contents, it will attempt never to make
      * this Widget smaller than its minimum size.
      */
+    @Override
     public Dimension getMinimumSize() {
         Dimension size = (content == null ? new Dimension() : content.getMinimumSize());
         Insets insets = ((JComponent) component).getInsets();
@@ -193,6 +199,7 @@ public class BOutline extends WidgetContainer {
      * WidgetContainer lays out its contents, it will attempt never to make this
      * Widget larger than its maximum size.
      */
+    @Override
     public Dimension getMaximumSize() {
         Dimension size = (content == null ? new Dimension() : new Dimension(content.getMaximumSize()));
         Insets insets = ((JComponent) component).getInsets();
@@ -214,6 +221,7 @@ public class BOutline extends WidgetContainer {
      * WidgetContainer lays out its contents, it will attempt to make this
      * Widget as close as possible to its preferred size.
      */
+    @Override
     public Dimension getPreferredSize() {
         Dimension size = (content == null ? new Dimension() : content.getPreferredSize());
         Insets insets = ((JComponent) component).getInsets();

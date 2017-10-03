@@ -105,6 +105,7 @@ public class BTree extends Widget {
     public BTree(TreeModel model) {
         component = createComponent(model);
         getComponent().addTreeSelectionListener(new TreeSelectionListener() {
+            @Override
             public void valueChanged(TreeSelectionEvent ev) {
                 if (suppressEvents == 0) {
                     dispatchEvent(new SelectionChangedEvent(BTree.this, false));
@@ -112,32 +113,39 @@ public class BTree extends Widget {
             }
         });
         final Runnable scrollPaneUpdater = new Runnable() {
+            @Override
             public void run() {
                 updateScrollPane();
             }
         };
         getComponent().addTreeExpansionListener(new TreeExpansionListener() {
+            @Override
             public void treeCollapsed(TreeExpansionEvent event) {
                 SwingUtilities.invokeLater(scrollPaneUpdater);
             }
 
+            @Override
             public void treeExpanded(TreeExpansionEvent event) {
                 SwingUtilities.invokeLater(scrollPaneUpdater);
             }
         });
         modelListener = new TreeModelListener() {
+            @Override
             public void treeNodesChanged(TreeModelEvent ev) {
                 if (suppressEvents == 0) {
                     dispatchEvent(new ValueChangedEvent(BTree.this));
                 }
             }
 
+            @Override
             public void treeNodesInserted(TreeModelEvent ev) {
             }
 
+            @Override
             public void treeNodesRemoved(TreeModelEvent ev) {
             }
 
+            @Override
             public void treeStructureChanged(TreeModelEvent ev) {
             }
         };
@@ -160,6 +168,7 @@ public class BTree extends Widget {
         return new JTree(model);
     }
 
+    @Override
     public JTree getComponent() {
         return (JTree) component;
     }
@@ -558,18 +567,21 @@ public class BTree extends Widget {
      */
     private class BTreeSelectionModel extends DefaultTreeSelectionModel {
 
+        @Override
         public void setSelectionPaths(TreePath path[]) {
             if (selectionEnabled) {
                 super.setSelectionPaths(path);
             }
         }
 
+        @Override
         public void addSelectionPaths(TreePath path[]) {
             if (selectionEnabled) {
                 super.addSelectionPaths(path);
             }
         }
 
+        @Override
         public void removeSelectionPaths(TreePath path[]) {
             if (selectionEnabled) {
                 super.removeSelectionPaths(path);

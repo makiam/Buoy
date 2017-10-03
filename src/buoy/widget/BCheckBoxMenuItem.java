@@ -74,10 +74,12 @@ public class BCheckBoxMenuItem extends BMenuItem {
      * Create the JCheckBoxMenuItem which serves as this Widget's Component.
      * This method is protected so that subclasses can override it.
      */
+    @Override
     protected JMenuItem createComponent() {
         return new JCheckBoxMenuItem();
     }
 
+    @Override
     public JMenuItem getComponent() {
         return (JMenuItem) component;
     }

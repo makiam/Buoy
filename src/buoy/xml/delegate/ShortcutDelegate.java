@@ -18,6 +18,7 @@ public class ShortcutDelegate extends DefaultPersistenceDelegate {
     public ShortcutDelegate() {
     }
 
+    @Override
     protected Expression instantiate(Object oldInstance, Encoder out) {
         Shortcut old = (Shortcut) oldInstance;
         Object arg1;

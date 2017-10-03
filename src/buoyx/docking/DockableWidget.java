@@ -127,6 +127,7 @@ public class DockableWidget extends WidgetContainer {
         return (pos.y < getBorderInsets().top);
     }
 
+    @Override
     public Dimension getPreferredSize() {
         Dimension size = (content == null ? new Dimension(0, 0) : new Dimension(content.getPreferredSize()));
         Insets insets = getBorderInsets();
@@ -135,6 +136,7 @@ public class DockableWidget extends WidgetContainer {
         return size;
     }
 
+    @Override
     public Dimension getMinimumSize() {
         Dimension size = (content == null ? new Dimension(0, 0) : new Dimension(content.getMinimumSize()));
         Insets insets = getBorderInsets();
@@ -147,10 +149,12 @@ public class DockableWidget extends WidgetContainer {
         return size;
     }
 
+    @Override
     public int getChildCount() {
         return (content == null ? 0 : 1);
     }
 
+    @Override
     public Collection<Widget> getChildren() {
         ArrayList<Widget> children = new ArrayList<Widget>();
         if (content != null) {
@@ -159,6 +163,7 @@ public class DockableWidget extends WidgetContainer {
         return children;
     }
 
+    @Override
     public void remove(Widget widget) {
         if (content == widget) {
             ((JPanel) getComponent()).remove(widget.getComponent());
@@ -167,12 +172,14 @@ public class DockableWidget extends WidgetContainer {
         }
     }
 
+    @Override
     public void removeAll() {
         if (content != null) {
             remove(content);
         }
     }
 
+    @Override
     public void layoutChildren() {
         if (content == null) {
             return;
@@ -185,6 +192,7 @@ public class DockableWidget extends WidgetContainer {
         }
     }
 
+    @Override
     public Rectangle getBounds() {
         Rectangle bounds = super.getBounds();
         Widget parentWidget = getParent();
@@ -207,6 +215,7 @@ public class DockableWidget extends WidgetContainer {
          * Optionally fill the component with its background color, then paint
          * the border.
          */
+        @Override
         public void paintComponent(Graphics g) {
             if (isOpaque()) {
                 Dimension size = getSize();
@@ -220,6 +229,7 @@ public class DockableWidget extends WidgetContainer {
         /**
          * This component is opaque if its WidgetContainer is set to be opaque.
          */
+        @Override
         public boolean isOpaque() {
             return DockableWidget.this.isOpaque();
         }

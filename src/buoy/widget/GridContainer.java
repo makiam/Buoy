@@ -45,6 +45,7 @@ public class GridContainer extends WidgetContainer {
         numCols = cols;
     }
 
+    @Override
     public JPanel getComponent() {
         return (JPanel) component;
     }
@@ -52,6 +53,7 @@ public class GridContainer extends WidgetContainer {
     /**
      * Get the number of children in this container.
      */
+    @Override
     public int getChildCount() {
         int count = 0;
         for (int i = 0; i < child.length; i++) {
@@ -67,6 +69,7 @@ public class GridContainer extends WidgetContainer {
     /**
      * Get a Collection containing all child Widgets of this container.
      */
+    @Override
     public Collection<Widget> getChildren() {
         ArrayList<Widget> ls = new ArrayList<Widget>(numCols * numRows);
         for (int i = 0; i < child.length; i++) {
@@ -97,6 +100,7 @@ public class GridContainer extends WidgetContainer {
      * child is itself a WidgetContainer, its layoutChildren() method will be
      * called in turn.
      */
+    @Override
     public void layoutChildren() {
         // Work out the positions of every row and column.
 
@@ -325,6 +329,7 @@ public class GridContainer extends WidgetContainer {
      *
      * @param widget the Widget to remove
      */
+    @Override
     public void remove(Widget widget) {
         for (int i = 0; i < child.length; i++) {
             for (int j = 0; j < child[i].length; j++) {
@@ -357,6 +362,7 @@ public class GridContainer extends WidgetContainer {
     /**
      * Remove all child Widgets from this container.
      */
+    @Override
     public void removeAll() {
         getComponent().removeAll();
         for (int i = 0; i < child.length; i++) {
@@ -394,6 +400,7 @@ public class GridContainer extends WidgetContainer {
      * a WidgetContainer lays out its contents, it will attempt never to make
      * this Widget smaller than its minimum size.
      */
+    @Override
     public Dimension getMinimumSize() {
         int x = 0, y = 0;
         for (int i = 0; i < child.length; i++) {
@@ -417,6 +424,7 @@ public class GridContainer extends WidgetContainer {
      * WidgetContainer lays out its contents, it will attempt to make this
      * Widget as close as possible to its preferred size.
      */
+    @Override
     public Dimension getPreferredSize() {
         int x = 0, y = 0;
         for (int i = 0; i < child.length; i++) {

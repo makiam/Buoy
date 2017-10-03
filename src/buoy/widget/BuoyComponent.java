@@ -17,6 +17,7 @@ public class BuoyComponent extends SingleWidgetPanel {
     public BuoyComponent(Widget widget) {
         super(widget);
         addComponentListener(new ComponentAdapter() {
+            @Override
             public void componentResized(ComponentEvent e) {
                 if (BuoyComponent.this.widget instanceof WidgetContainer) {
                     ((WidgetContainer) BuoyComponent.this.widget).layoutChildren();
@@ -36,6 +37,7 @@ public class BuoyComponent extends SingleWidgetPanel {
      * If the contained Widget is a WidgetContainer, make sure its contents are
      * layed out correctly.
      */
+    @Override
     public void validate() {
         super.validate();
         if (widget instanceof WidgetContainer) {

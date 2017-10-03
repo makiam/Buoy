@@ -31,6 +31,7 @@ public class AWTWidget extends Widget {
      * not actually cause the layout to change. To do that, you must call
      * layoutChildren() on the WidgetContainer.
      */
+    @Override
     public void invalidateSize() {
         super.invalidateSize();
     }

@@ -18,6 +18,7 @@ public class BTableDelegate extends EventSourceDelegate {
     public BTableDelegate() {
     }
 
+    @Override
     protected Expression instantiate(Object oldInstance, Encoder out) {
         BTable old = (BTable) oldInstance;
         TableModel defaultModel = (TableModel) getField(old, "defaultModel");
@@ -37,6 +38,7 @@ public class BTableDelegate extends EventSourceDelegate {
         return new Expression(old, old.getClass(), "new", new Object[]{contents, titles});
     }
 
+    @Override
     protected void initialize(Class type, Object oldInstance, Object newInstance, Encoder out) {
         super.initialize(type, oldInstance, newInstance, out);
         BTable oldTable = (BTable) oldInstance;

@@ -81,6 +81,7 @@ public class BFileChooser extends Widget {
         setTitle(title);
         setDirectory(directory);
         getComponent().addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
             public void propertyChange(PropertyChangeEvent ev) {
                 String name = ev.getPropertyName();
                 if (JFileChooser.SELECTED_FILES_CHANGED_PROPERTY.equals(name)
@@ -99,6 +100,7 @@ public class BFileChooser extends Widget {
         return new JFileChooser();
     }
 
+    @Override
     public JFileChooser getComponent() {
         return (JFileChooser) component;
     }

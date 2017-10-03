@@ -17,6 +17,7 @@ public class BTableHeaderDelegate extends EventSourceDelegate {
     public BTableHeaderDelegate() {
     }
 
+    @Override
     protected Expression instantiate(Object oldInstance, Encoder out) {
         BTable.BTableHeader old = (BTable.BTableHeader) oldInstance;
         BTable table = old.getTable();

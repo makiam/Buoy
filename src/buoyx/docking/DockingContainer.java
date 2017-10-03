@@ -405,6 +405,7 @@ public class DockingContainer extends WidgetContainer {
         }
     }
 
+    @Override
     public int getChildCount() {
         int count = (content == null ? 0 : 1);
         for (ArrayList<DockableWidget> tab : childrenInTab) {
@@ -417,6 +418,7 @@ public class DockingContainer extends WidgetContainer {
         return getChildCount() - (content == null ? 0 : 1);
     }
 
+    @Override
     public Collection<Widget> getChildren() {
         ArrayList<Widget> children = new ArrayList<Widget>(0);
         if (content != null) {
@@ -438,6 +440,7 @@ public class DockingContainer extends WidgetContainer {
         return (DockableWidget) ((ArrayList) childrenInTab.get(tab)).get(index);
     }
 
+    @Override
     public void remove(Widget widget) {
         if (widget == content) {
             setContent(null);
@@ -458,6 +461,7 @@ public class DockingContainer extends WidgetContainer {
         }
     }
 
+    @Override
     public void removeAll() {
         for (ArrayList<DockableWidget> thisTab : childrenInTab) {
             for (DockableWidget widget : thisTab) {
@@ -469,15 +473,18 @@ public class DockingContainer extends WidgetContainer {
 
     }
 
+    @Override
     public void layoutChildren() {
         splitPane.getComponent().setBounds(getBounds());
         splitPane.layoutChildren();
     }
 
+    @Override
     public Dimension getMinimumSize() {
         return splitPane.getMinimumSize();
     }
 
+    @Override
     public Dimension getPreferredSize() {
         return splitPane.getPreferredSize();
     }

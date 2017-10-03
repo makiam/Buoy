@@ -32,6 +32,7 @@ public class DocumentLinkEvent extends EventObject implements WidgetEvent {
     /**
      * Get the Widget which generated this event.
      */
+    @Override
     public Widget getWidget() {
         return widget;
     }

@@ -19,6 +19,7 @@ public class FormContainerDelegate extends EventSourceDelegate {
         super(new String[]{"columnCount", "rowCount"});
     }
 
+    @Override
     protected void initialize(Class type, Object oldInstance, Object newInstance, Encoder out) {
         super.initialize(type, oldInstance, newInstance, out);
         FormContainer oldC = (FormContainer) oldInstance;

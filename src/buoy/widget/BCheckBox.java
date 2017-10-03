@@ -36,6 +36,7 @@ public class BCheckBox extends Widget {
     public BCheckBox(String text, boolean state) {
         component = createComponent(text, state);
         getComponent().addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ev) {
                 dispatchEvent(new ValueChangedEvent(BCheckBox.this));
             }
@@ -53,6 +54,7 @@ public class BCheckBox extends Widget {
         return new JCheckBox(text, state);
     }
 
+    @Override
     public JCheckBox getComponent() {
         return (JCheckBox) component;
     }
@@ -91,6 +93,7 @@ public class BCheckBox extends Widget {
      * WidgetContainer lays out its contents, it will attempt never to make this
      * Widget larger than its maximum size.
      */
+    @Override
     public Dimension getMaximumSize() {
         return new Dimension(32767, 32767);
     }

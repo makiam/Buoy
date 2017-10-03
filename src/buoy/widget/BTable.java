@@ -88,6 +88,7 @@ public class BTable extends Widget {
      */
     public BTable() {
         defaultModel = new DefaultTableModel() {
+            @Override
             public boolean isCellEditable(int row, int column) {
                 return ((Boolean) columnEditable.get(column)).booleanValue();
             }
@@ -96,6 +97,7 @@ public class BTable extends Widget {
         tableHeader = new BTableHeader();
         columnEditable = new ArrayList<Boolean>();
         ListSelectionListener lsl = new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent ev) {
                 dispatchEvent(new SelectionChangedEvent(BTable.this, ev.getValueIsAdjusting()));
             }
@@ -149,12 +151,14 @@ public class BTable extends Widget {
      */
     protected JTable createComponent() {
         return new JTable(defaultModel) {
+            @Override
             public void editingStopped(ChangeEvent ev) {
                 int row = getEditingRow(), col = getEditingColumn();
                 super.editingStopped(ev);
                 BTable.this.dispatchEvent(new CellValueChangedEvent(BTable.this, row, col));
             }
 
+            @Override
             protected boolean processKeyBinding(KeyStroke ks, KeyEvent e, int condition, boolean pressed) {
                 if (e.getKeyCode() == KeyEvent.VK_META || e.getKeyCode() == KeyEvent.VK_CAPS_LOCK) {
                     return false;
@@ -164,6 +168,7 @@ public class BTable extends Widget {
         };
     }
 
+    @Override
     public JTable getComponent() {
         return (JTable) component;
     }
@@ -757,6 +762,7 @@ public class BTable extends Widget {
      * parent is a BScrollPane, the table header is placed into the
      * BScrollPane's column header position.
      */
+    @Override
     protected void setParent(WidgetContainer container) {
         super.setParent(container);
         if (container instanceof BScrollPane) {
@@ -774,6 +780,7 @@ public class BTable extends Widget {
         private BTableHeader() {
             component = ((JTable) BTable.this.getComponent()).getTableHeader();
             getComponent().addComponentListener(new ComponentAdapter() {
+                @Override
                 public void componentResized(ComponentEvent ev) {
                     // When the user resizes a column by hand, update the BScrollPane.
 
@@ -784,6 +791,7 @@ public class BTable extends Widget {
             });
         }
 
+        @Override
         public JTableHeader getComponent() {
             return (JTableHeader) component;
         }

@@ -56,6 +56,7 @@ public class BToolBar extends WidgetContainer {
         return toolbar;
     }
 
+    @Override
     public JToolBar getComponent() {
         return (JToolBar) component;
     }
@@ -109,6 +110,7 @@ public class BToolBar extends WidgetContainer {
     /**
      * Get the number of children in this container.
      */
+    @Override
     public int getChildCount() {
         return child.size();
     }
@@ -123,6 +125,7 @@ public class BToolBar extends WidgetContainer {
     /**
      * Get a Collection containing all child Widgets of this container.
      */
+    @Override
     public Collection<Widget> getChildren() {
         return new ArrayList<Widget>(child);
     }
@@ -130,6 +133,7 @@ public class BToolBar extends WidgetContainer {
     /**
      * Remove a child Widget from this container.
      */
+    @Override
     public void remove(Widget widget) {
         child.remove(widget);
         getComponent().remove(widget.getComponent().getParent());
@@ -139,6 +143,7 @@ public class BToolBar extends WidgetContainer {
     /**
      * Remove all child Widgets from this container.
      */
+    @Override
     public void removeAll() {
         for (int i = 0; i < child.size(); i++) {
             removeAsParent((Widget) child.get(i));
@@ -165,6 +170,7 @@ public class BToolBar extends WidgetContainer {
      * child is itself a WidgetContainer, its layoutChildren() method will be
      * called in turn.
      */
+    @Override
     public void layoutChildren() {
         getComponent().validate();
         for (int i = 0; i < child.size(); i++) {

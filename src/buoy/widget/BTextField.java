@@ -68,11 +68,13 @@ public class BTextField extends TextWidget {
         tf.addCaretListener(caretListener);
         tf.getDocument().addDocumentListener(documentListener);
         tf.addMouseListener(new MouseAdapter() {
+            @Override
             public void mousePressed(MouseEvent ev) {
                 keepSelection = true;
             }
         });
         tf.addFocusListener(new FocusListener() {
+            @Override
             public void focusGained(FocusEvent ev) {
                 // Automatically select the entire contents of the field when it gains focus through a means
                 // other than a mouse click.
@@ -83,6 +85,7 @@ public class BTextField extends TextWidget {
                 }
             }
 
+            @Override
             public void focusLost(FocusEvent ev) {
                 // If the contents were automatically selected when focus was gained, deselect them now.
 
@@ -104,6 +107,7 @@ public class BTextField extends TextWidget {
         return new JTextField();
     }
 
+    @Override
     public JTextField getComponent() {
         return (JTextField) component;
     }

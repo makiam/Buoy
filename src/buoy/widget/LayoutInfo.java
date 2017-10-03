@@ -156,6 +156,7 @@ public class LayoutInfo implements Cloneable {
     /**
      * Create a duplicate of this object.
      */
+    @Override
     public Object clone() {
         return new LayoutInfo(align, fill, insets == null ? null : (Insets) insets.clone(), padding == null ? null : (Dimension) padding.clone());
     }

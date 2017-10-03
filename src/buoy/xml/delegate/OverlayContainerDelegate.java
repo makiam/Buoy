@@ -17,6 +17,7 @@ public class OverlayContainerDelegate extends EventSourceDelegate {
     public OverlayContainerDelegate() {
     }
 
+    @Override
     protected void initialize(Class type, Object oldInstance, Object newInstance, Encoder out) {
         super.initialize(type, oldInstance, newInstance, out);
         OverlayContainer old = (OverlayContainer) oldInstance;
