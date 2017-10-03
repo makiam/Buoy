@@ -16,7 +16,7 @@ import java.util.*;
  */
 public class EventSource {
 
-    protected ArrayList eventLinks;
+    protected List<EventLinkRecord> eventLinks = new ArrayList<EventLinkRecord>();
 
     /**
      * Create a new EventSource.
@@ -83,14 +83,11 @@ public class EventSource {
      * its superclasses or interfaces) as its only argument.
      */
     public void addEventLink(Class eventType, Object target, Method method) {
-        if (eventLinks == null) {
-            eventLinks = new ArrayList();
-        }
+
         if (!Modifier.isPublic(method.getDeclaringClass().getModifiers()) || !Modifier.isPublic(method.getModifiers())) {
             method.setAccessible(true);
         }
-        for (int i = 0; i < eventLinks.size(); i++) {
-            EventLinkRecord rec = (EventLinkRecord) eventLinks.get(i);
+        for (EventLinkRecord rec: eventLinks) {
             if (rec.getEventType() == eventType) {
                 rec.addLink(target, method);
                 return;
@@ -110,11 +107,9 @@ public class EventSource {
      * @param target the object which was receiving the events
      */
     public void removeEventLink(Class eventType, Object target) {
-        if (eventLinks == null) {
-            return;
-        }
-        for (int i = 0; i < eventLinks.size(); i++) {
-            EventLinkRecord rec = (EventLinkRecord) eventLinks.get(i);
+        if(eventLinks.isEmpty()) return;
+        
+        for (EventLinkRecord rec: eventLinks) {
             if (rec.getEventType() == eventType) {
                 rec.removeLink(target);
                 return;
@@ -127,11 +122,9 @@ public class EventSource {
      * that has been added to this object.
      */
     public void dispatchEvent(Object event) {
-        if (eventLinks == null) {
-            return;
-        }
-        for (int i = 0; i < eventLinks.size(); i++) {
-            EventLinkRecord rec = (EventLinkRecord) eventLinks.get(i);
+        if(eventLinks.isEmpty()) return;
+        
+        for (EventLinkRecord rec: eventLinks) {
             if (rec.getEventType().isInstance(event)) {
                 rec.dispatchEvent(event);
             }

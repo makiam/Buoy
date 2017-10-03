@@ -38,15 +38,17 @@ public class EventSourceDelegate extends DefaultPersistenceDelegate {
      * This is called from initialize(). It initializes the list of event links
      * for the object.
      */
+    @SuppressWarnings("unchecked")
     protected void initializeEventLinks(Object oldInstance, Object newInstance, Encoder out) {
-        ArrayList oldLinks = (ArrayList) getField(newInstance, "eventLinks");
-        ArrayList newLinks = (ArrayList) getField(oldInstance, "eventLinks");
+        List<EventLinkRecord> oldLinks = (List<EventLinkRecord>) getField(newInstance, "eventLinks");
+        
+        List<EventLinkRecord> newLinks = (List<EventLinkRecord>) getField(oldInstance, "eventLinks");
         if (newLinks == null) {
             return; // There are no event links.
         }
-        for (int i = 0; i < newLinks.size(); i++) {
-            EventLinkRecord rec = (EventLinkRecord) newLinks.get(i);
-            ArrayList targetList = (ArrayList) getField(rec, "targetList");
+        for (EventLinkRecord rec: newLinks) {
+
+            List<Method> targetList = (List<Method>)getField(rec, "targetList");
             ArrayList methodList = (ArrayList) getField(rec, "targetMethodList");
             if (targetList == null || methodList == null) {
                 continue;
@@ -65,12 +67,12 @@ public class EventSourceDelegate extends DefaultPersistenceDelegate {
      * Given the list of event links on oldInstance, determine whether a
      * particular link has already been added.
      */
-    private boolean alreadyHasLink(ArrayList oldLinks, Class eventType, Object target, Method method) {
+    private boolean alreadyHasLink(List<EventLinkRecord> oldLinks, Class eventType, Object target, Method method) {
         if (oldLinks == null) {
             return false;
         }
-        for (int i = 0; i < oldLinks.size(); i++) {
-            EventLinkRecord rec = (EventLinkRecord) oldLinks.get(i);
+        for (EventLinkRecord rec: oldLinks) {
+
             if (rec.getEventType() != eventType) {
                 continue;
             }
