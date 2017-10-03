@@ -24,7 +24,7 @@ public class BSplitPaneDelegate extends EventSourceDelegate {
         if (old.getChildCount() != ((BSplitPane) newInstance).getChildCount()) {
             for (int i = 0; i < old.getChildCount(); i++) {
                 out.writeStatement(new Statement(oldInstance, "add", new Object[]{
-                    old.getChild(i), new Integer(i)}));
+                    old.getChild(i), i}));
             }
         }
     }

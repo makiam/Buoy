@@ -32,7 +32,7 @@ public class GridContainerDelegate extends EventSourceDelegate {
                     }
                     LayoutInfo layout = oldC.getChildLayout(col, row);
                     out.writeStatement(new Statement(oldC, "add", new Object[]{
-                        child, new Integer(col), new Integer(row), layout}));
+                        child, col, row, layout}));
                 }
             }
         }

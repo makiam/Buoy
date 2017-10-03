@@ -27,13 +27,13 @@ public class FormContainerDelegate extends EventSourceDelegate {
         for (int i = 0; i < oldC.getColumnCount(); i++) {
             if (oldC.getColumnWeight(i) != newC.getColumnWeight(i)) {
                 out.writeStatement(new Statement(oldC, "setColumnWeight", new Object[]{
-                    new Integer(i), new Double(oldC.getColumnWeight(i))}));
+                    i, oldC.getColumnWeight(i)}));
             }
         }
         for (int i = 0; i < oldC.getRowCount(); i++) {
             if (oldC.getRowWeight(i) != newC.getRowWeight(i)) {
                 out.writeStatement(new Statement(oldC, "setRowWeight", new Object[]{
-                    new Integer(i), new Double(oldC.getRowWeight(i))}));
+                    new Integer(i), oldC.getRowWeight(i)}));
             }
         }
         if (oldC.getChildCount() != newC.getChildCount()) {
@@ -42,8 +42,7 @@ public class FormContainerDelegate extends EventSourceDelegate {
                 Rectangle cells = oldC.getChildCells(i);
                 LayoutInfo layout = oldC.getChildLayout(i);
                 out.writeStatement(new Statement(oldC, "add", new Object[]{
-                    child, new Integer(cells.x), new Integer(cells.y), new Integer(cells.width),
-                    new Integer(cells.height), layout}));
+                    child, cells.x, cells.y, cells.width, cells.height, layout}));
             }
         }
     }

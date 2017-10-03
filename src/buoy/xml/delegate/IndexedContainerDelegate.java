@@ -45,7 +45,7 @@ public class IndexedContainerDelegate extends EventSourceDelegate {
                 // Add the children to the container.
                 for (int i = 0; i < old.getChildCount(); i++) {
                     Object args[] = new Object[methods.length];
-                    Object index[] = new Object[]{new Integer(i)};
+                    Object index[] = new Object[]{i};
                     for (int j = 0; j < args.length; j++) {
                         args[j] = methods[j].invoke(old, index);
                     }

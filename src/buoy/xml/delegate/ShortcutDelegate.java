@@ -23,10 +23,10 @@ public class ShortcutDelegate extends DefaultPersistenceDelegate {
         Shortcut old = (Shortcut) oldInstance;
         Object arg1;
         if (old.getKeyCode() == KeyEvent.VK_UNDEFINED) {
-            arg1 = new Character(old.getKeyChar());
+            arg1 = old.getKeyChar();
         } else {
-            arg1 = new Integer(old.getKeyCode());
+            arg1 = old.getKeyCode();
         }
-        return new Expression(old, old.getClass(), "new", new Object[]{arg1, new Integer(old.getModifiers())});
+        return new Expression(old, old.getClass(), "new", new Object[]{arg1, old.getModifiers()});
     }
 }
