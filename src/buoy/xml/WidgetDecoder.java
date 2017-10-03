@@ -23,10 +23,10 @@ import java.util.*;
  */
 public class WidgetDecoder {
 
-    private HashMap objectTable;
+    private HashMap<String,Object> objectTable;
     private Object rootObject;
 
-    private static ThreadLocal threadLocalObjects = new ThreadLocal();
+    private static ThreadLocal<HashMap<String,Object>> threadLocalObjects = new ThreadLocal<HashMap<String,Object>>();
 
     /**
      * Create a WidgetDecoder to reconstruct a Widget hierarchy from its XML
@@ -73,11 +73,11 @@ public class WidgetDecoder {
      * See {@link WidgetLocalization} for details.
      */
     public WidgetDecoder(InputStream in, ExceptionListener listener, ResourceBundle resources) {
-        threadLocalObjects.set(new HashMap());
+        threadLocalObjects.set(new HashMap<String,Object>());
         WidgetLocalization.setResourceBundle(resources);
         XMLDecoder decoder = new XMLDecoder(in, null, listener);
         rootObject = decoder.readObject();
-        objectTable = (HashMap) threadLocalObjects.get();
+        objectTable = threadLocalObjects.get();
         if (rootObject instanceof WidgetContainer) {
             ((WidgetContainer) rootObject).layoutChildren();
         }
@@ -110,9 +110,8 @@ public class WidgetDecoder {
      * directly.
      */
     public static void registerObject(String name, Object obj) {
-        HashMap map = (HashMap) threadLocalObjects.get();
-        if (map != null) {
-            map.put(name, obj);
-        }
+        HashMap<String,Object> map = threadLocalObjects.get();
+        if(map == null) return;
+        map.put(name, obj);
     }
 }

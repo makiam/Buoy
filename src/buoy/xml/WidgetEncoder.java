@@ -39,12 +39,12 @@ import java.util.*;
  */
 public class WidgetEncoder {
 
-    private static HashMap delegateTable;
-    private static EventSourceDelegate defaultDelegate;
+    private static final Map<Class,PersistenceDelegate> delegateTable;
+    private static final EventSourceDelegate defaultDelegate;
 
     static {
         defaultDelegate = new EventSourceDelegate();
-        delegateTable = new HashMap();
+        delegateTable = new HashMap<Class,PersistenceDelegate>();
     }
 
     /**
@@ -77,12 +77,13 @@ public class WidgetEncoder {
     public static void writeObject(Object obj, OutputStream out, ExceptionListener listener) {
         // If a window is being encoding, make sure the duplicate copy will never actually be shown.
 
-        ThreadLocal encodingInProgress = null;
+        ThreadLocal<Boolean> encodingInProgress = null;
         try {
             Field f = WindowWidget.class.getDeclaredField("encodingInProgress");
             f.setAccessible(true);
             encodingInProgress = (ThreadLocal) f.get(null);
-        } catch (Exception ex) {
+        } catch (NoSuchFieldException ex) {
+        } catch(IllegalAccessException iae) {            
         }
         if (encodingInProgress != null) {
             encodingInProgress.set(Boolean.TRUE);
