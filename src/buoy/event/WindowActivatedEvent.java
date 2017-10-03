@@ -8,17 +8,15 @@ import java.awt.event.*;
  *
  * @author Peter Eastman
  */
+public class WindowActivatedEvent extends WidgetWindowEvent {
 
-public class WindowActivatedEvent extends WidgetWindowEvent
-{
-  /**
-   * Create a WindowActivatedEvent.
-   *
-   * @param source      the window to which this event occurred
-   */
-  
-  public WindowActivatedEvent(WindowWidget source)
-  {
-    super(source, WindowEvent.WINDOW_ACTIVATED);
-  }
+    /**
+     * Create a WindowActivatedEvent.
+     *
+     * @param source the window to which this event occurred
+     */
+
+    public WindowActivatedEvent(WindowWidget source) {
+        super(source, WindowEvent.WINDOW_ACTIVATED);
+    }
 }

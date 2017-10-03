@@ -8,24 +8,23 @@ import java.beans.*;
  *
  * @author Peter Eastman
  */
+public class BSplitPaneDelegate extends EventSourceDelegate {
 
-public class BSplitPaneDelegate extends EventSourceDelegate
-{
-  /**
-   * Create a BSplitPaneDelegate.
-   */
-  
-  public BSplitPaneDelegate()
-  {
-  }
+    /**
+     * Create a BSplitPaneDelegate.
+     */
 
-  protected void initialize(Class type, Object oldInstance, Object newInstance, Encoder out)
-  {
-    super.initialize(type, oldInstance, newInstance, out);
-    BSplitPane old = (BSplitPane) oldInstance;
-    if (old.getChildCount() != ((BSplitPane) newInstance).getChildCount())
-      for (int i = 0; i < old.getChildCount(); i++)
-        out.writeStatement(new Statement(oldInstance, "add", new Object [] {
-            old.getChild(i), new Integer(i)}));
-  }
+    public BSplitPaneDelegate() {
+    }
+
+    protected void initialize(Class type, Object oldInstance, Object newInstance, Encoder out) {
+        super.initialize(type, oldInstance, newInstance, out);
+        BSplitPane old = (BSplitPane) oldInstance;
+        if (old.getChildCount() != ((BSplitPane) newInstance).getChildCount()) {
+            for (int i = 0; i < old.getChildCount(); i++) {
+                out.writeStatement(new Statement(oldInstance, "add", new Object[]{
+                    old.getChild(i), new Integer(i)}));
+            }
+        }
+    }
 }

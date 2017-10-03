@@ -8,26 +8,26 @@ import java.awt.event.*;
  *
  * @author Peter Eastman
  */
+public class MouseReleasedEvent extends WidgetMouseEvent {
 
-public class MouseReleasedEvent extends WidgetMouseEvent
-{
-  /**
-   * Create a MouseReleasedEvent.
-   *
-   * @param source        the Widget which generated this event
-   * @param when          the time at which the event occurred
-   * @param modifiers     describes the state of various keys and buttons at the time when the event occurred
-   *                      (a sum of the constants defined by InputEvent)
-   * @param x             the x coordinate at which the event occurred
-   * @param y             the y coordinate at which the event occurred
-   * @param clickCount    the number of successive times the mouse has been clicked
-   * @param popupTrigger  true if this event corresponds to the platform-specific trigger for displaying
-   *                      popup menus
-   * @param button        the flag for the button which has just changed state
-   */
-  
-  public MouseReleasedEvent(Widget source, long when, int modifiers, int x, int y, int clickCount, boolean popupTrigger, int button)
-  {
-    super(source, MOUSE_RELEASED, when, modifiers, x, y, clickCount, popupTrigger, button);
-  }
+    /**
+     * Create a MouseReleasedEvent.
+     *
+     * @param source the Widget which generated this event
+     * @param when the time at which the event occurred
+     * @param modifiers describes the state of various keys and buttons at the
+     * time when the event occurred (a sum of the constants defined by
+     * InputEvent)
+     * @param x the x coordinate at which the event occurred
+     * @param y the y coordinate at which the event occurred
+     * @param clickCount the number of successive times the mouse has been
+     * clicked
+     * @param popupTrigger true if this event corresponds to the
+     * platform-specific trigger for displaying popup menus
+     * @param button the flag for the button which has just changed state
+     */
+
+    public MouseReleasedEvent(Widget source, long when, int modifiers, int x, int y, int clickCount, boolean popupTrigger, int button) {
+        super(source, MOUSE_RELEASED, when, modifiers, x, y, clickCount, popupTrigger, button);
+    }
 }

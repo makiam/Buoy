@@ -8,17 +8,15 @@ import java.awt.event.*;
  *
  * @author Peter Eastman
  */
+public class WindowResizedEvent extends WidgetWindowEvent {
 
-public class WindowResizedEvent extends WidgetWindowEvent
-{
-  /**
-   * Create a WindowResizedEvent.
-   *
-   * @param source      the widget to which this event occurred
-   */
-  
-  public WindowResizedEvent(WindowWidget source)
-  {
-    super(source, ComponentEvent.COMPONENT_RESIZED);
-  }
+    /**
+     * Create a WindowResizedEvent.
+     *
+     * @param source the widget to which this event occurred
+     */
+
+    public WindowResizedEvent(WindowWidget source) {
+        super(source, ComponentEvent.COMPONENT_RESIZED);
+    }
 }

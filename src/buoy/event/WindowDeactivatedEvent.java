@@ -8,17 +8,15 @@ import java.awt.event.*;
  *
  * @author Peter Eastman
  */
+public class WindowDeactivatedEvent extends WidgetWindowEvent {
 
-public class WindowDeactivatedEvent extends WidgetWindowEvent
-{
-  /**
-   * Create a WindowDeactivatedEvent.
-   *
-   * @param source      the window to which this event occurred
-   */
-  
-  public WindowDeactivatedEvent(WindowWidget source)
-  {
-    super(source, WindowEvent.WINDOW_DEACTIVATED);
-  }
+    /**
+     * Create a WindowDeactivatedEvent.
+     *
+     * @param source the window to which this event occurred
+     */
+
+    public WindowDeactivatedEvent(WindowWidget source) {
+        super(source, WindowEvent.WINDOW_DEACTIVATED);
+    }
 }
