@@ -69,7 +69,7 @@ import java.lang.ref.*;
  */
 public class WidgetLocalization {
 
-    private static HashSet<WeakIdentityReference> localizedStringSet = new HashSet<WeakIdentityReference>();
+    private static final HashSet<WeakIdentityReference<String>> localizedStringSet = new HashSet<WeakIdentityReference<String>>();
     private static ResourceBundle currentBundle;
 
     /**
@@ -77,7 +77,7 @@ public class WidgetLocalization {
      * the user interface is reconstructed from XML.
      */
     public static void addLocalizedString(String s) {
-        localizedStringSet.add(new WeakIdentityReference(s));
+        localizedStringSet.add(new WeakIdentityReference<String>(s));
     }
 
     /**
@@ -85,7 +85,7 @@ public class WidgetLocalization {
      * when the user interface is reconstructed from XML.
      */
     public static void removeLocalizedString(String s) {
-        localizedStringSet.remove(new WeakIdentityReference(s));
+        localizedStringSet.remove(new WeakIdentityReference<String>(s));
     }
 
     /**
@@ -94,7 +94,7 @@ public class WidgetLocalization {
      * XML.
      */
     public static boolean isLocalizedString(String s) {
-        return localizedStringSet.contains(new WeakIdentityReference(s));
+        return localizedStringSet.contains(new WeakIdentityReference<String>(s));
     }
 
     /**
@@ -146,11 +146,11 @@ public class WidgetLocalization {
      * and also uses WeakReferences so Strings can be removed from the map when
      * they are no longer being used.
      */
-    private static class WeakIdentityReference extends WeakReference {
+    private static class WeakIdentityReference<T> extends WeakReference<T> {
 
-        private int hash;
+        private final int hash;
 
-        public WeakIdentityReference(Object obj) {
+        public WeakIdentityReference(T obj) {
             super(obj);
             hash = obj.hashCode();
         }
@@ -162,6 +162,7 @@ public class WidgetLocalization {
 
         @Override
         public boolean equals(Object obj) {
+            if(!(obj instanceof Reference)) return false;
             obj = ((Reference) obj).get();
             Object thisObj = get();
             if (thisObj == null || obj == null) {
