@@ -117,7 +117,7 @@ public class BRadioButtonMenuItem extends BMenuItem {
         if (selected) {
             group.setSelection(this);
         } else {
-            getComponent().setSelected(selected);
+            getComponent().setSelected(false);
         }
     }
 

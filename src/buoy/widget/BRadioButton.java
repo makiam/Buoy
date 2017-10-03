@@ -89,7 +89,7 @@ public class BRadioButton extends Widget {
         if (selected) {
             group.setSelection(this);
         } else {
-            getComponent().setSelected(selected);
+            getComponent().setSelected(false);
         }
     }
 
