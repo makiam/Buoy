@@ -47,22 +47,19 @@ public class BTableDelegate extends EventSourceDelegate {
         int numRow = oldTable.getRowCount();
         for (int i = 0; i < numCol; i++) {
             if (oldTable.getColumnWidth(i) != newTable.getColumnWidth(i)) {
-                out.writeStatement(new Statement(oldTable, "setColumnWidth", new Object[]{
-                    new Integer(i), new Integer(oldTable.getColumnWidth(i))}));
+                out.writeStatement(new Statement(oldTable, "setColumnWidth", new Object[]{i, oldTable.getColumnWidth(i)}));
             }
         }
         for (int i = 0; i < numRow; i++) {
             if (oldTable.getRowHeight(i) != newTable.getRowHeight(i)) {
-                out.writeStatement(new Statement(oldTable, "setRowHeight", new Object[]{
-                    new Integer(i), new Integer(oldTable.getRowHeight(i))}));
+                out.writeStatement(new Statement(oldTable, "setRowHeight", new Object[]{i, oldTable.getRowHeight(i)}));
             }
         }
         TableModel defaultModel = (TableModel) getField(oldTable, "defaultModel");
         if (defaultModel == oldTable.getModel()) {
             for (int i = 0; i < numCol; i++) {
                 if (oldTable.isColumnEditable(i) != newTable.isColumnEditable(i)) {
-                    out.writeStatement(new Statement(oldTable, "setColumnEditable", new Object[]{
-                        new Integer(i), new Boolean(oldTable.isColumnEditable(i))}));
+                    out.writeStatement(new Statement(oldTable, "setColumnEditable", new Object[]{i, oldTable.isColumnEditable(i)}));
                 }
             }
         }

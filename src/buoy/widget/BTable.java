@@ -360,7 +360,7 @@ public class BTable extends Widget {
      * @param editable specifies whether cells in the column may be edited
      */
     public void setColumnEditable(int index, boolean editable) {
-        columnEditable.set(index, new Boolean(editable));
+        columnEditable.set(index, editable);
     }
 
     /**

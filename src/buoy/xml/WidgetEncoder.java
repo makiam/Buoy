@@ -96,7 +96,7 @@ public class WidgetEncoder {
         encoder.writeExpression(new Expression(Class.class, "forName", new Object[]{"buoy.xml.WidgetLocalization"}));
         String localized[] = WidgetLocalization.getAllLocalizedStrings();
         for (int i = 0; i < localized.length; i++) {
-            encoder.writeExpression(new Expression(localized[i], WidgetLocalization.class, "getLocalizedString", new Object[]{new String(localized[i])}));
+            encoder.writeExpression(new Expression(localized[i], WidgetLocalization.class, "getLocalizedString", new Object[]{localized[i]}));
         }
         encoder.writeObject(obj);
         encoder.close();
