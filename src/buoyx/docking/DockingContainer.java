@@ -191,7 +191,7 @@ public class DockingContainer extends WidgetContainer {
      */
     public int getSelectedTab() {
         if (tabs == null) {
-            return (childrenInTab.size() == 0 ? -1 : 0);
+            return (childrenInTab.isEmpty() ? -1 : 0);
         }
         return tabs.getSelectedTab();
     }
@@ -451,7 +451,7 @@ public class DockingContainer extends WidgetContainer {
                 if (index > -1) {
                     thisTab.remove(index);
                     removeAsParent(widget);
-                    if (thisTab.size() == 0) {
+                    if (thisTab.isEmpty()) {
                         childrenInTab.remove(i);
                     }
                     rebuildContents(getDockedChildCount() > 0);
