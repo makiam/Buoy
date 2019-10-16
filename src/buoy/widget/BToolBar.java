@@ -42,7 +42,7 @@ public class BToolBar extends WidgetContainer {
      */
     public BToolBar(Orientation orientation) {
         component = createComponent();
-        child = new ArrayList<Widget>();
+        child = new ArrayList<>();
         setOrientation(orientation);
     }
 
@@ -127,7 +127,7 @@ public class BToolBar extends WidgetContainer {
      */
     @Override
     public Collection<Widget> getChildren() {
-        return new ArrayList<Widget>(child);
+        return new ArrayList<>(child);
     }
 
     /**

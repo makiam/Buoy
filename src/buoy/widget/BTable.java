@@ -95,7 +95,7 @@ public class BTable extends Widget {
         };
         component = createComponent();
         tableHeader = new BTableHeader();
-        columnEditable = new ArrayList<Boolean>();
+        columnEditable = new ArrayList<>();
         ListSelectionListener lsl = new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent ev) {
@@ -237,7 +237,7 @@ public class BTable extends Widget {
      */
     public void removeColumn(int index) {
         int columns = getColumnCount();
-        Vector<Object> columnNames = new Vector<Object>();
+        Vector<Object> columnNames = new Vector<>();
         for (int i = 0; i < columns; i++) {
             if (i != index) {
                 columnNames.add(getColumnHeader(i));

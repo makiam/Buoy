@@ -44,7 +44,7 @@ public class WidgetEncoder {
 
     static {
         defaultDelegate = new EventSourceDelegate();
-        delegateTable = new HashMap<Class,PersistenceDelegate>();
+        delegateTable = new HashMap<>();
     }
 
     /**

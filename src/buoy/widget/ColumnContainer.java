@@ -34,8 +34,8 @@ public class ColumnContainer extends WidgetContainer {
      */
     public ColumnContainer() {
         component = new WidgetContainerPanel(this);
-        child = new ArrayList<Widget>();
-        childLayout = new ArrayList<LayoutInfo>();
+        child = new ArrayList<>();
+        childLayout = new ArrayList<>();
         defaultLayout = new LayoutInfo(LayoutInfo.CENTER, LayoutInfo.NONE, new Insets(2, 2, 2, 2), null);
     }
 
@@ -64,7 +64,7 @@ public class ColumnContainer extends WidgetContainer {
      */
     @Override
     public Collection<Widget> getChildren() {
-        return new ArrayList<Widget>(child);
+        return new ArrayList<>(child);
     }
 
     /**

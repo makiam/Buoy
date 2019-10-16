@@ -38,7 +38,7 @@ public class DragManager {
         dithered.setRGB(0, 1, 0xFF000000);
         dithered.setRGB(1, 0, 0xFF000000);
         ditheredPaint = new TexturePaint(dithered, new Rectangle(2, 2));
-        detachedDocks = new WeakHashMap<WidgetContainer, HashSet<DetachedDockingContainer>>();
+        detachedDocks = new WeakHashMap<>();
     }
 
     private DragManager() {
@@ -423,7 +423,7 @@ public class DragManager {
             setContent(dock);
             HashSet<DetachedDockingContainer> detached = detachedDocks.get(parentWindow);
             if (detached == null) {
-                detached = new HashSet<DetachedDockingContainer>();
+                detached = new HashSet<>();
                 detachedDocks.put(parentWindow, detached);
             }
             detached.add(this);

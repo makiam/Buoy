@@ -68,7 +68,7 @@ public class BTabbedPane extends WidgetContainer {
                 });
             }
         });
-        child = new ArrayList<Widget>();
+        child = new ArrayList<>();
     }
 
     /**
@@ -107,7 +107,7 @@ public class BTabbedPane extends WidgetContainer {
      */
     @Override
     public Collection<Widget> getChildren() {
-        return new ArrayList<Widget>(child);
+        return new ArrayList<>(child);
     }
 
     /**

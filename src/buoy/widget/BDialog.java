@@ -118,7 +118,7 @@ public class BDialog extends WindowWidget {
      */
     @Override
     public Collection<Widget> getChildren() {
-        ArrayList<Widget> ls = new ArrayList<Widget>(3);
+        ArrayList<Widget> ls = new ArrayList<>(3);
         if (menubar != null) {
             ls.add(menubar);
         }

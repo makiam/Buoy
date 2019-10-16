@@ -39,7 +39,7 @@ public class BFrame extends WindowWidget {
         component = createComponent();
         getComponent().getContentPane().setLayout(null);
         getComponent().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        frameMap.put(getComponent(), new WeakReference<BFrame>(this));
+        frameMap.put(getComponent(), new WeakReference<>(this));
     }
 
     /**
@@ -76,7 +76,7 @@ public class BFrame extends WindowWidget {
      */
     @Override
     public Collection<Widget> getChildren() {
-        ArrayList<Widget> ls = new ArrayList<Widget>(3);
+        ArrayList<Widget> ls = new ArrayList<>(3);
         if (menubar != null) {
             ls.add(menubar);
         }
@@ -258,7 +258,7 @@ public class BFrame extends WindowWidget {
      * Get a list of all BFrames that currently exist.
      */
     public static List<BFrame> getFrames() {
-        ArrayList<BFrame> list = new ArrayList<BFrame>();
+        ArrayList<BFrame> list = new ArrayList<>();
         for (Frame frame : Frame.getFrames()) {
             WeakReference<BFrame> ref = frameMap.get(frame);
             if (ref != null) {

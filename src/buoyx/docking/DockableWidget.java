@@ -95,7 +95,8 @@ public class DockableWidget extends WidgetContainer {
      * to return the correct insets.
      */
     protected Insets getBorderInsets() {
-        FontMetrics fm = getComponent().getFontMetrics(getComponent().getFont());
+        Component cc = getComponent();
+        FontMetrics fm = cc.getFontMetrics(cc.getFont());
         return new Insets(fm.getMaxAscent() + fm.getMaxDescent() + 4, 0, 0, 0);
     }
 
@@ -103,17 +104,17 @@ public class DockableWidget extends WidgetContainer {
      * This method is called to paint the border. To customize the appearance of
      * the border, override this method.
      */
-    protected void paintBorder(Graphics2D g) {
+    protected void paintBorder(Graphics2D graphics) {
         Rectangle bounds = getBounds();
         Insets insets = getBorderInsets();
-        g.setPaint(new GradientPaint(0, 0, Color.WHITE, 0, insets.top, Color.LIGHT_GRAY));
-        g.fillRect(0, 0, bounds.width, insets.top);
-        g.setColor(Color.DARK_GRAY);
-        g.drawLine(0, insets.top - 1, bounds.width, insets.top - 1);
-        g.setColor(Color.BLACK);
+        graphics.setPaint(new GradientPaint(0, 0, Color.WHITE, 0, insets.top, Color.LIGHT_GRAY));
+        graphics.fillRect(0, 0, bounds.width, insets.top);
+        graphics.setColor(Color.DARK_GRAY);
+        graphics.drawLine(0, insets.top - 1, bounds.width, insets.top - 1);
+        graphics.setColor(Color.BLACK);
         if (label != null) {
             FontMetrics fm = getComponent().getFontMetrics(getComponent().getFont());
-            g.drawString(label, 2, fm.getMaxAscent() + 2);
+            graphics.drawString(label, 2, fm.getMaxAscent() + 2);
         }
     }
 
@@ -156,7 +157,7 @@ public class DockableWidget extends WidgetContainer {
 
     @Override
     public Collection<Widget> getChildren() {
-        ArrayList<Widget> children = new ArrayList<Widget>();
+        ArrayList<Widget> children = new ArrayList<>();
         if (content != null) {
             children.add(content);
         }

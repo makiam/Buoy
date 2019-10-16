@@ -50,7 +50,8 @@ public class DockingContainer extends WidgetContainer {
         tabPosition = BTabbedPane.TOP;
         ((Container) getComponent()).add(splitPane.getComponent());
         setAsParent(splitPane);
-        childrenInTab = new ArrayList<ArrayList<DockableWidget>>();
+        
+        childrenInTab = new ArrayList<>();
         visibleDividerSize = splitPane.getComponent().getDividerSize();
     }
 
@@ -98,7 +99,7 @@ public class DockingContainer extends WidgetContainer {
         if (widget.getParent() != null) {
             widget.getParent().remove(widget);
         }
-        ArrayList<DockableWidget> newTab = new ArrayList<DockableWidget>();
+        ArrayList<DockableWidget> newTab = new ArrayList<>();
         newTab.add(widget);
         childrenInTab.add(newTab);
         rebuildContents(getDockedChildCount() > 1 && (content == null || !content.getBounds().equals(splitPane.getBounds())));
@@ -420,7 +421,7 @@ public class DockingContainer extends WidgetContainer {
 
     @Override
     public Collection<Widget> getChildren() {
-        ArrayList<Widget> children = new ArrayList<Widget>(0);
+        ArrayList<Widget> children = new ArrayList<>(0);
         if (content != null) {
             children.add(content);
         }

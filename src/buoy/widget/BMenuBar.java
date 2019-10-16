@@ -23,7 +23,7 @@ public class BMenuBar extends WidgetContainer {
      */
     public BMenuBar() {
         component = createComponent();
-        menus = new ArrayList<BMenu>();
+        menus = new ArrayList<>();
     }
 
     /**
@@ -84,7 +84,7 @@ public class BMenuBar extends WidgetContainer {
      */
     @Override
     public Collection<Widget> getChildren() {
-        return new ArrayList<Widget>(menus);
+        return new ArrayList<>(menus);
     }
 
     /**

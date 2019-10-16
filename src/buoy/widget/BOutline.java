@@ -134,7 +134,7 @@ public class BOutline extends WidgetContainer {
      */
     @Override
     public Collection<Widget> getChildren() {
-        ArrayList<Widget> ls = new ArrayList<Widget>(1);
+        ArrayList<Widget> ls = new ArrayList<>(1);
         if (content != null) {
             ls.add(content);
         }

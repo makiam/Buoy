@@ -16,7 +16,7 @@ import java.util.*;
  */
 public class EventSource {
 
-    protected List<EventLinkRecord> eventLinks = new ArrayList<EventLinkRecord>();
+    protected List<EventLinkRecord> eventLinks = new ArrayList<>();
 
     /**
      * Create a new EventSource.

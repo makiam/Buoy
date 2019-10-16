@@ -229,7 +229,7 @@ public class BSplitPane extends WidgetContainer {
      */
     @Override
     public Collection<Widget> getChildren() {
-        ArrayList<Widget> ls = new ArrayList<Widget>(2);
+        ArrayList<Widget> ls = new ArrayList<>(2);
         for (Widget child1 : child) {
             if(child1 == null) continue;
             ls.add(child1);

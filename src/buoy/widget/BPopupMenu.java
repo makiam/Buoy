@@ -38,7 +38,7 @@ public class BPopupMenu extends WidgetContainer implements MenuWidget {
      */
     public BPopupMenu() {
         component = createComponent();
-        elements = new ArrayList<MenuWidget>();
+        elements = new ArrayList<>();
     }
 
     /**
@@ -135,7 +135,7 @@ public class BPopupMenu extends WidgetContainer implements MenuWidget {
      */
     @Override
     public Collection<Widget> getChildren() {
-        ArrayList<Widget> children = new ArrayList<Widget>(elements.size());
+        ArrayList<Widget> children = new ArrayList<>(elements.size());
         for (MenuWidget widget : elements) {
             children.add((Widget) widget);
         }

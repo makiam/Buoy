@@ -402,7 +402,7 @@ public class BScrollPane extends WidgetContainer {
      */
     @Override
     public Collection<Widget> getChildren() {
-        ArrayList<Widget> ls = new ArrayList<Widget>(5);
+        ArrayList<Widget> ls = new ArrayList<>(5);
         if (content != null) {
             ls.add(content);
         }

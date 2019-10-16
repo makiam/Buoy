@@ -70,7 +70,7 @@ public class GridContainer extends WidgetContainer {
      */
     @Override
     public Collection<Widget> getChildren() {
-        ArrayList<Widget> ls = new ArrayList<Widget>(numCols * numRows);
+        ArrayList<Widget> ls = new ArrayList<>(numCols * numRows);
         for (Widget[] child1 : child) {
             for (Widget item : child1) {
                 if(item == null) continue;

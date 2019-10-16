@@ -34,8 +34,8 @@ public class ExplicitContainer extends WidgetContainer {
      */
     public ExplicitContainer() {
         component = new WidgetContainerPanel(this);
-        children = new ArrayList<Widget>();
-        childBounds = new ArrayList<Rectangle>();
+        children = new ArrayList<>();
+        childBounds = new ArrayList<>();
         requiredSize = new Dimension(0, 0);
     }
 
@@ -64,7 +64,7 @@ public class ExplicitContainer extends WidgetContainer {
      */
     @Override
     public Collection<Widget> getChildren() {
-        return new ArrayList<Widget>(children);
+        return new ArrayList<>(children);
     }
 
     /**

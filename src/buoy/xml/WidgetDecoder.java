@@ -73,7 +73,7 @@ public class WidgetDecoder {
      * See {@link WidgetLocalization} for details.
      */
     public WidgetDecoder(InputStream in, ExceptionListener listener, ResourceBundle resources) {
-        threadLocalObjects.set(new HashMap<String,Object>());
+        threadLocalObjects.set(new HashMap<>());
         WidgetLocalization.setResourceBundle(resources);
         XMLDecoder decoder = new XMLDecoder(in, null, listener);
         rootObject = decoder.readObject();

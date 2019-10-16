@@ -12,9 +12,9 @@ import java.util.*;
 public class EventLinkRecord {
 
     private final Class eventClass;
-    private final List<Object> targetList = new ArrayList<Object>();
-    private final List<Method> targetMethodList = new ArrayList<Method>();
-    private final List<Boolean> argsList = new ArrayList<Boolean>();
+    private final List<Object> targetList = new ArrayList<>();
+    private final List<Method> targetMethodList = new ArrayList<>();
+    private final List<Boolean> argsList = new ArrayList<>();
 
     /**
      * Create an EventLinkRecord for storing links for a particular event class.

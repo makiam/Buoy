@@ -77,7 +77,7 @@ public class WidgetLocalization {
      * the user interface is reconstructed from XML.
      */
     public static void addLocalizedString(String s) {
-        localizedStringSet.add(new WeakIdentityReference<String>(s));
+        localizedStringSet.add(new WeakIdentityReference<>(s));
     }
 
     /**
@@ -85,7 +85,7 @@ public class WidgetLocalization {
      * when the user interface is reconstructed from XML.
      */
     public static void removeLocalizedString(String s) {
-        localizedStringSet.remove(new WeakIdentityReference<String>(s));
+        localizedStringSet.remove(new WeakIdentityReference<>(s));
     }
 
     /**
@@ -94,7 +94,7 @@ public class WidgetLocalization {
      * XML.
      */
     public static boolean isLocalizedString(String s) {
-        return localizedStringSet.contains(new WeakIdentityReference<String>(s));
+        return localizedStringSet.contains(new WeakIdentityReference<>(s));
     }
 
     /**
@@ -111,7 +111,7 @@ public class WidgetLocalization {
      */
     public static String[] getAllLocalizedStrings() {
         Iterator entries = localizedStringSet.iterator();
-        List<String> strings = new ArrayList<String>();
+        List<String> strings = new ArrayList<>();
         while (entries.hasNext()) {
             Object obj = ((Reference) entries.next()).get();
             if (obj == null) {

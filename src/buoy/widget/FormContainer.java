@@ -50,7 +50,7 @@ public class FormContainer extends WidgetContainer {
         this.colWeight = colWeight;
         this.rowWeight = rowWeight;
         component = new WidgetContainerPanel(this);
-        child = new ArrayList<ChildInfo>();
+        child = new ArrayList<>();
         defaultLayout = new LayoutInfo();
     }
 
@@ -96,7 +96,7 @@ public class FormContainer extends WidgetContainer {
      */
     @Override
     public Collection<Widget> getChildren() {
-        ArrayList<Widget> list = new ArrayList<Widget>(child.size());
+        ArrayList<Widget> list = new ArrayList<>(child.size());
         for (ChildInfo aChild : child) {
             list.add(aChild.widget);
         }
@@ -620,7 +620,7 @@ public class FormContainer extends WidgetContainer {
     private int[] calculateRequiredSizes(Dimension dim[], boolean row) {
         // Build a linked list of size requirements of every child.
 
-        LinkedList<int[]> requiredList = new LinkedList<int[]>();
+        LinkedList<int[]> requiredList = new LinkedList<>();
         for (int i = 0; i < dim.length; i++) {
             ChildInfo info = child.get(i);
             if (row) {

@@ -77,7 +77,7 @@ public class OverlayContainer extends WidgetContainer {
      */
     public OverlayContainer() {
         component = new WidgetContainerPanel(this);
-        children = new ArrayList<Widget>();
+        children = new ArrayList<>();
     }
 
     @Override
@@ -105,7 +105,7 @@ public class OverlayContainer extends WidgetContainer {
      */
     @Override
     public Collection<Widget> getChildren() {
-        return new ArrayList<Widget>(children);
+        return new ArrayList<>(children);
     }
 
     /**
