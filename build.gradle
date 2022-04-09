@@ -13,6 +13,7 @@ plugins {
 repositories {
     jcenter()
 }
+sourceCompatibility = '11'
 
 group = 'org.buoy'
 version = '1.0.0'
