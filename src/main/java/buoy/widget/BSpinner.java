@@ -4,7 +4,6 @@ import buoy.event.*;
 import java.text.*;
 import java.util.*;
 import javax.swing.*;
-import javax.swing.event.*;
 
 /**
  * A BSpinner is a Widget that allows the user to select a value from an ordered
