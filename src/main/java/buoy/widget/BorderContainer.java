@@ -34,7 +34,7 @@ public class BorderContainer extends WidgetContainer<JPanel> {
     public static final Position SOUTH = new Position(3);
     public static final Position WEST = new Position(4);
 
-    private static final Position ALL_POSITIONS[] = new Position[]{CENTER, NORTH, EAST, SOUTH, WEST};
+    private static final Position[] ALL_POSITIONS = new Position[]{CENTER, NORTH, EAST, SOUTH, WEST};
 
     static {
         WidgetEncoder.setPersistenceDelegate(BorderContainer.class, new BorderContainerDelegate());
@@ -113,8 +113,8 @@ public class BorderContainer extends WidgetContainer<JPanel> {
     @Override
     public void layoutChildren() {
         Dimension size = getComponent().getSize();
-        Rectangle bounds[] = new Rectangle[5];
-        Dimension prefSize[] = new Dimension[5];
+        Rectangle[] bounds = new Rectangle[5];
+        Dimension[] prefSize = new Dimension[5];
         for (int i = 0; i < child.length; i++) {
             bounds[i] = new Rectangle();
             if (child[i] == null || i == CENTER.value) {

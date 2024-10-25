@@ -558,21 +558,21 @@ public class BTree extends Widget<JTree> {
     private class BTreeSelectionModel extends DefaultTreeSelectionModel {
 
         @Override
-        public void setSelectionPaths(TreePath path[]) {
+        public void setSelectionPaths(TreePath[] path) {
             if (selectionEnabled) {
                 super.setSelectionPaths(path);
             }
         }
 
         @Override
-        public void addSelectionPaths(TreePath path[]) {
+        public void addSelectionPaths(TreePath[] path) {
             if (selectionEnabled) {
                 super.addSelectionPaths(path);
             }
         }
 
         @Override
-        public void removeSelectionPaths(TreePath path[]) {
+        public void removeSelectionPaths(TreePath[] path) {
             if (selectionEnabled) {
                 super.removeSelectionPaths(path);
             }

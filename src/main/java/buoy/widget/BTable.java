@@ -124,7 +124,7 @@ public class BTable extends Widget<JTable> {
      * j
      * @param columnTitle the list of column titles (usually Strings)
      */
-    public BTable(Object cellData[][], Object columnTitle[]) {
+    public BTable(Object[][] cellData, Object[] columnTitle) {
         this();
         defaultModel.setDataVector(cellData, columnTitle);
         for (Object aColumnTitle : columnTitle) {
@@ -210,7 +210,7 @@ public class BTable extends Widget<JTable> {
      * @param columnTitle the title of the column to add (usually a String)
      * @param columnData the objects to display in the cells of the new column
      */
-    public void addColumn(Object columnTitle, Object columnData[]) {
+    public void addColumn(Object columnTitle, Object[] columnData) {
         defaultModel.addColumn(columnTitle, columnData);
         columnEditable.add(Boolean.FALSE);
         invalidateSize();
@@ -266,7 +266,7 @@ public class BTable extends Widget<JTable> {
      *
      * @param rowData the objects to display in the cells of the new row
      */
-    public void addRow(Object rowData[]) {
+    public void addRow(Object[] rowData) {
         defaultModel.addRow(rowData);
         invalidateSize();
     }
@@ -281,7 +281,7 @@ public class BTable extends Widget<JTable> {
      * @param index the position at which to add the row
      * @param rowData the objects to display in the cells of the new row
      */
-    public void addRow(int index, Object rowData[]) {
+    public void addRow(int index, Object[] rowData) {
         defaultModel.insertRow(index, rowData);
         invalidateSize();
     }
@@ -641,7 +641,7 @@ public class BTable extends Widget<JTable> {
      * index. If no cells are selected, this returns an empty array.
      */
     public Point[] getSelectedCells() {
-        int rows[], cols[];
+        int[] rows, cols;
         if (component.getRowSelectionAllowed()) {
             rows = component.getSelectedRows();
         } else {
@@ -658,7 +658,7 @@ public class BTable extends Widget<JTable> {
                 cols[i] = i;
             }
         }
-        Point cells[] = new Point[rows.length * cols.length];
+        Point[] cells = new Point[rows.length * cols.length];
         for (int i = 0; i < rows.length; i++) {
             for (int j = 0; j < cols.length; j++) {
                 cells[i * cols.length + j] = new Point(cols[j], rows[i]);

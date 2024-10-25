@@ -25,13 +25,13 @@ public class BTableDelegate extends EventSourceDelegate {
         if (defaultModel != old.getModel()) {
             return new Expression(old, old.getClass(), "new", new Object[]{old.getModel()});
         }
-        Object contents[][] = new Object[old.getRowCount()][old.getColumnCount()];
+        Object[][] contents = new Object[old.getRowCount()][old.getColumnCount()];
         for (int i = 0; i < contents.length; i++) {
             for (int j = 0; j < contents[i].length; j++) {
                 contents[i][j] = old.getCellValue(i, j);
             }
         }
-        Object titles[] = new Object[old.getColumnCount()];
+        Object[] titles = new Object[old.getColumnCount()];
         for (int i = 0; i < titles.length; i++) {
             titles[i] = old.getColumnHeader(i);
         }

@@ -206,7 +206,7 @@ public class BFileChooser extends Widget<JFileChooser> {
      *
      * @throws IllegalArgumentException if multiple selection is not enabled
      */
-    public void setSelectedFiles(File files[]) throws IllegalArgumentException {
+    public void setSelectedFiles(File[] files) throws IllegalArgumentException {
         if (!isMultipleSelectionEnabled()) {
             throw new IllegalArgumentException();
         }

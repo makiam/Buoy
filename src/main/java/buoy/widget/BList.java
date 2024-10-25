@@ -45,7 +45,7 @@ public class BList extends Widget<JList> {
     /**
      * Create a new BList containing the objects in an array.
      */
-    public BList(Object contents[]) {
+    public BList(Object[] contents) {
         this();
         setContents(contents);
     }
@@ -86,7 +86,7 @@ public class BList extends Widget<JList> {
      *
      * @param o the objects to put in the list
      */
-    public void setContents(Object o[]) {
+    public void setContents(Object[] o) {
         defaultModel.clear();
         for (Object o1 : o) {
             defaultModel.addElement(o1);

@@ -42,7 +42,7 @@ public class BComboBox extends Widget<JComboBox> {
     /**
      * Create a new uneditable BComboBox containing the objects in an array.
      */
-    public BComboBox(Object contents[]) {
+    public BComboBox(Object[] contents) {
         this();
         setContents(contents);
     }
@@ -103,7 +103,7 @@ public class BComboBox extends Widget<JComboBox> {
      *
      * @param o the objects to put in the combo box's list
      */
-    public void setContents(Object o[]) {
+    public void setContents(Object[] o) {
         try {
             suppressEvents++;
             component.setModel(new DefaultComboBoxModel(o));

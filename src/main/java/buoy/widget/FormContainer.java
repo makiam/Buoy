@@ -30,8 +30,8 @@ import javax.swing.JPanel;
  */
 public class FormContainer extends WidgetContainer {
 
-    private double rowWeight[], colWeight[];
-    private int minRowSize[], prefRowSize[], minColSize[], prefColSize[];
+    private double[] rowWeight, colWeight;
+    private int[] minRowSize, prefRowSize, minColSize, prefColSize;
     private ArrayList<ChildInfo> child;
     private LayoutInfo defaultLayout;
 
@@ -46,7 +46,7 @@ public class FormContainer extends WidgetContainer {
      * @param colWeight the weights of the columns
      * @param rowWeight the weights of the rows
      */
-    public FormContainer(double colWeight[], double rowWeight[]) {
+    public FormContainer(double[] colWeight, double[] rowWeight) {
         this.colWeight = colWeight;
         this.rowWeight = rowWeight;
         component = new WidgetContainerPanel(this);
@@ -124,7 +124,7 @@ public class FormContainer extends WidgetContainer {
      * last row will be removed.
      */
     public void setRowCount(int rows) {
-        double newWeight[] = new double[rows];
+        double[] newWeight = new double[rows];
         if (rows > rowWeight.length) {
             System.arraycopy(rowWeight, 0, newWeight, 0, rowWeight.length);
             for (int i = rowWeight.length; i < newWeight.length; i++) {
@@ -149,7 +149,7 @@ public class FormContainer extends WidgetContainer {
      * beyond the last column will be removed.
      */
     public void setColumnCount(int columns) {
-        double newWeight[] = new double[columns];
+        double[] newWeight = new double[columns];
         if (columns > colWeight.length) {
             System.arraycopy(colWeight, 0, newWeight, 0, colWeight.length);
             for (int i = colWeight.length; i < newWeight.length; i++) {
@@ -218,8 +218,8 @@ public class FormContainer extends WidgetContainer {
             calculateSizes();
         }
         Dimension size = getComponent().getSize();
-        int rowPos[] = calculatePositions(minRowSize, prefRowSize, rowWeight, size.height);
-        int colPos[] = calculatePositions(minColSize, prefColSize, colWeight, size.width);
+        int[] rowPos = calculatePositions(minRowSize, prefRowSize, rowWeight, size.height);
+        int[] colPos = calculatePositions(minColSize, prefColSize, colWeight, size.width);
         Rectangle cell = new Rectangle();
         for (ChildInfo info : child) {
             LayoutInfo layout = (info.layout == null ? defaultLayout : info.layout);
@@ -247,8 +247,8 @@ public class FormContainer extends WidgetContainer {
      * @return the position of the right edge of each column, or the bottom edge
      * of each row
      */
-    private int[] calculatePositions(int minSize[], int prefSize[], double weight[], int totalSize) {
-        int pos[] = new int[minSize.length];
+    private int[] calculatePositions(int[] minSize, int[] prefSize, double[] weight, int totalSize) {
+        int[] pos = new int[minSize.length];
         int totalMin = 0, totalPref = 0;
         for (int i = 0; i < minSize.length; i++) {
             totalMin += minSize[i];
@@ -276,7 +276,7 @@ public class FormContainer extends WidgetContainer {
         } else {
             // Give each row/column its preferred size, plus a fraction of the extra size based on its weight.
 
-            double realWeight[] = new double[weight.length];
+            double[] realWeight = new double[weight.length];
             double totalWeight = 0.0;
             for (double aWeight : weight) {
                 totalWeight += aWeight;
@@ -594,7 +594,7 @@ public class FormContainer extends WidgetContainer {
      * Calculate the minimum and preferred size for every row and column.
      */
     private void calculateSizes() {
-        Dimension dim[] = new Dimension[child.size()];
+        Dimension[] dim = new Dimension[child.size()];
         for (int i = 0; i < dim.length; i++) {
             dim[i] = child.get(i).widget.getMinimumSize();
         }
@@ -617,7 +617,7 @@ public class FormContainer extends WidgetContainer {
      * should be calculated
      * @return the size required for every row or column
      */
-    private int[] calculateRequiredSizes(Dimension dim[], boolean row) {
+    private int[] calculateRequiredSizes(Dimension[] dim, boolean row) {
         // Build a linked list of size requirements of every child.
 
         LinkedList<int[]> requiredList = new LinkedList<>();
@@ -631,14 +631,14 @@ public class FormContainer extends WidgetContainer {
         }
 
         // Find the required size for each row or column.
-        int width[] = new int[row ? rowWeight.length : colWeight.length];
-        double weight[] = (row ? rowWeight : colWeight);
+        int[] width = new int[row ? rowWeight.length : colWeight.length];
+        double[] weight = (row ? rowWeight : colWeight);
         for (int currentWidth = 1; requiredList.size() > 0; currentWidth++) {
             // Apply constraints for all children which occupy currentWidth rows or columns.
 
             Iterator<int[]> iter = requiredList.iterator();
             while (iter.hasNext()) {
-                int req[] = iter.next();
+                int[] req = iter.next();
                 if (req[1] != currentWidth) {
                     continue;
                 }
@@ -662,7 +662,7 @@ public class FormContainer extends WidgetContainer {
                 for (int i = 0; i < currentWidth; i++) {
                     totalWeight += weight[req[0] + i];
                 }
-                int extra[] = new int[currentWidth];
+                int[] extra = new int[currentWidth];
                 int totalExtra = 0;
                 for (int i = 0; i < currentWidth - 1; i++) {
                     double w = (totalWeight > 0.0 ? weight[req[0] + i] / totalWeight : 1.0 / currentWidth);

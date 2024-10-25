@@ -96,7 +96,7 @@ public class BSpinner extends Widget<JSpinner> {
      *
      * @param values the list of allowed values
      */
-    public BSpinner(Object values[]) {
+    public BSpinner(Object[] values) {
         this(new SpinnerListModel(values));
     }
 

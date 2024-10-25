@@ -24,8 +24,9 @@ import javax.swing.JPanel;
  */
 public class GridContainer extends WidgetContainer<JPanel> {
 
-    private Widget child[][];
-    private LayoutInfo defaultLayout, childLayout[][];
+    private Widget[][] child;
+    private LayoutInfo defaultLayout;
+    private LayoutInfo[][] childLayout;
     private int numRows, numCols;
 
     static {
@@ -100,8 +101,8 @@ public class GridContainer extends WidgetContainer<JPanel> {
         // Work out the positions of every row and column.
 
         Dimension dim = getComponent().getSize();
-        int cellXBound[] = new int[numCols + 1];
-        int cellYBound[] = new int[numRows + 1];
+        int[] cellXBound = new int[numCols + 1];
+        int[] cellYBound = new int[numRows + 1];
         double xsize = dim.width / numCols;
         double ysize = dim.height / numRows;
         for (int i = 1; i < cellXBound.length; i++) {
@@ -270,8 +271,8 @@ public class GridContainer extends WidgetContainer<JPanel> {
                 }
             }
         }
-        Widget newchild[][] = new Widget[numCols][rows];
-        LayoutInfo newlayout[][] = new LayoutInfo[numCols][rows];
+        Widget[][] newchild = new Widget[numCols][rows];
+        LayoutInfo[][] newlayout = new LayoutInfo[numCols][rows];
         int copy = Math.min(rows, numRows);
         for (int i = 0; i < child.length; i++) {
             for (int j = 0; j < copy; j++) {
@@ -306,8 +307,8 @@ public class GridContainer extends WidgetContainer<JPanel> {
                 }
             }
         }
-        Widget newchild[][] = new Widget[cols][numRows];
-        LayoutInfo newlayout[][] = new LayoutInfo[cols][numRows];
+        Widget[][] newchild = new Widget[cols][numRows];
+        LayoutInfo[][] newlayout = new LayoutInfo[cols][numRows];
         int copy = Math.min(cols, numCols);
         for (int i = 0; i < copy; i++) {
             newchild[i] = child[i];

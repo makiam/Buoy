@@ -331,7 +331,7 @@ public class DockingContainer extends WidgetContainer {
             return;
         }
         splitPane.getComponent().setDividerSize(visibleDividerSize);
-        Widget tabContents[] = new Widget[childrenInTab.size()];
+        Widget[] tabContents = new Widget[childrenInTab.size()];
         for (int i = 0; i < tabContents.length; i++) {
             ArrayList<DockableWidget> children = childrenInTab.get(i);
             if (children.size() == 1) {

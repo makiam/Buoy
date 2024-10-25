@@ -22,7 +22,7 @@ public class BorderContainerDelegate extends EventSourceDelegate {
         super.initialize(type, oldInstance, newInstance, out);
         BorderContainer oldC = (BorderContainer) oldInstance;
         BorderContainer newC = (BorderContainer) newInstance;
-        BorderContainer.Position pos[] = new BorderContainer.Position[]{
+        BorderContainer.Position[] pos = new BorderContainer.Position[]{
             BorderContainer.CENTER, BorderContainer.NORTH, BorderContainer.SOUTH, BorderContainer.EAST, BorderContainer.WEST};
         for (BorderContainer.Position po : pos) {
             if(oldC.getChild(po) == newC.getChild(po)) continue;

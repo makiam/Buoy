@@ -25,7 +25,7 @@ public class BListDelegate extends EventSourceDelegate {
         if (defaultModel != old.getModel()) {
             return new Expression(old, old.getClass(), "new", new Object[]{old.getModel()});
         }
-        Object contents[] = new Object[old.getItemCount()];
+        Object[] contents = new Object[old.getItemCount()];
         for (int i = 0; i < contents.length; i++) {
             contents[i] = old.getItem(i);
         }
