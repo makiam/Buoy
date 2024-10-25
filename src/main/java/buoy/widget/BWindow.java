@@ -119,12 +119,7 @@ public class BWindow extends WindowWidget<JWindow> {
             layoutChildren();
             if (!BWindow.this.getComponent().getSize().equals(lastSize)) {
                 lastSize = BWindow.this.getComponent().getSize();
-                EventQueue.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        BWindow.this.dispatchEvent(new WindowResizedEvent(BWindow.this));
-                    }
-                });
+                EventQueue.invokeLater(() -> BWindow.this.dispatchEvent(new WindowResizedEvent(BWindow.this)));
             }
         }
     }

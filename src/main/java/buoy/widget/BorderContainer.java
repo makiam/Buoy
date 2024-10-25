@@ -23,7 +23,7 @@ import javax.swing.JPanel;
  */
 public class BorderContainer extends WidgetContainer<JPanel> {
 
-    private final Widget child[];
+    private final Widget[] child;
     private final LayoutInfo[] childLayout;
     private LayoutInfo defaultLayout;
     private boolean cornersVertical;
@@ -53,7 +53,7 @@ public class BorderContainer extends WidgetContainer<JPanel> {
 
     @Override
     public JPanel getComponent() {
-        return (JPanel) component;
+        return component;
     }
 
     /**

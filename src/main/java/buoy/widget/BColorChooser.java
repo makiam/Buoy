@@ -3,7 +3,6 @@ package buoy.widget;
 import buoy.event.*;
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.event.*;
 
 /**
  * A BColorChooser is a Widget that allows the user to select a color. It has

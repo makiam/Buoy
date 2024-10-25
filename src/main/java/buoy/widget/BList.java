@@ -40,12 +40,7 @@ public class BList extends Widget<JList> {
     public BList() {
         defaultModel = new DefaultListModel();
         component = createComponent();
-        getComponent().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent ev) {
-                dispatchEvent(new SelectionChangedEvent(BList.this, ev.getValueIsAdjusting()));
-            }
-        });
+        component.addListSelectionListener(ev -> dispatchEvent(new SelectionChangedEvent(BList.this, ev.getValueIsAdjusting())));
     }
 
     /**

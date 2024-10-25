@@ -104,7 +104,7 @@ public class BTree extends Widget<JTree> {
      */
     public BTree(TreeModel model) {
         component = createComponent(model);
-        getComponent().addTreeSelectionListener(new TreeSelectionListener() {
+        component.addTreeSelectionListener(new TreeSelectionListener() {
             @Override
             public void valueChanged(TreeSelectionEvent ev) {
                 if (suppressEvents == 0) {
@@ -112,13 +112,8 @@ public class BTree extends Widget<JTree> {
                 }
             }
         });
-        final Runnable scrollPaneUpdater = new Runnable() {
-            @Override
-            public void run() {
-                updateScrollPane();
-            }
-        };
-        getComponent().addTreeExpansionListener(new TreeExpansionListener() {
+        final Runnable scrollPaneUpdater = () -> updateScrollPane();
+        component.addTreeExpansionListener(new TreeExpansionListener() {
             @Override
             public void treeCollapsed(TreeExpansionEvent event) {
                 SwingUtilities.invokeLater(scrollPaneUpdater);

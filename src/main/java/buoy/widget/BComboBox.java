@@ -33,12 +33,9 @@ public class BComboBox extends Widget<JComboBox> {
      */
     public BComboBox() {
         component = createComponent();
-        component.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ev) {
-                if (suppressEvents == 0) {
-                    dispatchEvent(new ValueChangedEvent(BComboBox.this));
-                }
+        component.addActionListener(ev -> {
+            if (suppressEvents == 0) {
+                dispatchEvent(new ValueChangedEvent(BComboBox.this));
             }
         });
     }

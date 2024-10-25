@@ -24,12 +24,7 @@ public abstract class TextWidget<T extends JTextComponent> extends Widget<T> {
      * TextWidget need to attach these listeners to their components.
      */
     protected TextWidget() {
-        caretListener = new CaretListener() {
-            @Override
-            public void caretUpdate(CaretEvent e) {
-                caretMoved();
-            }
-        };
+        caretListener = e -> caretMoved();
         documentListener = new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {

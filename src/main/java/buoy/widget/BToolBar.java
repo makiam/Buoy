@@ -183,7 +183,7 @@ public class BToolBar extends WidgetContainer<JToolBar> {
      */
     public static class Orientation {
 
-        private int value;
+        private final int value;
 
         private Orientation(int value) {
             this.value = value;

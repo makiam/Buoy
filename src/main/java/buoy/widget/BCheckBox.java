@@ -35,12 +35,7 @@ public class BCheckBox extends Widget<JCheckBox> {
      */
     public BCheckBox(String text, boolean state) {
         component = createComponent(text, state);
-        component.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ev) {
-                dispatchEvent(new ValueChangedEvent(BCheckBox.this));
-            }
-        });
+        component.addActionListener(ev -> dispatchEvent(new ValueChangedEvent(BCheckBox.this)));
     }
 
     /**

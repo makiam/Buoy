@@ -47,12 +47,7 @@ public class BRadioButton extends Widget<JRadioButton> {
      */
     public BRadioButton(String text, boolean state, RadioButtonGroup group) {
         component = createComponent(text, state);
-        getComponent().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ev) {
-                dispatchEvent(new ValueChangedEvent(BRadioButton.this));
-            }
-        });
+        getComponent().addActionListener(ev -> dispatchEvent(new ValueChangedEvent(BRadioButton.this)));
         this.group = group;
         group.add(this);
     }

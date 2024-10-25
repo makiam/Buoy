@@ -291,12 +291,7 @@ public class BDialog extends WindowWidget<JDialog> {
             layoutChildren();
             if (!BDialog.this.getComponent().getSize().equals(lastSize)) {
                 lastSize = BDialog.this.getComponent().getSize();
-                EventQueue.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        BDialog.this.dispatchEvent(new WindowResizedEvent(BDialog.this));
-                    }
-                });
+                EventQueue.invokeLater(() -> BDialog.this.dispatchEvent(new WindowResizedEvent(BDialog.this)));
             }
         }
     }

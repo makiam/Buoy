@@ -5,7 +5,6 @@ import buoy.internal.*;
 import buoy.xml.*;
 import buoy.xml.delegate.*;
 import java.awt.*;
-import java.beans.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -26,7 +25,7 @@ import javax.swing.*;
  */
 public class BSplitPane extends WidgetContainer<JSplitPane> {
 
-    private Widget[] child;
+    private final Widget[] child;
     private int suppressEvents;
 
     public static final Orientation HORIZONTAL = new Orientation(JSplitPane.HORIZONTAL_SPLIT);

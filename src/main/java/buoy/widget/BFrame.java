@@ -290,12 +290,7 @@ public class BFrame extends WindowWidget<JFrame> {
             layoutChildren();
             if (!BFrame.this.getComponent().getSize().equals(lastSize)) {
                 lastSize = BFrame.this.getComponent().getSize();
-                EventQueue.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        BFrame.this.dispatchEvent(new WindowResizedEvent(BFrame.this));
-                    }
-                });
+                EventQueue.invokeLater(() -> BFrame.this.dispatchEvent(new WindowResizedEvent(BFrame.this)));
             }
         }
     }

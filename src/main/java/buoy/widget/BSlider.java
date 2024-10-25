@@ -49,12 +49,9 @@ public class BSlider extends Widget<JSlider> {
     public BSlider(int value, int minimum, int maximum, Orientation orientation) {
         component = createComponent(orientation);
         getComponent().setModel(new DefaultBoundedRangeModel(value, 0, minimum, maximum));
-        getComponent().addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent ev) {
-                if (suppressEvents == 0) {
-                    dispatchEvent(new ValueChangedEvent(BSlider.this, getComponent().getValueIsAdjusting()));
-                }
+        getComponent().addChangeListener(ev -> {
+            if (suppressEvents == 0) {
+                dispatchEvent(new ValueChangedEvent(BSlider.this, getComponent().getValueIsAdjusting()));
             }
         });
         setMajorTickSpacing(20);

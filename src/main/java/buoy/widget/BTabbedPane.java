@@ -22,7 +22,7 @@ import javax.swing.event.*;
  */
 public class BTabbedPane extends WidgetContainer<JTabbedPane> {
 
-    private List<Widget<?>> child;
+    private final List<Widget<?>> child;
     private int suppressEvents;
 
     public static final TabPosition TOP = new TabPosition(SwingConstants.TOP);
@@ -49,23 +49,15 @@ public class BTabbedPane extends WidgetContainer<JTabbedPane> {
      */
     public BTabbedPane(TabPosition pos) {
         component = createComponent(pos);
-        getComponent().addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent ev) {
-                if (suppressEvents == 0) {
-                    dispatchEvent(new SelectionChangedEvent(BTabbedPane.this));
-                }
+        component.addChangeListener(ev -> {
+            if (suppressEvents == 0) {
+                dispatchEvent(new SelectionChangedEvent(BTabbedPane.this));
             }
         });
-        getComponent().addComponentListener(new ComponentAdapter() {
+        component.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent ev) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        layoutChildren();
-                    }
-                });
+                SwingUtilities.invokeLater(() -> layoutChildren());
             }
         });
         child = new ArrayList<>();
@@ -84,7 +76,7 @@ public class BTabbedPane extends WidgetContainer<JTabbedPane> {
 
     @Override
     public JTabbedPane getComponent() {
-        return (JTabbedPane) component;
+        return component;
     }
 
     /**

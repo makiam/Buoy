@@ -96,12 +96,7 @@ public class BTable extends Widget<JTable> {
         component = createComponent();
         tableHeader = new BTableHeader();
         columnEditable = new ArrayList<>();
-        ListSelectionListener lsl = new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent ev) {
-                dispatchEvent(new SelectionChangedEvent(BTable.this, ev.getValueIsAdjusting()));
-            }
-        };
+        ListSelectionListener lsl = ev -> dispatchEvent(new SelectionChangedEvent(BTable.this, ev.getValueIsAdjusting()));
         component.getSelectionModel().addListSelectionListener(lsl);
         component.getColumnModel().getSelectionModel().addListSelectionListener(lsl);
         component.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
