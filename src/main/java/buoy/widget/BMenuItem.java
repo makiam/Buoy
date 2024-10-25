@@ -2,6 +2,7 @@ package buoy.widget;
 
 import buoy.event.*;
 import java.awt.event.*;
+import java.util.Optional;
 import javax.swing.*;
 
 /**
@@ -32,7 +33,7 @@ import javax.swing.*;
  *
  * @author Peter Eastman
  */
-public class BMenuItem extends Widget implements MenuWidget {
+public class BMenuItem extends Widget<JMenuItem> implements MenuWidget {
 
     private Shortcut shortcut;
 
@@ -81,18 +82,11 @@ public class BMenuItem extends Widget implements MenuWidget {
      */
     public BMenuItem(String text, Shortcut shortcut, Icon image) {
         component = createComponent();
-        getComponent().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ev) {
-                dispatchEvent(new CommandEvent(BMenuItem.this, ev.getWhen(), ev.getModifiers(), getComponent().getActionCommand()));
-            }
-        });
-        getComponent().setText(text);
-        getComponent().setIcon(image);
+        component.addActionListener(ev -> dispatchEvent(new CommandEvent(BMenuItem.this, ev.getWhen(), ev.getModifiers(), component.getActionCommand())));
+        component.setText(text);
+        component.setIcon(image);
         this.shortcut = shortcut;
-        if (shortcut != null) {
-            getComponent().setAccelerator(shortcut.getKeyStroke());
-        }
+        Optional.ofNullable(shortcut).ifPresent(this::setShortcut);
     }
 
     /**
@@ -105,21 +99,21 @@ public class BMenuItem extends Widget implements MenuWidget {
 
     @Override
     public JMenuItem getComponent() {
-        return (JMenuItem) component;
+        return component;
     }
 
     /**
      * Get the text which appears on this menu item.
      */
     public String getText() {
-        return getComponent().getText();
+        return component.getText();
     }
 
     /**
      * Set the text which appears on this menu item.
      */
     public void setText(String title) {
-        getComponent().setText(title);
+        component.setText(title);
         invalidateSize();
     }
 
@@ -128,7 +122,7 @@ public class BMenuItem extends Widget implements MenuWidget {
      * menu item is selected.
      */
     public String getActionCommand() {
-        return getComponent().getActionCommand();
+        return component.getActionCommand();
     }
 
     /**
@@ -136,7 +130,7 @@ public class BMenuItem extends Widget implements MenuWidget {
      * menu item is selected.
      */
     public void setActionCommand(String command) {
-        getComponent().setActionCommand(command);
+        component.setActionCommand(command);
     }
 
     /**
@@ -152,9 +146,9 @@ public class BMenuItem extends Widget implements MenuWidget {
     public void setShortcut(Shortcut shortcut) {
         this.shortcut = shortcut;
         if (shortcut == null) {
-            getComponent().setAccelerator(null);
+            component.setAccelerator(null);
         } else {
-            getComponent().setAccelerator(shortcut.getKeyStroke());
+            component.setAccelerator(shortcut.getKeyStroke());
         }
     }
 
@@ -166,7 +160,7 @@ public class BMenuItem extends Widget implements MenuWidget {
      * menu item
      */
     public int getMnemonic() {
-        return getComponent().getMnemonic();
+        return component.getMnemonic();
     }
 
     /**
@@ -177,21 +171,21 @@ public class BMenuItem extends Widget implements MenuWidget {
      * this menu item
      */
     public void setMnemonic(int key) {
-        getComponent().setMnemonic(key);
+        component.setMnemonic(key);
     }
 
     /**
      * Get the image which appears next to this menu item.
      */
     public Icon getIcon() {
-        return getComponent().getIcon();
+        return component.getIcon();
     }
 
     /**
      * Set the image which appears next to this menu item.
      */
     public void setIcon(Icon image) {
-        getComponent().setIcon(image);
+        component.setIcon(image);
         invalidateSize();
     }
 }

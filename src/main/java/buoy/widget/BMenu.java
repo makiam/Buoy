@@ -11,9 +11,9 @@ import javax.swing.*;
  *
  * @author Peter Eastman
  */
-public class BMenu extends WidgetContainer implements MenuWidget {
+public class BMenu extends WidgetContainer<JMenu> implements MenuWidget {
 
-    private ArrayList<MenuWidget> elements;
+    private List<MenuWidget> elements;
 
     static {
         WidgetEncoder.setPersistenceDelegate(BMenu.class, new IndexedContainerDelegate(new String[]{"getChild"}));
@@ -47,21 +47,21 @@ public class BMenu extends WidgetContainer implements MenuWidget {
 
     @Override
     public JMenu getComponent() {
-        return (JMenu) component;
+        return component;
     }
 
     /**
      * Get the title of this menu which appears in the menu bar.
      */
     public String getText() {
-        return getComponent().getText();
+        return component.getText();
     }
 
     /**
      * Set the title of this menu which appears in the menu bar.
      */
     public void setText(String title) {
-        getComponent().setText(title);
+        component.setText(title);
     }
 
     /**
@@ -72,7 +72,7 @@ public class BMenu extends WidgetContainer implements MenuWidget {
      * menu
      */
     public int getMnemonic() {
-        return getComponent().getMnemonic();
+        return component.getMnemonic();
     }
 
     /**
@@ -83,7 +83,7 @@ public class BMenu extends WidgetContainer implements MenuWidget {
      * this menu
      */
     public void setMnemonic(int key) {
-        getComponent().setMnemonic(key);
+        component.setMnemonic(key);
     }
 
     /**

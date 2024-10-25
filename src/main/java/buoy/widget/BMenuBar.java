@@ -10,9 +10,9 @@ import javax.swing.*;
  *
  * @author Peter Eastman
  */
-public class BMenuBar extends WidgetContainer {
+public class BMenuBar extends WidgetContainer<JMenuBar> {
 
-    private final ArrayList<BMenu> menus;
+    private final List<BMenu> menus = new ArrayList<>();
 
     static {
         WidgetEncoder.setPersistenceDelegate(BMenuBar.class, new IndexedContainerDelegate(new String[]{"getChild"}));
@@ -23,7 +23,6 @@ public class BMenuBar extends WidgetContainer {
      */
     public BMenuBar() {
         component = createComponent();
-        menus = new ArrayList<>();
     }
 
     /**
@@ -36,7 +35,7 @@ public class BMenuBar extends WidgetContainer {
 
     @Override
     public JMenuBar getComponent() {
-        return (JMenuBar) component;
+        return component;
     }
 
     /**
@@ -93,7 +92,7 @@ public class BMenuBar extends WidgetContainer {
     @Override
     public void remove(Widget widget) {
         menus.remove(widget);
-        getComponent().remove(widget.getComponent());
+        component.remove(widget.getComponent());
         removeAsParent(widget);
         invalidateSize();
     }
@@ -106,7 +105,7 @@ public class BMenuBar extends WidgetContainer {
         for (BMenu menu : menus) {
             removeAsParent(menu);
         }
-        getComponent().removeAll();
+        component.removeAll();
         menus.clear();
         invalidateSize();
     }
