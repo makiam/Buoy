@@ -289,7 +289,7 @@ public class BList extends Widget<JList> {
      * Get an array of all selected objects, in order of increasing index.
      */
     public Object[] getSelectedValues() {
-        return component.getSelectedValues();
+        return component.getSelectedValuesList().toArray(new Object[0]);
     }
 
     /**

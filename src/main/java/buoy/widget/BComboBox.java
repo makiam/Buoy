@@ -73,8 +73,8 @@ public class BComboBox extends Widget<JComboBox> {
     protected JComboBox createComponent() {
         return new JComboBox() {
             @Override
-            public void reshape(int x, int y, int width, int height) {
-                super.reshape(x, y, width, height);
+            public void setBounds(int x, int y, int width, int height) {
+                super.setBounds(x, y, width, height);
                 validate();
             }
         };
