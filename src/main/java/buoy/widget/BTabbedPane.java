@@ -7,7 +7,6 @@ import buoy.xml.delegate.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
-import javax.swing.event.*;
 
 /**
  * BTabbedPane is a WidgetContainer which arranges its child Widgets in a row.

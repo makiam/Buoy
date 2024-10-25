@@ -2,7 +2,6 @@ package buoy.widget;
 
 import buoy.event.*;
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
 /**

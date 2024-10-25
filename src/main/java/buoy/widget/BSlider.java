@@ -4,7 +4,6 @@ import buoy.event.*;
 import buoy.xml.*;
 import buoy.xml.delegate.*;
 import javax.swing.*;
-import javax.swing.event.*;
 
 /**
  * A BSlider is a Widget that allows the user to select a single value by

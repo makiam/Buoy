@@ -6,7 +6,6 @@ import buoy.xml.delegate.*;
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
-import javax.swing.event.*;
 
 /**
  * A BList is a Widget that displays a list of objects for the user to select.
