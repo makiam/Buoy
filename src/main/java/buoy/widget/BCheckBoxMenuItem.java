@@ -79,11 +79,6 @@ public class BCheckBoxMenuItem extends BMenuItem {
         return new JCheckBoxMenuItem();
     }
 
-    @Override
-    public JMenuItem getComponent() {
-        return (JMenuItem) component;
-    }
-
     /**
      * Get the selection state of this menu item.
      */
