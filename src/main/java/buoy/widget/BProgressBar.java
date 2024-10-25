@@ -83,7 +83,7 @@ public class BProgressBar extends Widget<JProgressBar> {
      * Set the progress bar's current progress value.
      */
     public void setValue(int value) {
-        getComponent().setValue(value);
+        component.setValue(value);
     }
 
     /**

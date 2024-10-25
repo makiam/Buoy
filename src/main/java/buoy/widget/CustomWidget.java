@@ -17,7 +17,7 @@ import javax.swing.JComponent;
  *
  * @author Peter Eastman
  */
-public class CustomWidget extends Widget {
+public class CustomWidget extends Widget<JComponent> {
 
     private boolean opaque;
 
@@ -35,7 +35,7 @@ public class CustomWidget extends Widget {
      * this Widget smaller than its minimum size.
      */
     public void setMinimumSize(Dimension size) {
-        getComponent().setMinimumSize(size);
+        component.setMinimumSize(size);
         invalidateSize();
     }
 
@@ -45,7 +45,7 @@ public class CustomWidget extends Widget {
      * Widget larger than its maximum size.
      */
     public void setMaximumSize(Dimension size) {
-        getComponent().setMaximumSize(size);
+        component.setMaximumSize(size);
         invalidateSize();
     }
 
@@ -55,7 +55,7 @@ public class CustomWidget extends Widget {
      * Widget as close as possible to its preferred size.
      */
     public void setPreferredSize(Dimension size) {
-        getComponent().setPreferredSize(size);
+        component.setPreferredSize(size);
         invalidateSize();
     }
 

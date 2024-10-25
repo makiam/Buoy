@@ -267,9 +267,9 @@ public class BSplitPane extends WidgetContainer<JSplitPane> {
         }
         child[index] = widget;
         if (index == 0) {
-            getComponent().setLeftComponent(new SingleWidgetPanel(widget));
+            component.setLeftComponent(new SingleWidgetPanel(widget));
         } else {
-            getComponent().setRightComponent(new SingleWidgetPanel(widget));
+            component.setRightComponent(new SingleWidgetPanel(widget));
         }
         setAsParent(widget);
         invalidateSize();
@@ -310,7 +310,7 @@ public class BSplitPane extends WidgetContainer<JSplitPane> {
      */
     @Override
     public void removeAll() {
-        getComponent().removeAll();
+        component.removeAll();
     }
 
     /**
@@ -322,7 +322,7 @@ public class BSplitPane extends WidgetContainer<JSplitPane> {
     public Dimension getMinimumSize() {
         Dimension dim0 = (child[0] == null ? new Dimension() : child[0].getMinimumSize());
         Dimension dim1 = (child[1] == null ? new Dimension() : child[1].getMinimumSize());
-        int dividerWidth = getComponent().getDividerSize();
+        int dividerWidth = component.getDividerSize();
         if (getOrientation() == HORIZONTAL) {
             return new Dimension(dim0.width + dim1.width + dividerWidth, Math.max(dim0.height, dim1.height));
         } else {
@@ -339,7 +339,7 @@ public class BSplitPane extends WidgetContainer<JSplitPane> {
     public Dimension getPreferredSize() {
         Dimension dim0 = (child[0] == null ? new Dimension() : child[0].getPreferredSize());
         Dimension dim1 = (child[1] == null ? new Dimension() : child[1].getPreferredSize());
-        int dividerWidth = getComponent().getDividerSize();
+        int dividerWidth = component.getDividerSize();
         if (getOrientation() == HORIZONTAL) {
             return new Dimension(dim0.width + dim1.width + dividerWidth, Math.max(dim0.height, dim1.height));
         } else {

@@ -66,8 +66,8 @@ public abstract class WindowWidget<T extends Window> extends WidgetContainer<T> 
      * its contents, then re-layout all of the window contents.
      */
     public void pack() {
-        if (!getComponent().isDisplayable()) {
-            getComponent().addNotify();
+        if (!component.isDisplayable()) {
+            component.addNotify();
         }
         JComponent contentPane = (JComponent) ((RootPaneContainer) component).getContentPane();
         if (content == null) {

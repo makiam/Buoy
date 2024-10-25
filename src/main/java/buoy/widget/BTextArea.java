@@ -72,8 +72,7 @@ public class BTextArea extends TextWidget<JTextArea> {
      * to display
      */
     public BTextArea(String text, int rows, int columns) {
-        component = createComponent();
-        JTextArea ta = getComponent();
+        JTextArea ta = component = createComponent();
         ta.setText(text);
         ta.setRows(rows);
         ta.setColumns(columns);
@@ -133,10 +132,10 @@ public class BTextArea extends TextWidget<JTextArea> {
      * WRAP_NONE, WRAP_CHARACTER, or WRAP_WORD.
      */
     public WrapStyle getWrapStyle() {
-        if (!getComponent().getLineWrap()) {
+        if (!component.getLineWrap()) {
             return WRAP_NONE;
         }
-        if (getComponent().getWrapStyleWord()) {
+        if (component.getWrapStyleWord()) {
             return WRAP_WORD;
         }
         return WRAP_CHARACTER;

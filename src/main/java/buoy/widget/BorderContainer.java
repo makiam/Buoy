@@ -112,7 +112,7 @@ public class BorderContainer extends WidgetContainer<JPanel> {
      */
     @Override
     public void layoutChildren() {
-        Dimension size = getComponent().getSize();
+        Dimension size = component.getSize();
         Rectangle[] bounds = new Rectangle[5];
         Dimension[] prefSize = new Dimension[5];
         for (int i = 0; i < child.length; i++) {
@@ -182,7 +182,7 @@ public class BorderContainer extends WidgetContainer<JPanel> {
         }
         child[where.value] = widget;
         childLayout[where.value] = layout;
-        getComponent().add(widget.getComponent());
+        component.add(widget.getComponent());
         setAsParent(widget);
         invalidateSize();
     }

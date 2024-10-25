@@ -61,8 +61,8 @@ public class BTextField extends TextWidget<JTextField> {
      * enough to display
      */
     public BTextField(String text, int columns) {
-        component = createComponent();
-        JTextField tf = getComponent();
+
+        JTextField tf = component = createComponent();
         tf.setText(text);
         tf.setColumns(columns);
         tf.addCaretListener(caretListener);

@@ -59,12 +59,12 @@ public class BDocumentViewer extends Widget<JEditorPane> {
 
     public BDocumentViewer() {
         component = createComponent();
-        JEditorPane ep = getComponent();
+        JEditorPane ep =component;
         ep.setEditable(false);
         ep.addPropertyChangeListener("page", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent ev) {
-                if (getComponent().isDisplayable()) {
+                if (component.isDisplayable()) {
                     updateScrollPane();
                 }
                 dispatchEvent(new ValueChangedEvent(BDocumentViewer.this));
@@ -73,7 +73,7 @@ public class BDocumentViewer extends Widget<JEditorPane> {
         ep.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent ev) {
-                if (getComponent().isDisplayable()) {
+                if (component.isDisplayable()) {
                     updateScrollPane();
                 }
             }
@@ -118,7 +118,7 @@ public class BDocumentViewer extends Widget<JEditorPane> {
      * was not specified by a URL, this returns null.
      */
     public URL getDocument() {
-        return getComponent().getPage();
+        return component.getPage();
     }
 
     /**
@@ -133,7 +133,7 @@ public class BDocumentViewer extends Widget<JEditorPane> {
      * @param document a URL pointing to the document to display
      */
     public void setDocument(URL document) throws IOException {
-        getComponent().setPage(document);
+        component.setPage(document);
     }
 
     /**
@@ -146,8 +146,8 @@ public class BDocumentViewer extends Widget<JEditorPane> {
      * @param type the MIME type of the document
      */
     public void setDocument(String text, String type) {
-        getComponent().setContentType(type);
-        getComponent().setText(text);
+        component.setContentType(type);
+        component.setText(text);
     }
 
     /**

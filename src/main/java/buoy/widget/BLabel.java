@@ -162,7 +162,7 @@ public class BLabel extends Widget<JLabel> {
      */
     public void setAlignment(Position alignment) {
         int align = alignment.value;
-        JLabel jl = getComponent();
+        JLabel jl = component;
         if ((align & NORTH.value) != 0) {
             jl.setVerticalAlignment(SwingConstants.TOP);
         } else if ((align & SOUTH.value) != 0) {
@@ -199,7 +199,7 @@ public class BLabel extends Widget<JLabel> {
      */
     public void setTextPosition(Position position) {
         int pos = position.value;
-        JLabel jl = getComponent();
+        JLabel jl = component;
         if ((pos & NORTH.value) != 0) {
             jl.setVerticalTextPosition(SwingConstants.TOP);
         } else if ((pos & SOUTH.value) != 0) {

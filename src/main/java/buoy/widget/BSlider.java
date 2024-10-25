@@ -169,7 +169,7 @@ public class BSlider extends Widget<JSlider> {
      * method, then the major tick spacing will also be set to the same value.
      */
     public void setMinorTickSpacing(int spacing) {
-        JSlider slider = getComponent();
+        JSlider slider = component;
         slider.setMinorTickSpacing(spacing);
         if (spacing > slider.getMajorTickSpacing()) {
             slider.setMajorTickSpacing(spacing);

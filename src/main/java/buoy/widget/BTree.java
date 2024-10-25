@@ -148,9 +148,9 @@ public class BTree extends Widget<JTree> {
         if (model instanceof DefaultTreeModel) {
             ((DefaultTreeModel) model).setAsksAllowsChildren(true);
         }
-        getComponent().setSelectionModel(new BTreeSelectionModel());
+        component.setSelectionModel(new BTreeSelectionModel());
         selectionEnabled = true;
-        getComponent().setShowsRootHandles(true);
+        component.setShowsRootHandles(true);
     }
 
     /**

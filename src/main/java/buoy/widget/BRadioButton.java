@@ -78,7 +78,7 @@ public class BRadioButton extends Widget<JRadioButton> {
         if (selected) {
             group.setSelection(this);
         } else {
-            getComponent().setSelected(false);
+            component.setSelected(false);
         }
     }
 

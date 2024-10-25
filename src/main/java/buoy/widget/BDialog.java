@@ -45,7 +45,7 @@ public class BDialog extends WindowWidget<JDialog> {
     public BDialog(String title) {
         component = createComponent(null, null, false);
         initInternal();
-        getComponent().setTitle(title);
+        component.setTitle(title);
     }
 
     /**
@@ -145,7 +145,7 @@ public class BDialog extends WindowWidget<JDialog> {
             menus.getParent().remove(menus);
         }
         menubar = menus;
-        getComponent().setJMenuBar(menubar.getComponent());
+        component.setJMenuBar(menubar.getComponent());
         setAsParent(menubar);
     }
 

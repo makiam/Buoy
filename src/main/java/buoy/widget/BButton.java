@@ -50,7 +50,7 @@ public class BButton extends Widget<JButton> {
      */
     public BButton(String text) {
         this();
-        getComponent().setText(text);
+        component.setText(text);
     }
 
     /**
@@ -60,7 +60,7 @@ public class BButton extends Widget<JButton> {
      */
     public BButton(Icon icon) {
         this();
-        getComponent().setIcon(icon);
+        component.setIcon(icon);
     }
 
     /**
@@ -71,8 +71,8 @@ public class BButton extends Widget<JButton> {
      */
     public BButton(String text, Icon icon) {
         this();
-        getComponent().setText(text);
-        getComponent().setIcon(icon);
+        component.setText(text);
+        component.setIcon(icon);
     }
 
     /**
@@ -87,14 +87,14 @@ public class BButton extends Widget<JButton> {
      * Get the text being displayed on the button. This may be null.
      */
     public String getText() {
-        return getComponent().getText();
+        return component.getText();
     }
 
     /**
      * Set the text being displayed on the button. This may be null.
      */
     public void setText(String text) {
-        getComponent().setText(text);
+        component.setText(text);
         invalidateSize();
     }
 
@@ -102,14 +102,14 @@ public class BButton extends Widget<JButton> {
      * Get the image being displayed on the button. This may be null.
      */
     public Icon getIcon() {
-        return getComponent().getIcon();
+        return component.getIcon();
     }
 
     /**
      * Set the image being displayed on the button. This may be null.
      */
     public void setIcon(Icon icon) {
-        getComponent().setIcon(icon);
+        component.setIcon(icon);
         invalidateSize();
     }
 
@@ -118,7 +118,7 @@ public class BButton extends Widget<JButton> {
      * button is pressed.
      */
     public String getActionCommand() {
-        return getComponent().getActionCommand();
+        return component.getActionCommand();
     }
 
     /**
@@ -126,7 +126,7 @@ public class BButton extends Widget<JButton> {
      * button is pressed.
      */
     public void setActionCommand(String command) {
-        getComponent().setActionCommand(command);
+        component.setActionCommand(command);
     }
 
     /**
@@ -145,8 +145,8 @@ public class BButton extends Widget<JButton> {
      * EAST, etc.
      */
     public Position getTextPosition() {
-        int hpos = getComponent().getHorizontalTextPosition();
-        int vpos = getComponent().getVerticalTextPosition();
+        int hpos = component.getHorizontalTextPosition();
+        int vpos = component.getVerticalTextPosition();
         return Position.get(hpos, vpos);
     }
 
@@ -158,7 +158,7 @@ public class BButton extends Widget<JButton> {
      */
     public void setTextPosition(Position position) {
         int pos = position.value;
-        JButton jb = getComponent();
+        JButton jb = component;
         if ((pos & NORTH.value) != 0) {
             jb.setVerticalTextPosition(SwingConstants.TOP);
         } else if ((pos & SOUTH.value) != 0) {

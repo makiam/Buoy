@@ -33,7 +33,7 @@ public class BWindow extends WindowWidget<JWindow> {
 
     public BWindow() {
         component = createComponent();
-        getComponent().getContentPane().setLayout(null);
+        component.getContentPane().setLayout(null);
     }
 
     /**
@@ -70,7 +70,7 @@ public class BWindow extends WindowWidget<JWindow> {
     @Override
     public void remove(Widget widget) {
         if (content == widget) {
-            getComponent().getContentPane().remove(widget.getComponent());
+            component.getContentPane().remove(widget.getComponent());
             removeAsParent(content);
             content = null;
         }

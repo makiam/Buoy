@@ -89,7 +89,7 @@ public class BToolBar extends WidgetContainer<JToolBar> {
             widget.getParent().remove(widget);
         }
         child.add(index, widget);
-        getComponent().add(new SingleWidgetPanel(widget), index);
+        component.add(new SingleWidgetPanel(widget), index);
         setAsParent(widget);
     }
 
@@ -129,7 +129,7 @@ public class BToolBar extends WidgetContainer<JToolBar> {
     @Override
     public void remove(Widget widget) {
         child.remove(widget);
-        getComponent().remove(widget.getComponent().getParent());
+        component.remove(widget.getComponent().getParent());
         removeAsParent(widget);
     }
 
@@ -141,7 +141,7 @@ public class BToolBar extends WidgetContainer<JToolBar> {
         for (Widget aChild : child) {
             removeAsParent(aChild);
         }
-        getComponent().removeAll();
+        component.removeAll();
         child.clear();
     }
 
@@ -165,7 +165,7 @@ public class BToolBar extends WidgetContainer<JToolBar> {
      */
     @Override
     public void layoutChildren() {
-        getComponent().validate();
+        component.validate();
         for (Widget w : child) {
             if (w instanceof WidgetContainer) {
                 ((WidgetContainer) w).layoutChildren();

@@ -65,7 +65,7 @@ public class BList extends Widget<JList> {
      */
     public BList(ListModel model) {
         this();
-        getComponent().setModel(model);
+        component.setModel(model);
     }
 
     /**
@@ -204,11 +204,11 @@ public class BList extends Widget<JList> {
         BScrollPane sp = (BScrollPane) getParent();
         BScrollBar sb = sp.getVerticalScrollBar();
         if (sb != null) {
-            sb.setMaximum(getComponent().getHeight());
+            sb.setMaximum(component.getHeight());
         }
         sb = sp.getHorizontalScrollBar();
         if (sb != null) {
-            sb.setMaximum(getComponent().getWidth());
+            sb.setMaximum(component.getWidth());
         }
     }
 

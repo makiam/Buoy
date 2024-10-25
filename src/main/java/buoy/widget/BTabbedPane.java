@@ -105,7 +105,7 @@ public class BTabbedPane extends WidgetContainer<JTabbedPane> {
      */
     @Override
     public void layoutChildren() {
-        getComponent().validate();
+        component.validate();
         for (Widget w : child) {
             if (w instanceof WidgetContainer) {
                 ((WidgetContainer) w).layoutChildren();
@@ -147,7 +147,7 @@ public class BTabbedPane extends WidgetContainer<JTabbedPane> {
             widget.getParent().remove(widget);
         }
         child.add(index, widget);
-        getComponent().insertTab(tabName, image, new SingleWidgetPanel(widget), null, index);
+        component.insertTab(tabName, image, new SingleWidgetPanel(widget), null, index);
         setAsParent(widget);
         invalidateSize();
     }
@@ -172,7 +172,7 @@ public class BTabbedPane extends WidgetContainer<JTabbedPane> {
      */
     public void remove(int index) {
         Widget w = child.get(index);
-        getComponent().remove(index);
+        component.remove(index);
         child.remove(index);
         removeAsParent(w);
         invalidateSize();
@@ -183,7 +183,7 @@ public class BTabbedPane extends WidgetContainer<JTabbedPane> {
      */
     @Override
     public void removeAll() {
-        getComponent().removeAll();
+        component.removeAll();
         for (Widget aChild : child) {
             removeAsParent(aChild);
         }
@@ -205,7 +205,7 @@ public class BTabbedPane extends WidgetContainer<JTabbedPane> {
      * Get the position of the tabs (TOP, LEFT, BOTTOM, or RIGHT).
      */
     public TabPosition getTabPosition() {
-        switch (getComponent().getTabPlacement()) {
+        switch (component.getTabPlacement()) {
             case SwingConstants.TOP:
                 return TOP;
             case SwingConstants.LEFT:
@@ -221,7 +221,7 @@ public class BTabbedPane extends WidgetContainer<JTabbedPane> {
      * Set the position of the tabs (TOP, LEFT, BOTTOM, or RIGHT).
      */
     public void setTabPosition(TabPosition pos) {
-        getComponent().setTabPlacement(pos.value);
+        component.setTabPlacement(pos.value);
     }
 
     /**
@@ -230,7 +230,7 @@ public class BTabbedPane extends WidgetContainer<JTabbedPane> {
      * @param index the index of the tab
      */
     public String getTabName(int index) {
-        return getComponent().getTitleAt(index);
+        return component.getTitleAt(index);
     }
 
     /**
@@ -240,7 +240,7 @@ public class BTabbedPane extends WidgetContainer<JTabbedPane> {
      * @param name the name to display
      */
     public void setTabName(int index, String name) {
-        getComponent().setTitleAt(index, name);
+        component.setTitleAt(index, name);
     }
 
     /**
@@ -249,7 +249,7 @@ public class BTabbedPane extends WidgetContainer<JTabbedPane> {
      * @param index the index of the tab
      */
     public Icon getTabImage(int index) {
-        return getComponent().getIconAt(index);
+        return component.getIconAt(index);
     }
 
     /**
@@ -259,14 +259,14 @@ public class BTabbedPane extends WidgetContainer<JTabbedPane> {
      * @param image the image to display
      */
     public void setTabImage(int index, Icon image) {
-        getComponent().setIconAt(index, image);
+        component.setIconAt(index, image);
     }
 
     /**
      * Get the index of the tab which is currently selected.
      */
     public int getSelectedTab() {
-        return getComponent().getSelectedIndex();
+        return component.getSelectedIndex();
     }
 
     /**
@@ -277,7 +277,7 @@ public class BTabbedPane extends WidgetContainer<JTabbedPane> {
     public void setSelectedTab(int index) {
         try {
             suppressEvents++;
-            getComponent().setSelectedIndex(index);
+            component.setSelectedIndex(index);
         } finally {
             suppressEvents--;
         }

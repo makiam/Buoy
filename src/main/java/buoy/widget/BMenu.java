@@ -158,7 +158,7 @@ public class BMenu extends WidgetContainer<JMenu> implements MenuWidget {
         for (MenuWidget element : elements) {
             removeAsParent((Widget) element);
         }
-        getComponent().removeAll();
+        component.removeAll();
         elements.clear();
     }
 

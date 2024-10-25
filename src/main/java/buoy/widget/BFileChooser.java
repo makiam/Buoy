@@ -128,7 +128,7 @@ public class BFileChooser extends Widget<JFileChooser> {
      */
     public void setMode(SelectionMode mode) {
         selectMode = mode;
-        getComponent().setFileSelectionMode(mode == SELECT_FOLDER ? JFileChooser.DIRECTORIES_ONLY : JFileChooser.FILES_ONLY);
+        component.setFileSelectionMode(mode == SELECT_FOLDER ? JFileChooser.DIRECTORIES_ONLY : JFileChooser.FILES_ONLY);
     }
 
     /**
@@ -163,7 +163,7 @@ public class BFileChooser extends Widget<JFileChooser> {
      * Get the directory displayed in this file chooser.
      */
     public File getDirectory() {
-        return getComponent().getCurrentDirectory();
+        return component.getCurrentDirectory();
     }
 
     /**

@@ -41,7 +41,7 @@ public class FormContainer extends WidgetContainer {
 
     /**
      * Create a new FormContainer. The number of columns is equal to
-     * colWeight.length, and the number of rows is equal to rowWeight.length.
+     * colWeight array length, and the number of rows is equal to rowWeight array length.
      *
      * @param colWeight the weights of the columns
      * @param rowWeight the weights of the rows

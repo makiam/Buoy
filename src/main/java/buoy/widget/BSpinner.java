@@ -49,7 +49,7 @@ public class BSpinner extends Widget<JSpinner> {
      */
     public BSpinner(SpinnerModel model) {
         this();
-        getComponent().setModel(model);
+        component.setModel(model);
     }
 
     /**

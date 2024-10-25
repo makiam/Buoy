@@ -37,9 +37,9 @@ public class BFrame extends WindowWidget<JFrame> {
      */
     public BFrame() {
         component = createComponent();
-        getComponent().getContentPane().setLayout(null);
-        getComponent().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        frameMap.put(getComponent(), new WeakReference<>(this));
+        component.getContentPane().setLayout(null);
+        component.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        frameMap.put(component, new WeakReference<>(this));
     }
 
     /**
@@ -47,7 +47,7 @@ public class BFrame extends WindowWidget<JFrame> {
      */
     public BFrame(String title) {
         this();
-        getComponent().setTitle(title);
+        component.setTitle(title);
     }
 
     /**
@@ -112,11 +112,11 @@ public class BFrame extends WindowWidget<JFrame> {
     @Override
     public void remove(Widget widget) {
         if (menubar == widget) {
-            getComponent().setJMenuBar(null);
+            component.setJMenuBar(null);
             removeAsParent(menubar);
             menubar = null;
         } else if (content == widget) {
-            getComponent().getContentPane().remove(widget.getComponent());
+            component.getContentPane().remove(widget.getComponent());
             removeAsParent(content);
             content = null;
         }

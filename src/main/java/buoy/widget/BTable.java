@@ -137,7 +137,7 @@ public class BTable extends Widget<JTable> {
      */
     public BTable(TableModel model) {
         this();
-        getComponent().setModel(model);
+        component.setModel(model);
     }
 
     /**
@@ -316,14 +316,14 @@ public class BTable extends Widget<JTable> {
      * Get the number of rows in the table.
      */
     public int getRowCount() {
-        return getComponent().getRowCount();
+        return component.getRowCount();
     }
 
     /**
      * Get the number of columns in the table.
      */
     public int getColumnCount() {
-        return getComponent().getColumnCount();
+        return component.getColumnCount();
     }
 
     /**
@@ -380,7 +380,7 @@ public class BTable extends Widget<JTable> {
      * @param col the column index
      */
     private TableColumn getColumn(int col) {
-        JTable table = getComponent();
+        JTable table = component;
         col = table.convertColumnIndexToView(col);
         return table.getColumnModel().getColumn(col);
     }
@@ -420,7 +420,7 @@ public class BTable extends Widget<JTable> {
      * @param height the new height for the row
      */
     public void setRowHeight(int row, int height) {
-        getComponent().setRowHeight(row, height);
+        component.setRowHeight(row, height);
         invalidateSize();
     }
 
@@ -454,7 +454,7 @@ public class BTable extends Widget<JTable> {
         if (tc.getHeaderRenderer() != null) {
             tc.sizeWidthToFit();
         } else {
-            JTableHeader th = getComponent().getTableHeader();
+            JTableHeader th = component.getTableHeader();
             FontMetrics fm = th.getFontMetrics(th.getFont());
             tc.setPreferredWidth(fm.stringWidth(tc.getHeaderValue().toString()) + 10);
         }
@@ -498,13 +498,13 @@ public class BTable extends Widget<JTable> {
      * SELECT_ROWS, SELECT_COLUMNS, or SELECT_CELLS.
      */
     public SelectionMode getSelectionMode() {
-        if (getComponent().getCellSelectionEnabled()) {
+        if (component.getCellSelectionEnabled()) {
             return SELECT_CELLS;
         }
-        if (getComponent().getColumnSelectionAllowed()) {
+        if (component.getColumnSelectionAllowed()) {
             return SELECT_COLUMNS;
         }
-        if (getComponent().getRowSelectionAllowed()) {
+        if (component.getRowSelectionAllowed()) {
             return SELECT_ROWS;
         }
         return SELECT_NONE;
@@ -553,9 +553,9 @@ public class BTable extends Widget<JTable> {
      */
     public void setRowSelected(int row, boolean selected) {
         if (selected) {
-            getComponent().addRowSelectionInterval(row, row);
+            component.addRowSelectionInterval(row, row);
         } else {
-            getComponent().removeRowSelectionInterval(row, row);
+            component.removeRowSelectionInterval(row, row);
         }
     }
 
@@ -765,16 +765,16 @@ public class BTable extends Widget<JTable> {
     /**
      * This inner class is the Widget that draws the table's column headers.
      */
-    public class BTableHeader extends Widget {
+    public class BTableHeader extends Widget<JTableHeader> {
 
         private BTableHeader() {
             component = BTable.this.getComponent().getTableHeader();
-            getComponent().addComponentListener(new ComponentAdapter() {
+            component.addComponentListener(new ComponentAdapter() {
                 @Override
                 public void componentResized(ComponentEvent ev) {
                     // When the user resizes a column by hand, update the BScrollPane.
 
-                    if (getComponent().getResizingColumn() != null && getParent() instanceof BScrollPane) {
+                    if (component.getResizingColumn() != null && getParent() instanceof BScrollPane) {
                         getParent().layoutChildren();
                     }
                 }
@@ -783,7 +783,7 @@ public class BTable extends Widget<JTable> {
 
         @Override
         public JTableHeader getComponent() {
-            return (JTableHeader) component;
+            return component;
         }
 
         public BTable getTable() {

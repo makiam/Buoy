@@ -53,7 +53,7 @@ public class BMenuBar extends WidgetContainer<JMenuBar> {
             menu.getParent().remove(menu);
         }
         menus.add(index, menu);
-        getComponent().add(menu.getComponent(), index);
+        component.add(menu.getComponent(), index);
         setAsParent(menu);
         invalidateSize();
     }

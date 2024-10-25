@@ -63,7 +63,7 @@ public class BComboBox extends Widget<JComboBox> {
      */
     public BComboBox(ComboBoxModel model) {
         this();
-        getComponent().setModel(model);
+        component.setModel(model);
     }
 
     /**
@@ -236,7 +236,7 @@ public class BComboBox extends Widget<JComboBox> {
      * menu without using a scrollbar.
      */
     public void setPreferredVisibleRows(int rows) {
-        getComponent().setMaximumRowCount(rows);
+        component.setMaximumRowCount(rows);
     }
 
     /**

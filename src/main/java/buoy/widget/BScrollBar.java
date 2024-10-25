@@ -157,7 +157,7 @@ public class BScrollBar extends Widget<JScrollBar> {
      * on one of the arrows at its end.
      */
     public int getUnitIncrement() {
-        return getComponent().getUnitIncrement();
+        return component.getUnitIncrement();
     }
 
     /**
