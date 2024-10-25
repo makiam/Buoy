@@ -1,6 +1,7 @@
 package buoy.widget;
 
 import java.awt.*;
+import java.util.Objects;
 import javax.swing.*;
 
 /**
@@ -16,7 +17,7 @@ public abstract class WindowWidget<T extends Window> extends WidgetContainer<T> 
 
     private Boolean mockVisible;
     private BButton defaultButton;
-    private static final ThreadLocal encodingInProgress = new ThreadLocal();
+    private static final ThreadLocal<Boolean> encodingInProgress = new ThreadLocal<>();
 
     @Override
     public T getComponent() {
@@ -68,7 +69,7 @@ public abstract class WindowWidget<T extends Window> extends WidgetContainer<T> 
         if (!getComponent().isDisplayable()) {
             getComponent().addNotify();
         }
-        JComponent contentPane = (JComponent) ((RootPaneContainer) getComponent()).getContentPane();
+        JComponent contentPane = (JComponent) ((RootPaneContainer) component).getContentPane();
         if (content == null) {
             contentPane.setPreferredSize(new Dimension(0, 0));
         } else {
@@ -88,15 +89,16 @@ public abstract class WindowWidget<T extends Window> extends WidgetContainer<T> 
      */
     @Override
     public void layoutChildren() {
-        if (content != null) {
-            Container contentPane = ((RootPaneContainer) getComponent()).getContentPane();
-            contentPane.validate();
-            Dimension max = content.getMaximumSize();
-            Dimension total = contentPane.getSize();
-            content.getComponent().setBounds(0, 0, Math.min(max.width, total.width), Math.min(max.height, total.height));
-            if (content instanceof WidgetContainer) {
-                ((WidgetContainer) content).layoutChildren();
-            }
+        if (content == null) {
+            return;
+        }
+        Container contentPane = ((RootPaneContainer) component).getContentPane();
+        contentPane.validate();
+        Dimension max = content.getMaximumSize();
+        Dimension total = contentPane.getSize();
+        content.getComponent().setBounds(0, 0, Math.min(max.width, total.width), Math.min(max.height, total.height));
+        if (content instanceof WidgetContainer) {
+            ((WidgetContainer) content).layoutChildren();
         }
     }
 
@@ -136,12 +138,8 @@ public abstract class WindowWidget<T extends Window> extends WidgetContainer<T> 
      */
     @Override
     public boolean isVisible() {
-        if (mockVisible != null) {
-            // This window was created internally in the process of encoding a window as XML.
-
-            return mockVisible;
-        }
-        return component.isVisible();
+        // This window was created internally in the process of encoding a window as XML.
+        return Objects.requireNonNullElseGet(mockVisible, () -> component.isVisible());
     }
 
     /**

@@ -29,7 +29,7 @@ public abstract class WidgetContainer<T extends Component> extends Widget<T> {
     /**
      * Get a Collection containing all child Widgets of this container.
      */
-    public abstract Collection<Widget> getChildren();
+    public abstract Collection<Widget<?>> getChildren();
 
     /**
      * Remove a child Widget from this container.
