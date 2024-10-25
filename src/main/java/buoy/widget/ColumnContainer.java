@@ -5,6 +5,7 @@ import buoy.xml.*;
 import buoy.xml.delegate.*;
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 import javax.swing.JPanel;
 
 /**
@@ -19,9 +20,9 @@ import javax.swing.JPanel;
  *
  * @author Peter Eastman
  */
-public class ColumnContainer extends WidgetContainer<JPanel> {
+public class ColumnContainer extends WidgetContainer {
 
-    private final ArrayList<Widget> child;
+    private final List<Widget> child;
     private final ArrayList<LayoutInfo> childLayout;
     private LayoutInfo defaultLayout;
 
@@ -58,7 +59,7 @@ public class ColumnContainer extends WidgetContainer<JPanel> {
      * Get a Collection containing all child Widgets of this container.
      */
     @Override
-    public Collection<Widget<?>> getChildren() {
+    public Collection<Widget> getChildren() {
         return new ArrayList<>(child);
     }
 
