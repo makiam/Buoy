@@ -40,6 +40,11 @@ public class ColumnContainer extends WidgetContainer {
         defaultLayout = new LayoutInfo(LayoutInfo.CENTER, LayoutInfo.NONE, new Insets(2, 2, 2, 2), null);
     }
 
+    @Override
+    public JPanel getComponent() {
+        return (JPanel) component;
+    }
+
     /**
      * Get the number of children in this container.
      */
@@ -220,7 +225,7 @@ public class ColumnContainer extends WidgetContainer {
      */
     public void remove(int index) {
         Widget w = child.get(index);
-        component.remove(w.getComponent());
+        getComponent().remove(w.getComponent());
         child.remove(index);
         childLayout.remove(index);
         removeAsParent(w);
@@ -232,7 +237,7 @@ public class ColumnContainer extends WidgetContainer {
      */
     @Override
     public void removeAll() {
-        component.removeAll();
+        getComponent().removeAll();
         for (Widget aChild : child) {
             removeAsParent(aChild);
         }
