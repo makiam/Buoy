@@ -44,11 +44,6 @@ public class BWindow extends WindowWidget<JWindow> {
         return new BWindowComponent();
     }
 
-    @Override
-    public JWindow getComponent() {
-        return component;
-    }
-
     /**
      * Get the number of children in this container.
      */

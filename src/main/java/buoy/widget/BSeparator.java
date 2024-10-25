@@ -45,11 +45,6 @@ public class BSeparator extends Widget<JSeparator> implements MenuWidget {
         return new JSeparator();
     }
 
-    @Override
-    public JSeparator getComponent() {
-        return component;
-    }
-
     /**
      * Get the orientation of this separator.
      */

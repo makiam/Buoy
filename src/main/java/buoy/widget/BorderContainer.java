@@ -51,11 +51,6 @@ public class BorderContainer extends WidgetContainer<JPanel> {
         defaultLayout = new LayoutInfo(LayoutInfo.CENTER, LayoutInfo.BOTH, null, null);
     }
 
-    @Override
-    public JPanel getComponent() {
-        return component;
-    }
-
     /**
      * Get the number of children in this container.
      */

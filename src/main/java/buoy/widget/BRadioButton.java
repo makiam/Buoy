@@ -62,11 +62,6 @@ public class BRadioButton extends Widget<JRadioButton> {
         return new JRadioButton(text, state);
     }
 
-    @Override
-    public JRadioButton getComponent() {
-        return component;
-    }
-
     /**
      * Get the selection state of this radio button.
      */

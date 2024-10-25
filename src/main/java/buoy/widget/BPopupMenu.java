@@ -48,11 +48,6 @@ public class BPopupMenu extends WidgetContainer<JPopupMenu> implements MenuWidge
         return new JPopupMenu();
     }
 
-    @Override
-    public JPopupMenu getComponent() {
-        return component;
-    }
-
     /**
      * Display the popup menu over another Widget.
      *

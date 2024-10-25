@@ -163,11 +163,6 @@ public class BTable extends Widget<JTable> {
         };
     }
 
-    @Override
-    public JTable getComponent() {
-        return component;
-    }
-
     /**
      * Get the Widget that displays this table's column headers.
      */

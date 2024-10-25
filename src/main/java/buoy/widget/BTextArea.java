@@ -89,11 +89,6 @@ public class BTextArea extends TextWidget<JTextArea> {
         return new JTextArea();
     }
 
-    @Override
-    public JTextArea getComponent() {
-        return component;
-    }
-
     /**
      * Get the number of rows this text area should be tall enough to display.
      */

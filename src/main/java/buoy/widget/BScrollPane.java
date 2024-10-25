@@ -175,11 +175,6 @@ public class BScrollPane extends WidgetContainer<JScrollPane> {
         return new ScrollPaneComponent();
     }
 
-    @Override
-    public JScrollPane getComponent() {
-        return component;
-    }
-
     /**
      * Get the content Widget.
      */

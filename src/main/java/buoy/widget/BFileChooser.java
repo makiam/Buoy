@@ -100,11 +100,6 @@ public class BFileChooser extends Widget<JFileChooser> {
         return new JFileChooser();
     }
 
-    @Override
-    public JFileChooser getComponent() {
-        return component;
-    }
-
     /**
      * Get the title displayed on the dialog.
      */

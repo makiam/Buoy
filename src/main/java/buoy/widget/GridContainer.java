@@ -4,7 +4,9 @@ import buoy.internal.*;
 import buoy.xml.*;
 import buoy.xml.delegate.*;
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import javax.swing.JPanel;
 
 /**
@@ -20,7 +22,7 @@ import javax.swing.JPanel;
  *
  * @author Peter Eastman
  */
-public class GridContainer extends WidgetContainer {
+public class GridContainer extends WidgetContainer<JPanel> {
 
     private Widget child[][];
     private LayoutInfo defaultLayout, childLayout[][];
@@ -45,11 +47,6 @@ public class GridContainer extends WidgetContainer {
         numCols = cols;
     }
 
-    @Override
-    public JPanel getComponent() {
-        return (JPanel) component;
-    }
-
     /**
      * Get the number of children in this container.
      */
@@ -69,8 +66,8 @@ public class GridContainer extends WidgetContainer {
      * Get a Collection containing all child Widgets of this container.
      */
     @Override
-    public Collection<Widget> getChildren() {
-        ArrayList<Widget> ls = new ArrayList<>(numCols * numRows);
+    public Collection<Widget<?>> getChildren() {
+        List<Widget<?>> ls = new ArrayList<>(numCols * numRows);
         for (Widget[] child1 : child) {
             for (Widget item : child1) {
                 if(item == null) continue;

@@ -33,11 +33,6 @@ public class BMenuBar extends WidgetContainer<JMenuBar> {
         return new JMenuBar();
     }
 
-    @Override
-    public JMenuBar getComponent() {
-        return component;
-    }
-
     /**
      * Add a BMenu to the end of the menu bar.
      *

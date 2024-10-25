@@ -97,11 +97,6 @@ public class BMenuItem extends Widget<JMenuItem> implements MenuWidget {
         return new JMenuItem();
     }
 
-    @Override
-    public JMenuItem getComponent() {
-        return component;
-    }
-
     /**
      * Get the text which appears on this menu item.
      */

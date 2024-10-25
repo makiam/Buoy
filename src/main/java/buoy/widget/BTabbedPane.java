@@ -73,11 +73,6 @@ public class BTabbedPane extends WidgetContainer<JTabbedPane> {
         return new JTabbedPane(pos.value);
     }
 
-    @Override
-    public JTabbedPane getComponent() {
-        return component;
-    }
-
     /**
      * Get the number of children in this container.
      */

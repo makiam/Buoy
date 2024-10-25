@@ -107,11 +107,6 @@ public class BTextField extends TextWidget<JTextField> {
         return new JTextField();
     }
 
-    @Override
-    public JTextField getComponent() {
-        return component;
-    }
-
     /**
      * Get the number of columns this text field should be wide enough to
      * display.
