@@ -31,7 +31,7 @@ import javax.swing.*;
  */
 public class BScrollBar extends Widget<JScrollBar> {
 
-    private DefaultBoundedRangeModel model;
+    private final DefaultBoundedRangeModel model;
     private int suppressEvents;
 
     public static final Orientation HORIZONTAL = new Orientation(Adjustable.HORIZONTAL);
