@@ -58,11 +58,6 @@ public class BFrame extends WindowWidget<JFrame> {
         return new BFrameComponent();
     }
 
-    @Override
-    public JFrame getComponent() {
-        return (JFrame) component;
-    }
-
     /**
      * Get the number of children in this container.
      */

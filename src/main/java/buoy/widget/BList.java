@@ -77,11 +77,6 @@ public class BList extends Widget<JList> {
         return new JList(defaultModel);
     }
 
-    @Override
-    public JList getComponent() {
-        return component;
-    }
-
     /**
      * Set the contents of the list to the objects in an array. This completely
      * replaces the contents of the list, removing any objects that were

@@ -72,11 +72,6 @@ public class BProgressBar extends Widget<JProgressBar> {
         return new JProgressBar();
     }
 
-    @Override
-    public JProgressBar getComponent() {
-        return component;
-    }
-
     /**
      * Get the progress bar's current progress value.
      */

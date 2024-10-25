@@ -49,11 +49,6 @@ public class BCheckBox extends Widget<JCheckBox> {
         return new JCheckBox(text, state);
     }
 
-    @Override
-    public JCheckBox getComponent() {
-        return component;
-    }
-
     /**
      * Get the selection state of this check box.
      */

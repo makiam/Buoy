@@ -83,11 +83,6 @@ public class BButton extends Widget<JButton> {
         return new JButton();
     }
 
-    @Override
-    public JButton getComponent() {
-        return component;
-    }
-
     /**
      * Get the text being displayed on the button. This may be null.
      */

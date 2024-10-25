@@ -86,11 +86,6 @@ public class BSplitPane extends WidgetContainer<JSplitPane> {
         return new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, false);
     }
 
-    @Override
-    public JSplitPane getComponent() {
-        return component;
-    }
-
     /**
      * Get the location of the divider (in pixels).
      */

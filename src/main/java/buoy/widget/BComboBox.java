@@ -81,11 +81,6 @@ public class BComboBox extends Widget<JComboBox> {
         };
     }
 
-    @Override
-    public JComboBox getComponent() {
-        return component;
-    }
-
     /**
      * Get whether this combo box is editable, allowing the user to type in
      * values other than those in the popup list.

@@ -104,11 +104,6 @@ public class BLabel extends Widget<JLabel> {
         return new JLabel(text, image, SwingConstants.RIGHT);
     }
 
-    @Override
-    public JLabel getComponent() {
-        return component;
-    }
-
     /**
      * Get the text which appears on this label.
      */

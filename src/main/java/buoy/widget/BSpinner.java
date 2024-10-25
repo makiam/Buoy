@@ -108,11 +108,6 @@ public class BSpinner extends Widget<JSpinner> {
         return new JSpinner();
     }
 
-    @Override
-    public JSpinner getComponent() {
-        return component;
-    }
-
     /**
      * Get the current value of the spinner.
      */

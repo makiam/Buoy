@@ -76,11 +76,6 @@ public class BScrollBar extends Widget<JScrollBar> {
         return new BScrollBarComponent(orientation);
     }
 
-    @Override
-    public JScrollBar getComponent() {
-        return component;
-    }
-
     /**
      * Get the minimum value of the range represented by this BScrollBar.
      */

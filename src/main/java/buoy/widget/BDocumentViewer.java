@@ -113,11 +113,6 @@ public class BDocumentViewer extends Widget<JEditorPane> {
         return new JEditorPane();
     }
 
-    @Override
-    public JEditorPane getComponent() {
-        return  component;
-    }
-
     /**
      * Get the URL for the document currently being displayed. If the document
      * was not specified by a URL, this returns null.

@@ -68,12 +68,6 @@ public class BSlider extends Widget<JSlider> {
     protected JSlider createComponent(Orientation orientation) {
         return new JSlider(orientation.value);
     }
-
-    @Override
-    public JSlider getComponent() {
-        return  component;
-    }
-
     /**
      * Get the minimum value of the range represented by this BSlider.
      */
