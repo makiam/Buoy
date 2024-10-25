@@ -93,11 +93,6 @@ public class BDialog extends WindowWidget<JDialog> {
         }
     }
 
-    @Override
-    public JDialog getComponent() {
-        return component;
-    }
-
     /**
      * Perform internal initialization.
      */

@@ -55,11 +55,6 @@ public class BToolBar extends WidgetContainer<JToolBar> {
         return toolbar;
     }
 
-    @Override
-    public JToolBar getComponent() {
-        return component;
-    }
-
     /**
      * Get the orientation of this toolbar.
      */

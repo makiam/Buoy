@@ -87,11 +87,6 @@ public class BToolTip extends Widget<JToolTip> {
         return new JToolTip();
     }
 
-    @Override
-    public JToolTip getComponent() {
-        return component;
-    }
-
     /**
      * Get the text to display on the tool tip.
      */

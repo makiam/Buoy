@@ -44,11 +44,6 @@ public class BMenu extends WidgetContainer<JMenu> implements MenuWidget {
         return new JMenu();
     }
 
-    @Override
-    public JMenu getComponent() {
-        return component;
-    }
-
     /**
      * Get the title of this menu which appears in the menu bar.
      */
