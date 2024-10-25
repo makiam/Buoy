@@ -3,6 +3,7 @@ package buoy.widget;
 import buoy.event.*;
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 import javax.swing.*;
 
 /**
@@ -24,7 +25,7 @@ import javax.swing.*;
  *
  * @author Peter Eastman
  */
-public class BWindow extends WindowWidget {
+public class BWindow extends WindowWidget<JWindow> {
 
     /**
      * Create a new BWindow.
@@ -32,7 +33,7 @@ public class BWindow extends WindowWidget {
 
     public BWindow() {
         component = createComponent();
-        getComponent().getContentPane().setLayout(null);
+        component.getContentPane().setLayout(null);
     }
 
     /**
@@ -41,11 +42,6 @@ public class BWindow extends WindowWidget {
      */
     protected JWindow createComponent() {
         return new BWindowComponent();
-    }
-
-    @Override
-    public JWindow getComponent() {
-        return (JWindow) component;
     }
 
     /**
@@ -60,8 +56,8 @@ public class BWindow extends WindowWidget {
      * Get a Collection containing all child Widgets of this container.
      */
     @Override
-    public Collection<Widget> getChildren() {
-        ArrayList<Widget> ls = new ArrayList<>(1);
+    public Collection<Widget<?>> getChildren() {
+        List<Widget<?>> ls = new ArrayList<>(1);
         if (content != null) {
             ls.add(content);
         }
@@ -74,7 +70,7 @@ public class BWindow extends WindowWidget {
     @Override
     public void remove(Widget widget) {
         if (content == widget) {
-            getComponent().getContentPane().remove(widget.getComponent());
+            component.getContentPane().remove(widget.getComponent());
             removeAsParent(content);
             content = null;
         }
@@ -95,7 +91,7 @@ public class BWindow extends WindowWidget {
      */
     @Override
     protected JRootPane getRootPane() {
-        return getComponent().getRootPane();
+        return component.getRootPane();
     }
 
     /**
@@ -118,12 +114,7 @@ public class BWindow extends WindowWidget {
             layoutChildren();
             if (!BWindow.this.getComponent().getSize().equals(lastSize)) {
                 lastSize = BWindow.this.getComponent().getSize();
-                EventQueue.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        BWindow.this.dispatchEvent(new WindowResizedEvent(BWindow.this));
-                    }
-                });
+                EventQueue.invokeLater(() -> BWindow.this.dispatchEvent(new WindowResizedEvent(BWindow.this)));
             }
         }
     }

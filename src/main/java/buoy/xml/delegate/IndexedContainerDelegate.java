@@ -15,7 +15,7 @@ import java.lang.reflect.*;
  */
 public class IndexedContainerDelegate extends EventSourceDelegate {
 
-    private final String propertyMethods[];
+    private final String[] propertyMethods;
 
     /**
      * Create an IndexedContainerDelegate.
@@ -25,7 +25,7 @@ public class IndexedContainerDelegate extends EventSourceDelegate {
      * methods will be invoked and their return values passed to the add()
      * method.
      */
-    public IndexedContainerDelegate(String propertyMethods[]) {
+    public IndexedContainerDelegate(String[] propertyMethods) {
         this.propertyMethods = propertyMethods;
     }
 
@@ -36,7 +36,7 @@ public class IndexedContainerDelegate extends EventSourceDelegate {
             try {
                 // Find the list of methods to get property values.
 
-                Method methods[] = new Method[propertyMethods.length];
+                Method[] methods = new Method[propertyMethods.length];
                 Class<?> objClass = old.getClass();
                 for (int i = 0; i < methods.length; i++) {
                     methods[i] = objClass.getMethod(propertyMethods[i], Integer.TYPE);
@@ -44,8 +44,8 @@ public class IndexedContainerDelegate extends EventSourceDelegate {
 
                 // Add the children to the container.
                 for (int i = 0; i < old.getChildCount(); i++) {
-                    Object args[] = new Object[methods.length];
-                    Object index[] = new Object[]{i};
+                    Object[] args = new Object[methods.length];
+                    Object[] index = new Object[]{i};
                     for (int j = 0; j < args.length; j++) {
                         args[j] = methods[j].invoke(old, index);
                     }

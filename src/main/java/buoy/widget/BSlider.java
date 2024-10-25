@@ -4,7 +4,6 @@ import buoy.event.*;
 import buoy.xml.*;
 import buoy.xml.delegate.*;
 import javax.swing.*;
-import javax.swing.event.*;
 
 /**
  * A BSlider is a Widget that allows the user to select a single value by
@@ -19,7 +18,7 @@ import javax.swing.event.*;
  *
  * @author Peter Eastman
  */
-public class BSlider extends Widget {
+public class BSlider extends Widget<JSlider> {
 
     private int suppressEvents;
 
@@ -49,12 +48,9 @@ public class BSlider extends Widget {
     public BSlider(int value, int minimum, int maximum, Orientation orientation) {
         component = createComponent(orientation);
         getComponent().setModel(new DefaultBoundedRangeModel(value, 0, minimum, maximum));
-        getComponent().addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent ev) {
-                if (suppressEvents == 0) {
-                    dispatchEvent(new ValueChangedEvent(BSlider.this, getComponent().getValueIsAdjusting()));
-                }
+        getComponent().addChangeListener(ev -> {
+            if (suppressEvents == 0) {
+                dispatchEvent(new ValueChangedEvent(BSlider.this, getComponent().getValueIsAdjusting()));
             }
         });
         setMajorTickSpacing(20);
@@ -71,45 +67,39 @@ public class BSlider extends Widget {
     protected JSlider createComponent(Orientation orientation) {
         return new JSlider(orientation.value);
     }
-
-    @Override
-    public JSlider getComponent() {
-        return (JSlider) component;
-    }
-
     /**
      * Get the minimum value of the range represented by this BSlider.
      */
     public int getMinimum() {
-        return getComponent().getMinimum();
+        return component.getMinimum();
     }
 
     /**
      * Set the minimum value of the range represented by this BSlider.
      */
     public void setMinimum(int value) {
-        getComponent().setMinimum(value);
+        component.setMinimum(value);
     }
 
     /**
      * Get the maximum value of the range represented by this BSlider.
      */
     public int getMaximum() {
-        return getComponent().getMaximum();
+        return component.getMaximum();
     }
 
     /**
      * Set the maximum value of the range represented by this BSlider.
      */
     public void setMaximum(int value) {
-        getComponent().setMaximum(value);
+        component.setMaximum(value);
     }
 
     /**
      * Get the current value of this BSlider.
      */
     public int getValue() {
-        return getComponent().getValue();
+        return component.getValue();
     }
 
     /**
@@ -118,7 +108,7 @@ public class BSlider extends Widget {
     public void setValue(int value) {
         try {
             suppressEvents++;
-            getComponent().setValue(value);
+            component.setValue(value);
         } finally {
             suppressEvents--;
         }
@@ -128,7 +118,7 @@ public class BSlider extends Widget {
      * Get the orientation (HORIZONTAL or VERTICAL) of this BSlider.
      */
     public Orientation getOrientation() {
-        int orient = getComponent().getOrientation();
+        int orient = component.getOrientation();
         return (orient == HORIZONTAL.value ? HORIZONTAL : VERTICAL);
     }
 
@@ -136,7 +126,7 @@ public class BSlider extends Widget {
      * Set the orientation (HORIZONTAL or VERTICAL) of this BSlider.
      */
     public void setOrientation(Orientation orientation) {
-        getComponent().setOrientation(orientation.value);
+        component.setOrientation(orientation.value);
         invalidateSize();
     }
 
@@ -144,7 +134,7 @@ public class BSlider extends Widget {
      * Get the spacing between major tick marks on the slider.
      */
     public int getMajorTickSpacing() {
-        return getComponent().getMajorTickSpacing();
+        return component.getMajorTickSpacing();
     }
 
     /**
@@ -156,7 +146,7 @@ public class BSlider extends Widget {
      * value.
      */
     public void setMajorTickSpacing(int spacing) {
-        JSlider slider = getComponent();
+        JSlider slider = component;
         slider.setMajorTickSpacing(spacing);
         if (spacing < slider.getMinorTickSpacing()) {
             slider.setMinorTickSpacing(spacing);
@@ -168,7 +158,7 @@ public class BSlider extends Widget {
      * Get the spacing between minor tick marks on the slider.
      */
     public int getMinorTickSpacing() {
-        return getComponent().getMinorTickSpacing();
+        return component.getMinorTickSpacing();
     }
 
     /**
@@ -179,7 +169,7 @@ public class BSlider extends Widget {
      * method, then the major tick spacing will also be set to the same value.
      */
     public void setMinorTickSpacing(int spacing) {
-        JSlider slider = getComponent();
+        JSlider slider = component;
         slider.setMinorTickSpacing(spacing);
         if (spacing > slider.getMajorTickSpacing()) {
             slider.setMajorTickSpacing(spacing);
@@ -190,28 +180,28 @@ public class BSlider extends Widget {
      * Get whether tick marks are shown on the slider.
      */
     public boolean getShowTicks() {
-        return getComponent().getPaintTicks();
+        return component.getPaintTicks();
     }
 
     /**
      * Set whether tick marks are shown on the slider.
      */
     public void setShowTicks(boolean show) {
-        getComponent().setPaintTicks(show);
+        component.setPaintTicks(show);
     }
 
     /**
      * Get whether labels are shown on the slider at the major tick positions.
      */
     public boolean getShowLabels() {
-        return getComponent().getPaintLabels();
+        return component.getPaintLabels();
     }
 
     /**
      * Set whether labels are shown on the slider at the major tick positions.
      */
     public void setShowLabels(boolean show) {
-        getComponent().setPaintLabels(show);
+        component.setPaintLabels(show);
     }
 
     /**
@@ -219,7 +209,7 @@ public class BSlider extends Widget {
      * tick position.
      */
     public boolean getSnapToTicks() {
-        return getComponent().getSnapToTicks();
+        return component.getSnapToTicks();
     }
 
     /**
@@ -227,7 +217,7 @@ public class BSlider extends Widget {
      * tick position.
      */
     public void setSnapToTicks(boolean snap) {
-        getComponent().setSnapToTicks(snap);
+        component.setSnapToTicks(snap);
     }
 
     /**

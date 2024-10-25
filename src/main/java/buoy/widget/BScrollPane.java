@@ -7,6 +7,7 @@ import buoy.event.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.event.*;
 
@@ -32,12 +33,12 @@ import javax.swing.event.*;
  *
  * @author Peter Eastman
  */
-public class BScrollPane extends WidgetContainer {
+public class BScrollPane extends WidgetContainer<JScrollPane> {
 
     private ContentViewport contentPort;
     private JViewport rowHeaderPort, colHeaderPort;
     private Widget content, rowHeader, colHeader;
-    private BScrollBar hscroll, vscroll;
+    private BScrollBar hScroll, vScroll;
     private ScrollbarPolicy hPolicy, vPolicy;
     private Dimension preferredViewSize, prefSize, minSize;
     private boolean forceWidth, forceHeight;
@@ -95,10 +96,10 @@ public class BScrollPane extends WidgetContainer {
             public void stateChanged(ChangeEvent e) {
                 Point pos = contentPort.getViewPosition();
                 if (hPolicy != SCROLLBAR_NEVER) {
-                    pos.x = hscroll.getValue();
+                    pos.x = hScroll.getValue();
                 }
                 if (vPolicy != SCROLLBAR_NEVER) {
-                    pos.y = vscroll.getValue();
+                    pos.y = vScroll.getValue();
                 }
                 contentPort.setViewPositionInternal(pos);
                 rowHeaderPort.setViewPosition(new Point(0, pos.y));
@@ -109,14 +110,14 @@ public class BScrollPane extends WidgetContainer {
             @Override
             public void mouseWheelMoved(MouseWheelEvent ev) {
                 BScrollBar bar = null;
-                if (ev.getSource() == vscroll.getComponent()) {
-                    bar = vscroll;
-                } else if (ev.getSource() == hscroll.getComponent()) {
-                    bar = hscroll;
-                } else if (vscroll.isVisible() && vscroll.isEnabled() && vscroll.getExtent() < vscroll.getMaximum()) {
-                    bar = vscroll;
-                } else if (hscroll.isVisible() && hscroll.isEnabled() && hscroll.getExtent() < hscroll.getMaximum()) {
-                    bar = hscroll;
+                if (ev.getSource() == vScroll.getComponent()) {
+                    bar = vScroll;
+                } else if (ev.getSource() == hScroll.getComponent()) {
+                    bar = hScroll;
+                } else if (vScroll.isVisible() && vScroll.isEnabled() && vScroll.getExtent() < vScroll.getMaximum()) {
+                    bar = vScroll;
+                } else if (hScroll.isVisible() && hScroll.isEnabled() && hScroll.getExtent() < hScroll.getMaximum()) {
+                    bar = hScroll;
                 } else {
                     return;
                 }
@@ -128,16 +129,16 @@ public class BScrollPane extends WidgetContainer {
                 }
             }
         };
-        vscroll = new ScrollPaneScrollBar(0, 1, 0, 100, BScrollBar.VERTICAL);
-        panel.add(vscroll.getComponent());
-        setAsParent(vscroll);
-        vscroll.getComponent().getModel().addChangeListener(scrollListener);
-        vscroll.getComponent().addMouseWheelListener(wheelListener);
-        hscroll = new ScrollPaneScrollBar(0, 1, 0, 100, BScrollBar.HORIZONTAL);
-        panel.add(hscroll.getComponent());
-        setAsParent(hscroll);
-        hscroll.getComponent().getModel().addChangeListener(scrollListener);
-        hscroll.getComponent().addMouseWheelListener(wheelListener);
+        vScroll = new ScrollPaneScrollBar(0, 1, 0, 100, BScrollBar.VERTICAL);
+        panel.add(vScroll.getComponent());
+        setAsParent(vScroll);
+        vScroll.getComponent().getModel().addChangeListener(scrollListener);
+        vScroll.getComponent().addMouseWheelListener(wheelListener);
+        hScroll = new ScrollPaneScrollBar(0, 1, 0, 100, BScrollBar.HORIZONTAL);
+        panel.add(hScroll.getComponent());
+        setAsParent(hScroll);
+        hScroll.getComponent().getModel().addChangeListener(scrollListener);
+        hScroll.getComponent().addMouseWheelListener(wheelListener);
         panel.setViewport(contentPort = new ContentViewport());
         panel.setRowHeader(rowHeaderPort = new JViewport());
         panel.setColumnHeader(colHeaderPort = new JViewport());
@@ -172,11 +173,6 @@ public class BScrollPane extends WidgetContainer {
      */
     protected JScrollPane createComponent() {
         return new ScrollPaneComponent();
-    }
-
-    @Override
-    public JScrollPane getComponent() {
-        return (JScrollPane) component;
     }
 
     /**
@@ -251,14 +247,14 @@ public class BScrollPane extends WidgetContainer {
      * Get the horizontal BScrollBar.
      */
     public BScrollBar getHorizontalScrollBar() {
-        return hscroll;
+        return hScroll;
     }
 
     /**
      * Get the vertical BScrollBar.
      */
     public BScrollBar getVerticalScrollBar() {
-        return vscroll;
+        return vScroll;
     }
 
     /**
@@ -401,8 +397,8 @@ public class BScrollPane extends WidgetContainer {
      * Get a Collection containing all child Widgets of this container.
      */
     @Override
-    public Collection<Widget> getChildren() {
-        ArrayList<Widget> ls = new ArrayList<>(5);
+    public Collection<Widget<?>> getChildren() {
+        List<Widget<?>> ls = new ArrayList<>(5);
         if (content != null) {
             ls.add(content);
         }
@@ -412,8 +408,8 @@ public class BScrollPane extends WidgetContainer {
         if (colHeader != null) {
             ls.add(colHeader);
         }
-        ls.add(hscroll);
-        ls.add(vscroll);
+        ls.add(hScroll);
+        ls.add(vScroll);
         return ls;
     }
 
@@ -461,8 +457,8 @@ public class BScrollPane extends WidgetContainer {
         int topMargin = 0, leftMargin = 0, bottomMargin = 0, rightMargin = 0;
         Dimension colHeaderSize = (colHeader == null ? null : colHeader.getPreferredSize());
         Dimension rowHeaderSize = (rowHeader == null ? null : rowHeader.getPreferredSize());
-        Dimension hScrollSize = hscroll.getPreferredSize();
-        Dimension vScrollSize = vscroll.getPreferredSize();
+        Dimension hScrollSize = hScroll.getPreferredSize();
+        Dimension vScrollSize = vScroll.getPreferredSize();
         Dimension contentSize = (content == null ? new Dimension() : content.getPreferredSize());
         Rectangle bounds = getBounds();
 
@@ -555,30 +551,30 @@ public class BScrollPane extends WidgetContainer {
         }
 
         // Set up the scrollbars.
-        hscroll.getComponent().setBounds(new Rectangle(leftMargin, viewBounds.y + viewBounds.height, hScrollLength, bottomMargin));
+        hScroll.getComponent().setBounds(new Rectangle(leftMargin, viewBounds.y + viewBounds.height, hScrollLength, bottomMargin));
         if (content == null) {
-            hscroll.setEnabled(false);
+            hScroll.setEnabled(false);
         } else {
-            hscroll.setEnabled(true);
+            hScroll.setEnabled(true);
             int width = content.getComponent().getWidth();
-            hscroll.setMaximum(width);
-            if (hscroll.getValue() + viewBounds.width > width) {
-                hscroll.setValue(width - viewBounds.width);
+            hScroll.setMaximum(width);
+            if (hScroll.getValue() + viewBounds.width > width) {
+                hScroll.setValue(width - viewBounds.width);
             }
         }
-        hscroll.setExtent(viewBounds.width);
-        vscroll.getComponent().setBounds(new Rectangle(viewBounds.x + viewBounds.width, topMargin, rightMargin, vScrollLength));
+        hScroll.setExtent(viewBounds.width);
+        vScroll.getComponent().setBounds(new Rectangle(viewBounds.x + viewBounds.width, topMargin, rightMargin, vScrollLength));
         if (content == null) {
-            vscroll.setEnabled(false);
+            vScroll.setEnabled(false);
         } else {
-            vscroll.setEnabled(true);
+            vScroll.setEnabled(true);
             int height = content.getComponent().getHeight();
-            vscroll.setMaximum(height);
-            if (vscroll.getValue() + viewBounds.height > height) {
-                vscroll.setValue(height - viewBounds.height);
+            vScroll.setMaximum(height);
+            if (vScroll.getValue() + viewBounds.height > height) {
+                vScroll.setValue(height - viewBounds.height);
             }
         }
-        vscroll.setExtent(viewBounds.height);
+        vScroll.setExtent(viewBounds.height);
 
         // Layout any child containers.
         if (content instanceof WidgetContainer) {
@@ -613,12 +609,12 @@ public class BScrollPane extends WidgetContainer {
             // Add the scrollbars, if appropriate.
             Dimension contentDim = (content == null ? new Dimension() : content.getMinimumSize());
             if (hPolicy == SCROLLBAR_ALWAYS || (hPolicy == SCROLLBAR_AS_NEEDED && contentDim.width > 0)) {
-                Dimension hScrollDim = hscroll.getMinimumSize();
+                Dimension hScrollDim = hScroll.getMinimumSize();
                 minSize.width += hScrollDim.width;
                 minSize.height += hScrollDim.height;
             }
             if (vPolicy == SCROLLBAR_ALWAYS || (vPolicy == SCROLLBAR_AS_NEEDED && contentDim.height > 0)) {
-                Dimension vScrollDim = vscroll.getMinimumSize();
+                Dimension vScrollDim = vScroll.getMinimumSize();
                 minSize.height += vScrollDim.height;
                 minSize.width += vScrollDim.width;
             }
@@ -665,14 +661,14 @@ public class BScrollPane extends WidgetContainer {
 
             // Add the scrollbars, if appropriate.
             if (hPolicy == SCROLLBAR_ALWAYS || (hPolicy == SCROLLBAR_AS_NEEDED && prefSize.width < contentPrefSize.width)) {
-                Dimension hScrollDim = hscroll.getPreferredSize();
+                Dimension hScrollDim = hScroll.getPreferredSize();
                 if (hScrollDim.width > prefSize.width) {
                     prefSize.width = hScrollDim.width;
                 }
                 prefSize.height += hScrollDim.height;
             }
             if (vPolicy == SCROLLBAR_ALWAYS || (vPolicy == SCROLLBAR_AS_NEEDED && prefSize.height < contentPrefSize.height)) {
-                Dimension vScrollDim = vscroll.getPreferredSize();
+                Dimension vScrollDim = vScroll.getPreferredSize();
                 if (vScrollDim.height > prefSize.height) {
                     prefSize.height = vScrollDim.height;
                 }
@@ -770,8 +766,8 @@ public class BScrollPane extends WidgetContainer {
 
         @Override
         public void setViewPosition(Point p) {
-            hscroll.setValue(p.x);
-            vscroll.setValue(p.y);
+            hScroll.setValue(p.x);
+            vScroll.setValue(p.y);
         }
 
         public void setViewPositionInternal(Point p) {

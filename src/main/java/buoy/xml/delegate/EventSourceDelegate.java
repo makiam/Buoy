@@ -24,7 +24,7 @@ public class EventSourceDelegate extends DefaultPersistenceDelegate {
      * Create an EventSourceDelegate for a class whose constructor takes a list
      * of property values as arguments.
      */
-    public EventSourceDelegate(String constructorPropertyNames[]) {
+    public EventSourceDelegate(String[] constructorPropertyNames) {
         super(constructorPropertyNames);
     }
 

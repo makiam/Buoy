@@ -163,7 +163,7 @@ public class DragManager {
             if (originalIndex == -1) {
                 // A whole tab was being dragged.  First find all the widgets in that tab.
 
-                DockableWidget widget[] = new DockableWidget[originalContainer.getTabChildCount(originalTab)];
+                DockableWidget[] widget = new DockableWidget[originalContainer.getTabChildCount(originalTab)];
                 for (int i = 0; i < widget.length; i++) {
                     widget[i] = originalContainer.getChild(originalTab, i);
                 }
@@ -267,7 +267,8 @@ public class DragManager {
         boolean found;
         do {
             found = false;
-            for (Widget w : container.getChildren()) {
+            Collection<Widget<?>> children = container.getChildren();
+            for (Widget w: children) {
                 if (!w.getComponent().isShowing()) {
                     continue;
                 }

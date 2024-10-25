@@ -130,7 +130,7 @@ public class WidgetEncoder {
         @Override
         public PersistenceDelegate getPersistenceDelegate(Class cls) {
             if (cls != null) {
-                PersistenceDelegate delegate = (PersistenceDelegate) delegateTable.get(cls);
+                PersistenceDelegate delegate = delegateTable.get(cls);
                 if (delegate != null) {
                     return delegate;
                 }

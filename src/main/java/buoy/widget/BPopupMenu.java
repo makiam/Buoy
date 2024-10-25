@@ -25,9 +25,9 @@ import javax.swing.*;
  *
  * @author Peter Eastman
  */
-public class BPopupMenu extends WidgetContainer implements MenuWidget {
+public class BPopupMenu extends WidgetContainer<JPopupMenu> implements MenuWidget {
 
-    private final ArrayList<MenuWidget> elements;
+    private final List<MenuWidget> elements = new ArrayList<>();
 
     static {
         WidgetEncoder.setPersistenceDelegate(BPopupMenu.class, new IndexedContainerDelegate(new String[]{"getChild"}));
@@ -38,7 +38,6 @@ public class BPopupMenu extends WidgetContainer implements MenuWidget {
      */
     public BPopupMenu() {
         component = createComponent();
-        elements = new ArrayList<>();
     }
 
     /**
@@ -49,11 +48,6 @@ public class BPopupMenu extends WidgetContainer implements MenuWidget {
         return new JPopupMenu();
     }
 
-    @Override
-    public JPopupMenu getComponent() {
-        return (JPopupMenu) component;
-    }
-
     /**
      * Display the popup menu over another Widget.
      *
@@ -62,7 +56,7 @@ public class BPopupMenu extends WidgetContainer implements MenuWidget {
      * @param y the y coordinate at which to display the popup menu
      */
     public void show(Widget widget, int x, int y) {
-        getComponent().show(widget.getComponent(), x, y);
+        component.show(widget.getComponent(), x, y);
     }
 
     /**
@@ -104,7 +98,7 @@ public class BPopupMenu extends WidgetContainer implements MenuWidget {
             parent.remove((Widget) widget);
         }
         elements.add(index, widget);
-        getComponent().add(((Widget) widget).getComponent(), index);
+        component.add(((Widget) widget).getComponent(), index);
         setAsParent((Widget) widget);
     }
 
@@ -134,8 +128,8 @@ public class BPopupMenu extends WidgetContainer implements MenuWidget {
      * Get a Collection containing all child Widgets of this container.
      */
     @Override
-    public Collection<Widget> getChildren() {
-        ArrayList<Widget> children = new ArrayList<>(elements.size());
+    public Collection<Widget<?>> getChildren() {
+        List<Widget<?>> children = new ArrayList<>(elements.size());
         for (MenuWidget widget : elements) {
             children.add((Widget) widget);
         }
@@ -148,7 +142,7 @@ public class BPopupMenu extends WidgetContainer implements MenuWidget {
     @Override
     public void remove(Widget widget) {
         elements.remove(widget);
-        getComponent().remove(widget.getComponent());
+        component.remove(widget.getComponent());
         removeAsParent(widget);
     }
 
@@ -160,7 +154,7 @@ public class BPopupMenu extends WidgetContainer implements MenuWidget {
         for (MenuWidget element : elements) {
             removeAsParent((Widget) element);
         }
-        getComponent().removeAll();
+        component.removeAll();
         elements.clear();
     }
 

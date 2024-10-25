@@ -19,7 +19,7 @@ import javax.swing.*;
  *
  * @author Peter Eastman
  */
-public class BTextField extends TextWidget {
+public class BTextField extends TextWidget<JTextField> {
 
     private boolean keepSelection;
 
@@ -61,8 +61,8 @@ public class BTextField extends TextWidget {
      * enough to display
      */
     public BTextField(String text, int columns) {
-        component = createComponent();
-        JTextField tf = getComponent();
+
+        JTextField tf = component = createComponent();
         tf.setText(text);
         tf.setColumns(columns);
         tf.addCaretListener(caretListener);
@@ -107,17 +107,12 @@ public class BTextField extends TextWidget {
         return new JTextField();
     }
 
-    @Override
-    public JTextField getComponent() {
-        return (JTextField) component;
-    }
-
     /**
      * Get the number of columns this text field should be wide enough to
      * display.
      */
     public int getColumns() {
-        return getComponent().getColumns();
+        return component.getColumns();
     }
 
     /**
@@ -125,7 +120,7 @@ public class BTextField extends TextWidget {
      * display.
      */
     public void setColumns(int columns) {
-        getComponent().setColumns(columns);
+        component.setColumns(columns);
         invalidateSize();
     }
 }

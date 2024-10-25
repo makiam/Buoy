@@ -11,9 +11,9 @@ import javax.swing.*;
  *
  * @author Peter Eastman
  */
-public class BMenu extends WidgetContainer implements MenuWidget {
+public class BMenu extends WidgetContainer<JMenu> implements MenuWidget {
 
-    private ArrayList<MenuWidget> elements;
+    private final List<MenuWidget> elements = new ArrayList<>();
 
     static {
         WidgetEncoder.setPersistenceDelegate(BMenu.class, new IndexedContainerDelegate(new String[]{"getChild"}));
@@ -33,8 +33,7 @@ public class BMenu extends WidgetContainer implements MenuWidget {
      */
     public BMenu(String title) {
         component = createComponent();
-        elements = new ArrayList<>();
-        getComponent().setText(title);
+        component.setText(title);
     }
 
     /**
@@ -45,23 +44,18 @@ public class BMenu extends WidgetContainer implements MenuWidget {
         return new JMenu();
     }
 
-    @Override
-    public JMenu getComponent() {
-        return (JMenu) component;
-    }
-
     /**
      * Get the title of this menu which appears in the menu bar.
      */
     public String getText() {
-        return getComponent().getText();
+        return component.getText();
     }
 
     /**
      * Set the title of this menu which appears in the menu bar.
      */
     public void setText(String title) {
-        getComponent().setText(title);
+        component.setText(title);
     }
 
     /**
@@ -72,7 +66,7 @@ public class BMenu extends WidgetContainer implements MenuWidget {
      * menu
      */
     public int getMnemonic() {
-        return getComponent().getMnemonic();
+        return component.getMnemonic();
     }
 
     /**
@@ -83,7 +77,7 @@ public class BMenu extends WidgetContainer implements MenuWidget {
      * this menu
      */
     public void setMnemonic(int key) {
-        getComponent().setMnemonic(key);
+        component.setMnemonic(key);
     }
 
     /**
@@ -138,8 +132,8 @@ public class BMenu extends WidgetContainer implements MenuWidget {
      * Get a Collection containing all child Widgets of this container.
      */
     @Override
-    public Collection<Widget> getChildren() {
-        ArrayList<Widget> children = new ArrayList<>(elements.size());
+    public Collection<Widget<?>> getChildren() {
+        List<Widget<?>> children = new ArrayList<>(elements.size());
         for (MenuWidget widget : elements) {
             children.add((Widget) widget);
         }
@@ -152,7 +146,7 @@ public class BMenu extends WidgetContainer implements MenuWidget {
     @Override
     public void remove(Widget widget) {
         elements.remove(widget);
-        getComponent().remove(widget.getComponent());
+        component.remove(widget.getComponent());
         removeAsParent(widget);
     }
 
@@ -164,7 +158,7 @@ public class BMenu extends WidgetContainer implements MenuWidget {
         for (MenuWidget element : elements) {
             removeAsParent((Widget) element);
         }
-        getComponent().removeAll();
+        component.removeAll();
         elements.clear();
     }
 

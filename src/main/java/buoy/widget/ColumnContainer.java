@@ -19,7 +19,7 @@ import javax.swing.JPanel;
  *
  * @author Peter Eastman
  */
-public class ColumnContainer extends WidgetContainer {
+public class ColumnContainer extends WidgetContainer<JPanel> {
 
     private final ArrayList<Widget> child;
     private final ArrayList<LayoutInfo> childLayout;
@@ -37,11 +37,6 @@ public class ColumnContainer extends WidgetContainer {
         child = new ArrayList<>();
         childLayout = new ArrayList<>();
         defaultLayout = new LayoutInfo(LayoutInfo.CENTER, LayoutInfo.NONE, new Insets(2, 2, 2, 2), null);
-    }
-
-    @Override
-    public JPanel getComponent() {
-        return (JPanel) component;
     }
 
     /**
@@ -63,7 +58,7 @@ public class ColumnContainer extends WidgetContainer {
      * Get a Collection containing all child Widgets of this container.
      */
     @Override
-    public Collection<Widget> getChildren() {
+    public Collection<Widget<?>> getChildren() {
         return new ArrayList<>(child);
     }
 
@@ -76,7 +71,7 @@ public class ColumnContainer extends WidgetContainer {
      */
     @Override
     public void layoutChildren() {
-        Dimension size = getComponent().getSize();
+        Dimension size = component.getSize();
         Rectangle cell = new Rectangle(0, 0, size.width, 0);
         for (int i = 0; i < child.size(); i++) {
             Widget w = child.get(i);
@@ -224,7 +219,7 @@ public class ColumnContainer extends WidgetContainer {
      */
     public void remove(int index) {
         Widget w = child.get(index);
-        getComponent().remove(w.getComponent());
+        component.remove(w.getComponent());
         child.remove(index);
         childLayout.remove(index);
         removeAsParent(w);
@@ -236,7 +231,7 @@ public class ColumnContainer extends WidgetContainer {
      */
     @Override
     public void removeAll() {
-        getComponent().removeAll();
+        component.removeAll();
         for (Widget aChild : child) {
             removeAsParent(aChild);
         }

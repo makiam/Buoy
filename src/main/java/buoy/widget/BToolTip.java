@@ -57,7 +57,7 @@ import javax.swing.*;
  *
  * @author Peter Eastman
  */
-public class BToolTip extends Widget {
+public class BToolTip extends Widget<JToolTip> {
 
     private static BToolTip currentTip;
     private static Popup tipWindow;
@@ -87,23 +87,18 @@ public class BToolTip extends Widget {
         return new JToolTip();
     }
 
-    @Override
-    public JToolTip getComponent() {
-        return (JToolTip) component;
-    }
-
     /**
      * Get the text to display on the tool tip.
      */
     public String getText() {
-        return getComponent().getTipText();
+        return component.getTipText();
     }
 
     /**
      * Set the text to display on the tool tip.
      */
     public void setText(String text) {
-        getComponent().setTipText(text);
+        component.setTipText(text);
         invalidateSize();
     }
 

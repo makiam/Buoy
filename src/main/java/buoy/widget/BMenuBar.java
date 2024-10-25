@@ -10,9 +10,9 @@ import javax.swing.*;
  *
  * @author Peter Eastman
  */
-public class BMenuBar extends WidgetContainer {
+public class BMenuBar extends WidgetContainer<JMenuBar> {
 
-    private final ArrayList<BMenu> menus;
+    private final List<BMenu> menus = new ArrayList<>();
 
     static {
         WidgetEncoder.setPersistenceDelegate(BMenuBar.class, new IndexedContainerDelegate(new String[]{"getChild"}));
@@ -23,7 +23,6 @@ public class BMenuBar extends WidgetContainer {
      */
     public BMenuBar() {
         component = createComponent();
-        menus = new ArrayList<>();
     }
 
     /**
@@ -32,11 +31,6 @@ public class BMenuBar extends WidgetContainer {
      */
     protected JMenuBar createComponent() {
         return new JMenuBar();
-    }
-
-    @Override
-    public JMenuBar getComponent() {
-        return (JMenuBar) component;
     }
 
     /**
@@ -59,7 +53,7 @@ public class BMenuBar extends WidgetContainer {
             menu.getParent().remove(menu);
         }
         menus.add(index, menu);
-        getComponent().add(menu.getComponent(), index);
+        component.add(menu.getComponent(), index);
         setAsParent(menu);
         invalidateSize();
     }
@@ -83,7 +77,7 @@ public class BMenuBar extends WidgetContainer {
      * Get a Collection containing all child Widgets of this container.
      */
     @Override
-    public Collection<Widget> getChildren() {
+    public Collection<Widget<?>> getChildren() {
         return new ArrayList<>(menus);
     }
 
@@ -93,7 +87,7 @@ public class BMenuBar extends WidgetContainer {
     @Override
     public void remove(Widget widget) {
         menus.remove(widget);
-        getComponent().remove(widget.getComponent());
+        component.remove(widget.getComponent());
         removeAsParent(widget);
         invalidateSize();
     }
@@ -106,7 +100,7 @@ public class BMenuBar extends WidgetContainer {
         for (BMenu menu : menus) {
             removeAsParent(menu);
         }
-        getComponent().removeAll();
+        component.removeAll();
         menus.clear();
         invalidateSize();
     }

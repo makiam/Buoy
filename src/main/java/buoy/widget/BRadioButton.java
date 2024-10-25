@@ -4,7 +4,6 @@ import buoy.event.*;
 import buoy.xml.*;
 import buoy.xml.delegate.*;
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
 /**
@@ -21,7 +20,7 @@ import javax.swing.*;
  *
  * @author Peter Eastman
  */
-public class BRadioButton extends Widget {
+public class BRadioButton extends Widget<JRadioButton> {
 
     private RadioButtonGroup group;
 
@@ -47,12 +46,7 @@ public class BRadioButton extends Widget {
      */
     public BRadioButton(String text, boolean state, RadioButtonGroup group) {
         component = createComponent(text, state);
-        getComponent().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ev) {
-                dispatchEvent(new ValueChangedEvent(BRadioButton.this));
-            }
-        });
+        getComponent().addActionListener(ev -> dispatchEvent(new ValueChangedEvent(BRadioButton.this)));
         this.group = group;
         group.add(this);
     }
@@ -68,16 +62,11 @@ public class BRadioButton extends Widget {
         return new JRadioButton(text, state);
     }
 
-    @Override
-    public JRadioButton getComponent() {
-        return (JRadioButton) component;
-    }
-
     /**
      * Get the selection state of this radio button.
      */
     public boolean getState() {
-        return getComponent().isSelected();
+        return component.isSelected();
     }
 
     /**
@@ -89,7 +78,7 @@ public class BRadioButton extends Widget {
         if (selected) {
             group.setSelection(this);
         } else {
-            getComponent().setSelected(false);
+            component.setSelected(false);
         }
     }
 
@@ -97,14 +86,14 @@ public class BRadioButton extends Widget {
      * Get the text which appears on this radio button.
      */
     public String getText() {
-        return getComponent().getText();
+        return component.getText();
     }
 
     /**
      * Set the text which appears on this radio button.
      */
     public void setText(String text) {
-        getComponent().setText(text);
+        component.setText(text);
         invalidateSize();
     }
 

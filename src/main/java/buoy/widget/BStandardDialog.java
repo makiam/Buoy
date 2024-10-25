@@ -155,7 +155,7 @@ public class BStandardDialog {
      * @param defaultVal the option which should be shown as the default value
      * @return the index of the button selected by the user
      */
-    public int showOptionDialog(Widget parent, String options[], String defaultVal) {
+    public int showOptionDialog(Widget parent, String[] options, String defaultVal) {
         if (options.length != 2 && options.length != 3) {
             throw new IllegalArgumentException("Number of options must be 2 or 3");
         }
@@ -184,7 +184,7 @@ public class BStandardDialog {
      * @param defaultVal the default value when the dialog first appears
      * @return the value entered by the user, or null if they clicked "Cancel"
      */
-    public String showInputDialog(Widget parent, String options[], String defaultVal) {
+    public String showInputDialog(Widget parent, String[] options, String defaultVal) {
         return (String) JOptionPane.showInputDialog(parent == null ? null : parent.getComponent(), buildMessage(message), title,
                 style.value, null, options, defaultVal);
     }
@@ -195,8 +195,8 @@ public class BStandardDialog {
      */
     private static Object buildMessage(Object message) {
         if (message.getClass().isArray()) {
-            Object msg[] = (Object[]) message;
-            Object a[] = new Object[msg.length];
+            Object[] msg = (Object[]) message;
+            Object[] a = new Object[msg.length];
             for (int i = 0; i < msg.length; i++) {
                 a[i] = buildMessage(msg[i]);
             }

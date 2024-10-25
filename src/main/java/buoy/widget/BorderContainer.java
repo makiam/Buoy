@@ -5,6 +5,7 @@ import buoy.xml.*;
 import buoy.xml.delegate.*;
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 import javax.swing.JPanel;
 
 /**
@@ -20,9 +21,9 @@ import javax.swing.JPanel;
  *
  * @author Peter Eastman
  */
-public class BorderContainer extends WidgetContainer {
+public class BorderContainer extends WidgetContainer<JPanel> {
 
-    private final Widget child[];
+    private final Widget[] child;
     private final LayoutInfo[] childLayout;
     private LayoutInfo defaultLayout;
     private boolean cornersVertical;
@@ -33,7 +34,7 @@ public class BorderContainer extends WidgetContainer {
     public static final Position SOUTH = new Position(3);
     public static final Position WEST = new Position(4);
 
-    private static final Position ALL_POSITIONS[] = new Position[]{CENTER, NORTH, EAST, SOUTH, WEST};
+    private static final Position[] ALL_POSITIONS = new Position[]{CENTER, NORTH, EAST, SOUTH, WEST};
 
     static {
         WidgetEncoder.setPersistenceDelegate(BorderContainer.class, new BorderContainerDelegate());
@@ -48,11 +49,6 @@ public class BorderContainer extends WidgetContainer {
         child = new Widget[5];
         childLayout = new LayoutInfo[5];
         defaultLayout = new LayoutInfo(LayoutInfo.CENTER, LayoutInfo.BOTH, null, null);
-    }
-
-    @Override
-    public JPanel getComponent() {
-        return (JPanel) component;
     }
 
     /**
@@ -72,8 +68,8 @@ public class BorderContainer extends WidgetContainer {
      * Get a Collection containing all child Widgets of this container.
      */
     @Override
-    public Collection<Widget> getChildren() {
-        ArrayList<Widget> ls = new ArrayList<>(5);
+    public Collection<Widget<?>> getChildren() {
+        List<Widget<?>> ls = new ArrayList<>(5);
         for (Widget child1 : child) {
             if(child1 == null) continue;
             ls.add(child1);
@@ -116,9 +112,9 @@ public class BorderContainer extends WidgetContainer {
      */
     @Override
     public void layoutChildren() {
-        Dimension size = getComponent().getSize();
-        Rectangle bounds[] = new Rectangle[5];
-        Dimension prefSize[] = new Dimension[5];
+        Dimension size = component.getSize();
+        Rectangle[] bounds = new Rectangle[5];
+        Dimension[] prefSize = new Dimension[5];
         for (int i = 0; i < child.length; i++) {
             bounds[i] = new Rectangle();
             if (child[i] == null || i == CENTER.value) {
@@ -186,7 +182,7 @@ public class BorderContainer extends WidgetContainer {
         }
         child[where.value] = widget;
         childLayout[where.value] = layout;
-        getComponent().add(widget.getComponent());
+        component.add(widget.getComponent());
         setAsParent(widget);
         invalidateSize();
     }

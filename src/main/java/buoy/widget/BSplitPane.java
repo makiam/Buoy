@@ -5,8 +5,9 @@ import buoy.internal.*;
 import buoy.xml.*;
 import buoy.xml.delegate.*;
 import java.awt.*;
-import java.beans.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import javax.swing.*;
 
 /**
@@ -22,9 +23,9 @@ import javax.swing.*;
  *
  * @author Peter Eastman
  */
-public class BSplitPane extends WidgetContainer {
+public class BSplitPane extends WidgetContainer<JSplitPane> {
 
-    private Widget child[];
+    private final Widget[] child;
     private int suppressEvents;
 
     public static final Orientation HORIZONTAL = new Orientation(JSplitPane.HORIZONTAL_SPLIT);
@@ -61,18 +62,10 @@ public class BSplitPane extends WidgetContainer {
      */
     public BSplitPane(Orientation orient, Widget child1, Widget child2) {
         component = createComponent();
-        getComponent().addPropertyChangeListener(JSplitPane.DIVIDER_LOCATION_PROPERTY, new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent ev) {
-                layoutChildren();
-                if (suppressEvents == 0) {
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            dispatchEvent(new ValueChangedEvent(BSplitPane.this));
-                        }
-                    });
-                }
+        component.addPropertyChangeListener(JSplitPane.DIVIDER_LOCATION_PROPERTY, ev -> {
+            layoutChildren();
+            if (suppressEvents == 0) {
+                SwingUtilities.invokeLater(() -> dispatchEvent(new ValueChangedEvent(BSplitPane.this)));
             }
         });
         child = new Widget[2];
@@ -93,16 +86,11 @@ public class BSplitPane extends WidgetContainer {
         return new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, false);
     }
 
-    @Override
-    public JSplitPane getComponent() {
-        return (JSplitPane) component;
-    }
-
     /**
      * Get the location of the divider (in pixels).
      */
     public int getDividerLocation() {
-        return getComponent().getDividerLocation();
+        return component.getDividerLocation();
     }
 
     /**
@@ -111,7 +99,7 @@ public class BSplitPane extends WidgetContainer {
     public void setDividerLocation(int location) {
         try {
             suppressEvents++;
-            getComponent().setDividerLocation(location);
+            component.setDividerLocation(location);
         } finally {
             suppressEvents--;
         }
@@ -125,7 +113,7 @@ public class BSplitPane extends WidgetContainer {
     public void setDividerLocation(double location) {
         try {
             suppressEvents++;
-            getComponent().setDividerLocation(location);
+            component.setDividerLocation(location);
         } finally {
             suppressEvents--;
         }
@@ -138,7 +126,7 @@ public class BSplitPane extends WidgetContainer {
     public void resetToPreferredSizes() {
         try {
             suppressEvents++;
-            getComponent().resetToPreferredSizes();
+            component.resetToPreferredSizes();
         } finally {
             suppressEvents--;
         }
@@ -148,14 +136,14 @@ public class BSplitPane extends WidgetContainer {
      * Get which way the container is split, HORIZONTAL or VERTICAL.
      */
     public Orientation getOrientation() {
-        return (getComponent().getOrientation() == JSplitPane.HORIZONTAL_SPLIT ? HORIZONTAL : VERTICAL);
+        return component.getOrientation() == JSplitPane.HORIZONTAL_SPLIT ? HORIZONTAL : VERTICAL;
     }
 
     /**
      * Set which way the container is split, HORIZONTAL or VERTICAL.
      */
     public void setOrientation(Orientation orient) {
-        getComponent().setOrientation(orient.value);
+        component.setOrientation(orient.value);
     }
 
     /**
@@ -163,7 +151,7 @@ public class BSplitPane extends WidgetContainer {
      * divider bar is dragged, or only when the mouse is released.
      */
     public boolean isContinuousLayout() {
-        return getComponent().isContinuousLayout();
+        return component.isContinuousLayout();
     }
 
     /**
@@ -171,7 +159,7 @@ public class BSplitPane extends WidgetContainer {
      * divider bar is dragged, or only when the mouse is released.
      */
     public void setContinuousLayout(boolean continuous) {
-        getComponent().setContinuousLayout(continuous);
+        component.setContinuousLayout(continuous);
     }
 
     /**
@@ -179,7 +167,7 @@ public class BSplitPane extends WidgetContainer {
      * split with a single click.
      */
     public boolean isOneTouchExpandable() {
-        return getComponent().isOneTouchExpandable();
+        return component.isOneTouchExpandable();
     }
 
     /**
@@ -187,7 +175,7 @@ public class BSplitPane extends WidgetContainer {
      * split with a single click.
      */
     public void setOneTouchExpandable(boolean expandable) {
-        getComponent().setOneTouchExpandable(expandable);
+        component.setOneTouchExpandable(expandable);
     }
 
     /**
@@ -197,7 +185,7 @@ public class BSplitPane extends WidgetContainer {
      * extra space proportionally between the two.
      */
     public double getResizeWeight() {
-        return getComponent().getResizeWeight();
+        return component.getResizeWeight();
     }
 
     /**
@@ -207,7 +195,7 @@ public class BSplitPane extends WidgetContainer {
      * extra space proportionally between the two.
      */
     public void setResizeWeight(double weight) {
-        getComponent().setResizeWeight(weight);
+        component.setResizeWeight(weight);
     }
 
     /**
@@ -228,8 +216,8 @@ public class BSplitPane extends WidgetContainer {
      * Get a Collection containing all child Widgets of this container.
      */
     @Override
-    public Collection<Widget> getChildren() {
-        ArrayList<Widget> ls = new ArrayList<>(2);
+    public Collection<Widget<?>> getChildren() {
+        List<Widget<?>> ls = new ArrayList<>(2);
         for (Widget child1 : child) {
             if(child1 == null) continue;
             ls.add(child1);
@@ -255,7 +243,7 @@ public class BSplitPane extends WidgetContainer {
      */
     @Override
     public void layoutChildren() {
-        getComponent().validate();
+        component.validate();
         for (Widget child1 : child) {
             if (child1 instanceof WidgetContainer) {
                 ((WidgetContainer) child1).layoutChildren();
@@ -279,9 +267,9 @@ public class BSplitPane extends WidgetContainer {
         }
         child[index] = widget;
         if (index == 0) {
-            getComponent().setLeftComponent(new SingleWidgetPanel(widget));
+            component.setLeftComponent(new SingleWidgetPanel(widget));
         } else {
-            getComponent().setRightComponent(new SingleWidgetPanel(widget));
+            component.setRightComponent(new SingleWidgetPanel(widget));
         }
         setAsParent(widget);
         invalidateSize();
@@ -311,7 +299,7 @@ public class BSplitPane extends WidgetContainer {
         if (child[index] == null) {
             return;
         }
-        getComponent().remove(child[index].getComponent().getParent());
+        component.remove(child[index].getComponent().getParent());
         removeAsParent(child[index]);
         child[index] = null;
         invalidateSize();
@@ -322,7 +310,7 @@ public class BSplitPane extends WidgetContainer {
      */
     @Override
     public void removeAll() {
-        getComponent().removeAll();
+        component.removeAll();
     }
 
     /**
@@ -334,7 +322,7 @@ public class BSplitPane extends WidgetContainer {
     public Dimension getMinimumSize() {
         Dimension dim0 = (child[0] == null ? new Dimension() : child[0].getMinimumSize());
         Dimension dim1 = (child[1] == null ? new Dimension() : child[1].getMinimumSize());
-        int dividerWidth = getComponent().getDividerSize();
+        int dividerWidth = component.getDividerSize();
         if (getOrientation() == HORIZONTAL) {
             return new Dimension(dim0.width + dim1.width + dividerWidth, Math.max(dim0.height, dim1.height));
         } else {
@@ -351,7 +339,7 @@ public class BSplitPane extends WidgetContainer {
     public Dimension getPreferredSize() {
         Dimension dim0 = (child[0] == null ? new Dimension() : child[0].getPreferredSize());
         Dimension dim1 = (child[1] == null ? new Dimension() : child[1].getPreferredSize());
-        int dividerWidth = getComponent().getDividerSize();
+        int dividerWidth = component.getDividerSize();
         if (getOrientation() == HORIZONTAL) {
             return new Dimension(dim0.width + dim1.width + dividerWidth, Math.max(dim0.height, dim1.height));
         } else {

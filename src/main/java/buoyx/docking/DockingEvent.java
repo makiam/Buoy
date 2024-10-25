@@ -13,7 +13,7 @@ public class DockingEvent {
 
     private final DockingContainer source;
     private DockingContainer target;
-    private final DockableWidget widget[];
+    private final DockableWidget[] widget;
 
     /**
      * Create a new DockingEvent.
@@ -24,7 +24,7 @@ public class DockingEvent {
      * dragged
      * @param widgets the list of DockableWidgets which were moved
      */
-    public DockingEvent(DockingContainer sourceContainer, DockingContainer targetContainer, DockableWidget widgets[]) {
+    public DockingEvent(DockingContainer sourceContainer, DockingContainer targetContainer, DockableWidget[] widgets) {
         source = sourceContainer;
         target = targetContainer;
         widget = widgets;

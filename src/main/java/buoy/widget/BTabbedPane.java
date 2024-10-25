@@ -7,7 +7,6 @@ import buoy.xml.delegate.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
-import javax.swing.event.*;
 
 /**
  * BTabbedPane is a WidgetContainer which arranges its child Widgets in a row.
@@ -20,9 +19,9 @@ import javax.swing.event.*;
  *
  * @author Peter Eastman
  */
-public class BTabbedPane extends WidgetContainer {
+public class BTabbedPane extends WidgetContainer<JTabbedPane> {
 
-    private ArrayList<Widget> child;
+    private final List<Widget<?>> child;
     private int suppressEvents;
 
     public static final TabPosition TOP = new TabPosition(SwingConstants.TOP);
@@ -49,23 +48,15 @@ public class BTabbedPane extends WidgetContainer {
      */
     public BTabbedPane(TabPosition pos) {
         component = createComponent(pos);
-        getComponent().addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent ev) {
-                if (suppressEvents == 0) {
-                    dispatchEvent(new SelectionChangedEvent(BTabbedPane.this));
-                }
+        component.addChangeListener(ev -> {
+            if (suppressEvents == 0) {
+                dispatchEvent(new SelectionChangedEvent(BTabbedPane.this));
             }
         });
-        getComponent().addComponentListener(new ComponentAdapter() {
+        component.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent ev) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        layoutChildren();
-                    }
-                });
+                SwingUtilities.invokeLater(() -> layoutChildren());
             }
         });
         child = new ArrayList<>();
@@ -80,11 +71,6 @@ public class BTabbedPane extends WidgetContainer {
      */
     protected JTabbedPane createComponent(TabPosition pos) {
         return new JTabbedPane(pos.value);
-    }
-
-    @Override
-    public JTabbedPane getComponent() {
-        return (JTabbedPane) component;
     }
 
     /**
@@ -106,7 +92,7 @@ public class BTabbedPane extends WidgetContainer {
      * Get a Collection containing all child Widgets of this container.
      */
     @Override
-    public Collection<Widget> getChildren() {
+    public Collection<Widget<?>> getChildren() {
         return new ArrayList<>(child);
     }
 
@@ -119,7 +105,7 @@ public class BTabbedPane extends WidgetContainer {
      */
     @Override
     public void layoutChildren() {
-        getComponent().validate();
+        component.validate();
         for (Widget w : child) {
             if (w instanceof WidgetContainer) {
                 ((WidgetContainer) w).layoutChildren();
@@ -161,7 +147,7 @@ public class BTabbedPane extends WidgetContainer {
             widget.getParent().remove(widget);
         }
         child.add(index, widget);
-        getComponent().insertTab(tabName, image, new SingleWidgetPanel(widget), null, index);
+        component.insertTab(tabName, image, new SingleWidgetPanel(widget), null, index);
         setAsParent(widget);
         invalidateSize();
     }
@@ -186,7 +172,7 @@ public class BTabbedPane extends WidgetContainer {
      */
     public void remove(int index) {
         Widget w = child.get(index);
-        getComponent().remove(index);
+        component.remove(index);
         child.remove(index);
         removeAsParent(w);
         invalidateSize();
@@ -197,7 +183,7 @@ public class BTabbedPane extends WidgetContainer {
      */
     @Override
     public void removeAll() {
-        getComponent().removeAll();
+        component.removeAll();
         for (Widget aChild : child) {
             removeAsParent(aChild);
         }
@@ -219,7 +205,7 @@ public class BTabbedPane extends WidgetContainer {
      * Get the position of the tabs (TOP, LEFT, BOTTOM, or RIGHT).
      */
     public TabPosition getTabPosition() {
-        switch (getComponent().getTabPlacement()) {
+        switch (component.getTabPlacement()) {
             case SwingConstants.TOP:
                 return TOP;
             case SwingConstants.LEFT:
@@ -235,7 +221,7 @@ public class BTabbedPane extends WidgetContainer {
      * Set the position of the tabs (TOP, LEFT, BOTTOM, or RIGHT).
      */
     public void setTabPosition(TabPosition pos) {
-        getComponent().setTabPlacement(pos.value);
+        component.setTabPlacement(pos.value);
     }
 
     /**
@@ -244,7 +230,7 @@ public class BTabbedPane extends WidgetContainer {
      * @param index the index of the tab
      */
     public String getTabName(int index) {
-        return getComponent().getTitleAt(index);
+        return component.getTitleAt(index);
     }
 
     /**
@@ -254,7 +240,7 @@ public class BTabbedPane extends WidgetContainer {
      * @param name the name to display
      */
     public void setTabName(int index, String name) {
-        getComponent().setTitleAt(index, name);
+        component.setTitleAt(index, name);
     }
 
     /**
@@ -263,7 +249,7 @@ public class BTabbedPane extends WidgetContainer {
      * @param index the index of the tab
      */
     public Icon getTabImage(int index) {
-        return getComponent().getIconAt(index);
+        return component.getIconAt(index);
     }
 
     /**
@@ -273,14 +259,14 @@ public class BTabbedPane extends WidgetContainer {
      * @param image the image to display
      */
     public void setTabImage(int index, Icon image) {
-        getComponent().setIconAt(index, image);
+        component.setIconAt(index, image);
     }
 
     /**
      * Get the index of the tab which is currently selected.
      */
     public int getSelectedTab() {
-        return getComponent().getSelectedIndex();
+        return component.getSelectedIndex();
     }
 
     /**
@@ -291,7 +277,7 @@ public class BTabbedPane extends WidgetContainer {
     public void setSelectedTab(int index) {
         try {
             suppressEvents++;
-            getComponent().setSelectedIndex(index);
+            component.setSelectedIndex(index);
         } finally {
             suppressEvents--;
         }

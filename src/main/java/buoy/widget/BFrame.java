@@ -26,20 +26,20 @@ import javax.swing.*;
  *
  * @author Peter Eastman
  */
-public class BFrame extends WindowWidget {
+public class BFrame extends WindowWidget<JFrame> {
 
     private BMenuBar menubar;
     private ImageIcon icon;
-    private static WeakHashMap<Frame, WeakReference<BFrame>> frameMap = new WeakHashMap<Frame, WeakReference<BFrame>>();
+    private static WeakHashMap<Frame, WeakReference<BFrame>> frameMap = new WeakHashMap<>();
 
     /**
      * Create a new BFrame.
      */
     public BFrame() {
         component = createComponent();
-        getComponent().getContentPane().setLayout(null);
-        getComponent().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        frameMap.put(getComponent(), new WeakReference<>(this));
+        component.getContentPane().setLayout(null);
+        component.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        frameMap.put(component, new WeakReference<>(this));
     }
 
     /**
@@ -47,7 +47,7 @@ public class BFrame extends WindowWidget {
      */
     public BFrame(String title) {
         this();
-        getComponent().setTitle(title);
+        component.setTitle(title);
     }
 
     /**
@@ -56,11 +56,6 @@ public class BFrame extends WindowWidget {
      */
     protected JFrame createComponent() {
         return new BFrameComponent();
-    }
-
-    @Override
-    public JFrame getComponent() {
-        return (JFrame) component;
     }
 
     /**
@@ -75,8 +70,8 @@ public class BFrame extends WindowWidget {
      * Get a Collection containing all child Widgets of this container.
      */
     @Override
-    public Collection<Widget> getChildren() {
-        ArrayList<Widget> ls = new ArrayList<>(3);
+    public Collection<Widget<?>> getChildren() {
+        List<Widget<?>> ls = new ArrayList<>(3);
         if (menubar != null) {
             ls.add(menubar);
         }
@@ -107,7 +102,7 @@ public class BFrame extends WindowWidget {
             menus.getParent().remove(menus);
         }
         menubar = menus;
-        getComponent().setJMenuBar(menubar.getComponent());
+        component.setJMenuBar(menubar.getComponent());
         setAsParent(menubar);
     }
 
@@ -117,11 +112,11 @@ public class BFrame extends WindowWidget {
     @Override
     public void remove(Widget widget) {
         if (menubar == widget) {
-            getComponent().setJMenuBar(null);
+            component.setJMenuBar(null);
             removeAsParent(menubar);
             menubar = null;
         } else if (content == widget) {
-            getComponent().getContentPane().remove(widget.getComponent());
+            component.getContentPane().remove(widget.getComponent());
             removeAsParent(content);
             content = null;
         }
@@ -144,28 +139,28 @@ public class BFrame extends WindowWidget {
      * Get the title of the window.
      */
     public String getTitle() {
-        return getComponent().getTitle();
+        return component.getTitle();
     }
 
     /**
      * Set the title of the window.
      */
     public void setTitle(String title) {
-        getComponent().setTitle(title);
+        component.setTitle(title);
     }
 
     /**
      * Determine whether this window may be resized by the user.
      */
     public boolean isResizable() {
-        return getComponent().isResizable();
+        return component.isResizable();
     }
 
     /**
      * Set whether this window may be resized by the user.
      */
     public void setResizable(boolean resizable) {
-        getComponent().setResizable(resizable);
+        component.setResizable(resizable);
     }
 
     /**
@@ -175,7 +170,7 @@ public class BFrame extends WindowWidget {
      * on the screen.
      */
     public boolean isIconified() {
-        return ((getComponent().getExtendedState() & Frame.ICONIFIED) != 0);
+        return (component.getExtendedState() & Frame.ICONIFIED) != 0;
     }
 
     /**
@@ -185,7 +180,7 @@ public class BFrame extends WindowWidget {
      * screen.
      */
     public void setIconified(boolean iconified) {
-        JFrame jf = getComponent();
+        JFrame jf = component;
         int state = jf.getExtendedState();
         if (iconified) {
             jf.setExtendedState(state | Frame.ICONIFIED);
@@ -218,7 +213,7 @@ public class BFrame extends WindowWidget {
      */
     public void setIcon(ImageIcon icon) {
         this.icon = icon;
-        getComponent().setIconImage(icon.getImage());
+        component.setIconImage(icon.getImage());
     }
 
     /**
@@ -227,7 +222,7 @@ public class BFrame extends WindowWidget {
      * window to expand to fill the entire screen.
      */
     public boolean isMaximized() {
-        return ((getComponent().getExtendedState() & Frame.MAXIMIZED_BOTH) != 0);
+        return (component.getExtendedState() & Frame.MAXIMIZED_BOTH) != 0;
     }
 
     /**
@@ -236,7 +231,7 @@ public class BFrame extends WindowWidget {
      * to fill the entire screen.
      */
     public void setMaximized(boolean maximized) {
-        JFrame jf = getComponent();
+        JFrame jf = component;
         int state = jf.getExtendedState();
         if (maximized) {
             jf.setExtendedState(state | Frame.MAXIMIZED_BOTH);
@@ -251,7 +246,7 @@ public class BFrame extends WindowWidget {
      */
     @Override
     protected JRootPane getRootPane() {
-        return getComponent().getRootPane();
+        return component.getRootPane();
     }
 
     /**
@@ -290,12 +285,7 @@ public class BFrame extends WindowWidget {
             layoutChildren();
             if (!BFrame.this.getComponent().getSize().equals(lastSize)) {
                 lastSize = BFrame.this.getComponent().getSize();
-                EventQueue.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        BFrame.this.dispatchEvent(new WindowResizedEvent(BFrame.this));
-                    }
-                });
+                EventQueue.invokeLater(() -> BFrame.this.dispatchEvent(new WindowResizedEvent(BFrame.this)));
             }
         }
     }

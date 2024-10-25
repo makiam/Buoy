@@ -51,7 +51,7 @@ import javax.swing.text.html.*;
  *
  * @author Peter Eastman
  */
-public class BDocumentViewer extends Widget {
+public class BDocumentViewer extends Widget<JEditorPane> {
 
     /**
      * Create an empty BDocumentViewer.
@@ -59,12 +59,12 @@ public class BDocumentViewer extends Widget {
 
     public BDocumentViewer() {
         component = createComponent();
-        JEditorPane ep = getComponent();
+        JEditorPane ep =component;
         ep.setEditable(false);
         ep.addPropertyChangeListener("page", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent ev) {
-                if (getComponent().isDisplayable()) {
+                if (component.isDisplayable()) {
                     updateScrollPane();
                 }
                 dispatchEvent(new ValueChangedEvent(BDocumentViewer.this));
@@ -73,7 +73,7 @@ public class BDocumentViewer extends Widget {
         ep.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent ev) {
-                if (getComponent().isDisplayable()) {
+                if (component.isDisplayable()) {
                     updateScrollPane();
                 }
             }
@@ -91,7 +91,7 @@ public class BDocumentViewer extends Widget {
     /**
      * Create a new BDocumentViewer displaying the document referenced by a URL.
      * Depending on the location and type of document, it may be loaded either
-     * synchronously or ansynchronously. For this reason, no assumptions should
+     * synchronously or asynchronously. For this reason, no assumptions should
      * be made about whether the document has been loaded when this method
      * returns. This method may throw an IOException if an error occurs while
      * loading the document, but the lack of an exception cannot be taken to
@@ -113,23 +113,18 @@ public class BDocumentViewer extends Widget {
         return new JEditorPane();
     }
 
-    @Override
-    public JEditorPane getComponent() {
-        return (JEditorPane) component;
-    }
-
     /**
      * Get the URL for the document currently being displayed. If the document
      * was not specified by a URL, this returns null.
      */
     public URL getDocument() {
-        return getComponent().getPage();
+        return component.getPage();
     }
 
     /**
      * Set the document to display in this BDocumentViewer. Depending on the
      * location and type of document, it may be loaded either synchronously or
-     * ansynchronously. For this reason, no assumptions should be made about
+     * asynchronously. For this reason, no assumptions should be made about
      * whether the document has been loaded when this method returns. This
      * method may throw an IOException if an error occurs while loading the
      * document, but the lack of an exception cannot be taken to mean that the
@@ -138,7 +133,7 @@ public class BDocumentViewer extends Widget {
      * @param document a URL pointing to the document to display
      */
     public void setDocument(URL document) throws IOException {
-        getComponent().setPage(document);
+        component.setPage(document);
     }
 
     /**
@@ -151,15 +146,15 @@ public class BDocumentViewer extends Widget {
      * @param type the MIME type of the document
      */
     public void setDocument(String text, String type) {
-        getComponent().setContentType(type);
-        getComponent().setText(text);
+        component.setContentType(type);
+        component.setText(text);
     }
 
     /**
      * Get the MIME type of the document currently being displayed.
      */
     public String getContentType() {
-        return getComponent().getContentType();
+        return component.getContentType();
     }
 
     /**

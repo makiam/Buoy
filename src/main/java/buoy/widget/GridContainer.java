@@ -4,7 +4,9 @@ import buoy.internal.*;
 import buoy.xml.*;
 import buoy.xml.delegate.*;
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import javax.swing.JPanel;
 
 /**
@@ -20,10 +22,11 @@ import javax.swing.JPanel;
  *
  * @author Peter Eastman
  */
-public class GridContainer extends WidgetContainer {
+public class GridContainer extends WidgetContainer<JPanel> {
 
-    private Widget child[][];
-    private LayoutInfo defaultLayout, childLayout[][];
+    private Widget[][] child;
+    private LayoutInfo defaultLayout;
+    private LayoutInfo[][] childLayout;
     private int numRows, numCols;
 
     static {
@@ -45,11 +48,6 @@ public class GridContainer extends WidgetContainer {
         numCols = cols;
     }
 
-    @Override
-    public JPanel getComponent() {
-        return (JPanel) component;
-    }
-
     /**
      * Get the number of children in this container.
      */
@@ -69,8 +67,8 @@ public class GridContainer extends WidgetContainer {
      * Get a Collection containing all child Widgets of this container.
      */
     @Override
-    public Collection<Widget> getChildren() {
-        ArrayList<Widget> ls = new ArrayList<>(numCols * numRows);
+    public Collection<Widget<?>> getChildren() {
+        List<Widget<?>> ls = new ArrayList<>(numCols * numRows);
         for (Widget[] child1 : child) {
             for (Widget item : child1) {
                 if(item == null) continue;
@@ -103,8 +101,8 @@ public class GridContainer extends WidgetContainer {
         // Work out the positions of every row and column.
 
         Dimension dim = getComponent().getSize();
-        int cellXBound[] = new int[numCols + 1];
-        int cellYBound[] = new int[numRows + 1];
+        int[] cellXBound = new int[numCols + 1];
+        int[] cellYBound = new int[numRows + 1];
         double xsize = dim.width / numCols;
         double ysize = dim.height / numRows;
         for (int i = 1; i < cellXBound.length; i++) {
@@ -273,8 +271,8 @@ public class GridContainer extends WidgetContainer {
                 }
             }
         }
-        Widget newchild[][] = new Widget[numCols][rows];
-        LayoutInfo newlayout[][] = new LayoutInfo[numCols][rows];
+        Widget[][] newchild = new Widget[numCols][rows];
+        LayoutInfo[][] newlayout = new LayoutInfo[numCols][rows];
         int copy = Math.min(rows, numRows);
         for (int i = 0; i < child.length; i++) {
             for (int j = 0; j < copy; j++) {
@@ -309,8 +307,8 @@ public class GridContainer extends WidgetContainer {
                 }
             }
         }
-        Widget newchild[][] = new Widget[cols][numRows];
-        LayoutInfo newlayout[][] = new LayoutInfo[cols][numRows];
+        Widget[][] newchild = new Widget[cols][numRows];
+        LayoutInfo[][] newlayout = new LayoutInfo[cols][numRows];
         int copy = Math.min(cols, numCols);
         for (int i = 0; i < copy; i++) {
             newchild[i] = child[i];

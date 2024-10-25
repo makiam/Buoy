@@ -1,6 +1,7 @@
 package buoy.widget;
 
 import java.awt.*;
+import java.util.Objects;
 import javax.swing.*;
 
 /**
@@ -9,18 +10,18 @@ import javax.swing.*;
  *
  * @author Peter Eastman
  */
-public abstract class WindowWidget extends WidgetContainer {
+public abstract class WindowWidget<T extends Window> extends WidgetContainer<T> {
 
     protected Widget content;
     protected Dimension lastSize;
 
     private Boolean mockVisible;
     private BButton defaultButton;
-    private static final ThreadLocal encodingInProgress = new ThreadLocal();
+    private static final ThreadLocal<Boolean> encodingInProgress = new ThreadLocal<>();
 
     @Override
-    public Window getComponent() {
-        return (Window) component;
+    public T getComponent() {
+        return component;
     }
 
     /**
@@ -29,10 +30,10 @@ public abstract class WindowWidget extends WidgetContainer {
      */
     public void setBounds(Rectangle bounds) {
         if (encodingInProgress.get() != Boolean.TRUE && !getComponent().isDisplayable()) {
-            getComponent().addNotify();
+            component.addNotify();
         }
         lastSize = new Dimension(bounds.width, bounds.height);
-        getComponent().setBounds(bounds);
+        component.setBounds(bounds);
     }
 
     /**
@@ -54,7 +55,7 @@ public abstract class WindowWidget extends WidgetContainer {
             if (content.getParent() != null) {
                 content.getParent().remove(content);
             }
-            JComponent contentPane = (JComponent) ((RootPaneContainer) getComponent()).getContentPane();
+            JComponent contentPane = (JComponent) ((RootPaneContainer) component).getContentPane();
             contentPane.add(content.getComponent());
             setAsParent(content);
         }
@@ -65,10 +66,10 @@ public abstract class WindowWidget extends WidgetContainer {
      * its contents, then re-layout all of the window contents.
      */
     public void pack() {
-        if (!getComponent().isDisplayable()) {
-            getComponent().addNotify();
+        if (!component.isDisplayable()) {
+            component.addNotify();
         }
-        JComponent contentPane = (JComponent) ((RootPaneContainer) getComponent()).getContentPane();
+        JComponent contentPane = (JComponent) ((RootPaneContainer) component).getContentPane();
         if (content == null) {
             contentPane.setPreferredSize(new Dimension(0, 0));
         } else {
@@ -88,15 +89,16 @@ public abstract class WindowWidget extends WidgetContainer {
      */
     @Override
     public void layoutChildren() {
-        if (content != null) {
-            Container contentPane = ((RootPaneContainer) getComponent()).getContentPane();
-            contentPane.validate();
-            Dimension max = content.getMaximumSize();
-            Dimension total = contentPane.getSize();
-            content.getComponent().setBounds(0, 0, Math.min(max.width, total.width), Math.min(max.height, total.height));
-            if (content instanceof WidgetContainer) {
-                ((WidgetContainer) content).layoutChildren();
-            }
+        if (content == null) {
+            return;
+        }
+        Container contentPane = ((RootPaneContainer) component).getContentPane();
+        contentPane.validate();
+        Dimension max = content.getMaximumSize();
+        Dimension total = contentPane.getSize();
+        content.getComponent().setBounds(0, 0, Math.min(max.width, total.width), Math.min(max.height, total.height));
+        if (content instanceof WidgetContainer) {
+            ((WidgetContainer) content).layoutChildren();
         }
     }
 
@@ -116,7 +118,7 @@ public abstract class WindowWidget extends WidgetContainer {
      * may not affect which Widget has focus.
      */
     public void toFront() {
-        getComponent().toFront();
+        component.toFront();
     }
 
     /**
@@ -128,7 +130,7 @@ public abstract class WindowWidget extends WidgetContainer {
      * may not affect which Widget has focus.
      */
     public void toBack() {
-        getComponent().toBack();
+        component.toBack();
     }
 
     /**
@@ -136,12 +138,8 @@ public abstract class WindowWidget extends WidgetContainer {
      */
     @Override
     public boolean isVisible() {
-        if (mockVisible != null) {
-            // This window was created internally in the process of encoding a window as XML.
-
-            return mockVisible;
-        }
-        return getComponent().isVisible();
+        // This window was created internally in the process of encoding a window as XML.
+        return Objects.requireNonNullElseGet(mockVisible, () -> component.isVisible());
     }
 
     /**

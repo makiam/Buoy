@@ -4,7 +4,6 @@ import buoy.event.*;
 import java.text.*;
 import java.util.*;
 import javax.swing.*;
-import javax.swing.event.*;
 
 /**
  * A BSpinner is a Widget that allows the user to select a value from an ordered
@@ -26,7 +25,7 @@ import javax.swing.event.*;
  *
  * @author Peter Eastman
  */
-public class BSpinner extends Widget {
+public class BSpinner extends Widget<JSpinner> {
 
     private int suppressEvents;
 
@@ -36,12 +35,9 @@ public class BSpinner extends Widget {
      */
     public BSpinner() {
         component = createComponent();
-        getComponent().addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent ev) {
-                if (suppressEvents == 0) {
-                    dispatchEvent(new ValueChangedEvent(BSpinner.this));
-                }
+        component.addChangeListener(ev -> {
+            if (suppressEvents == 0) {
+                dispatchEvent(new ValueChangedEvent(BSpinner.this));
             }
         });
     }
@@ -53,7 +49,7 @@ public class BSpinner extends Widget {
      */
     public BSpinner(SpinnerModel model) {
         this();
-        getComponent().setModel(model);
+        component.setModel(model);
     }
 
     /**
@@ -100,7 +96,7 @@ public class BSpinner extends Widget {
      *
      * @param values the list of allowed values
      */
-    public BSpinner(Object values[]) {
+    public BSpinner(Object[] values) {
         this(new SpinnerListModel(values));
     }
 
@@ -112,16 +108,11 @@ public class BSpinner extends Widget {
         return new JSpinner();
     }
 
-    @Override
-    public JSpinner getComponent() {
-        return (JSpinner) component;
-    }
-
     /**
      * Get the current value of the spinner.
      */
     public Object getValue() {
-        return getComponent().getValue();
+        return component.getValue();
     }
 
     /**
@@ -130,7 +121,7 @@ public class BSpinner extends Widget {
     public void setValue(Object value) {
         try {
             suppressEvents++;
-            getComponent().setValue(value);
+            component.setValue(value);
         } finally {
             suppressEvents--;
         }
@@ -145,20 +136,20 @@ public class BSpinner extends Widget {
      * Note: calling commitEdit() will <i>not</i> generate a ValueChangedEvent.
      */
     public void commitEdit() throws ParseException {
-        getComponent().commitEdit();
+        component.commitEdit();
     }
 
     /**
      * Get the model for this spinner.
      */
     public SpinnerModel getModel() {
-        return getComponent().getModel();
+        return component.getModel();
     }
 
     /**
      * Set the model for this spinner.
      */
     public void setModel(SpinnerModel model) {
-        getComponent().setModel(model);
+        component.setModel(model);
     }
 }

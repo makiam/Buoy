@@ -34,9 +34,9 @@ import java.lang.reflect.*;
  *
  * @author Peter Eastman
  */
-public abstract class Widget extends EventSource {
+public abstract class Widget<T extends Component> extends EventSource {
 
-    protected Component component;
+    protected T component;
     protected EventLinkAdapter eventAdapter;
     private WidgetContainer parent;
     private boolean wantsToolTipEvents;
@@ -50,7 +50,7 @@ public abstract class Widget extends EventSource {
     /**
      * Get the java.awt.Component corresponding to this Widget.
      */
-    public Component getComponent() {
+    public T getComponent() {
         return component;
     }
 
