@@ -9,7 +9,7 @@ import javax.swing.*;
  *
  * @author Peter Eastman
  */
-public abstract class WindowWidget extends WidgetContainer {
+public abstract class WindowWidget<T extends Window> extends WidgetContainer<T> {
 
     protected Widget content;
     protected Dimension lastSize;
@@ -19,8 +19,8 @@ public abstract class WindowWidget extends WidgetContainer {
     private static final ThreadLocal encodingInProgress = new ThreadLocal();
 
     @Override
-    public Window getComponent() {
-        return (Window) component;
+    public T getComponent() {
+        return component;
     }
 
     /**
@@ -29,10 +29,10 @@ public abstract class WindowWidget extends WidgetContainer {
      */
     public void setBounds(Rectangle bounds) {
         if (encodingInProgress.get() != Boolean.TRUE && !getComponent().isDisplayable()) {
-            getComponent().addNotify();
+            component.addNotify();
         }
         lastSize = new Dimension(bounds.width, bounds.height);
-        getComponent().setBounds(bounds);
+        component.setBounds(bounds);
     }
 
     /**
@@ -54,7 +54,7 @@ public abstract class WindowWidget extends WidgetContainer {
             if (content.getParent() != null) {
                 content.getParent().remove(content);
             }
-            JComponent contentPane = (JComponent) ((RootPaneContainer) getComponent()).getContentPane();
+            JComponent contentPane = (JComponent) ((RootPaneContainer) component).getContentPane();
             contentPane.add(content.getComponent());
             setAsParent(content);
         }
@@ -116,7 +116,7 @@ public abstract class WindowWidget extends WidgetContainer {
      * may not affect which Widget has focus.
      */
     public void toFront() {
-        getComponent().toFront();
+        component.toFront();
     }
 
     /**
@@ -128,7 +128,7 @@ public abstract class WindowWidget extends WidgetContainer {
      * may not affect which Widget has focus.
      */
     public void toBack() {
-        getComponent().toBack();
+        component.toBack();
     }
 
     /**
@@ -141,7 +141,7 @@ public abstract class WindowWidget extends WidgetContainer {
 
             return mockVisible;
         }
-        return getComponent().isVisible();
+        return component.isVisible();
     }
 
     /**

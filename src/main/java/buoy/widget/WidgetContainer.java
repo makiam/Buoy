@@ -1,5 +1,6 @@
 package buoy.widget;
 
+import java.awt.*;
 import java.util.*;
 
 /**
@@ -9,7 +10,7 @@ import java.util.*;
  *
  * @author Peter Eastman
  */
-public abstract class WidgetContainer extends Widget {
+public abstract class WidgetContainer<T extends Component> extends Widget<T> {
 
     protected boolean opaque;
 
