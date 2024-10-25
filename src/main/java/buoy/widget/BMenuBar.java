@@ -82,7 +82,7 @@ public class BMenuBar extends WidgetContainer<JMenuBar> {
      * Get a Collection containing all child Widgets of this container.
      */
     @Override
-    public Collection<Widget> getChildren() {
+    public Collection<Widget<?>> getChildren() {
         return new ArrayList<>(menus);
     }
 

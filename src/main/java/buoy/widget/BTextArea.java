@@ -22,7 +22,7 @@ import javax.swing.*;
  *
  * @author Peter Eastman
  */
-public class BTextArea extends TextWidget {
+public class BTextArea extends TextWidget<JTextArea> {
 
     public static final WrapStyle WRAP_NONE = new WrapStyle();
     public static final WrapStyle WRAP_CHARACTER = new WrapStyle();
@@ -91,21 +91,21 @@ public class BTextArea extends TextWidget {
 
     @Override
     public JTextArea getComponent() {
-        return (JTextArea) component;
+        return component;
     }
 
     /**
      * Get the number of rows this text area should be tall enough to display.
      */
     public int getRows() {
-        return getComponent().getRows();
+        return component.getRows();
     }
 
     /**
      * Set the number of rows this text area should be tall enough to display.
      */
     public void setRows(int rows) {
-        getComponent().setRows(rows);
+        component.setRows(rows);
         invalidateSize();
     }
 
@@ -114,7 +114,7 @@ public class BTextArea extends TextWidget {
      * display.
      */
     public int getColumns() {
-        return getComponent().getColumns();
+        return component.getColumns();
     }
 
     /**
@@ -122,7 +122,7 @@ public class BTextArea extends TextWidget {
      * display.
      */
     public void setColumns(int columns) {
-        getComponent().setColumns(columns);
+        component.setColumns(columns);
         invalidateSize();
     }
 
@@ -130,7 +130,7 @@ public class BTextArea extends TextWidget {
      * Determine the number of lines of text contained in this text area.
      */
     public int getLineCount() {
-        return getComponent().getLineCount();
+        return component.getLineCount();
     }
 
     /**
@@ -152,7 +152,7 @@ public class BTextArea extends TextWidget {
      * WRAP_NONE, WRAP_CHARACTER, or WRAP_WORD.
      */
     public void setWrapStyle(WrapStyle style) {
-        JTextArea ta = getComponent();
+        JTextArea ta = component;
         if (style == WRAP_NONE) {
             ta.setLineWrap(false);
         } else if (style == WRAP_CHARACTER) {
@@ -169,14 +169,14 @@ public class BTextArea extends TextWidget {
      * Get the number of character widths to use for a tab character.
      */
     public int getTabSize() {
-        return getComponent().getTabSize();
+        return component.getTabSize();
     }
 
     /**
      * Set the number of character widths to use for a tab character.
      */
     public void setTabSize(int size) {
-        getComponent().setTabSize(size);
+        component.setTabSize(size);
     }
 
     /**
@@ -190,7 +190,7 @@ public class BTextArea extends TextWidget {
     public void append(String text) {
         try {
             suppressEvents++;
-            getComponent().append(text);
+            component.append(text);
         } finally {
             suppressEvents--;
         }
@@ -208,7 +208,7 @@ public class BTextArea extends TextWidget {
     public void insert(String text, int pos) {
         try {
             suppressEvents++;
-            getComponent().insert(text, pos);
+            component.insert(text, pos);
         } finally {
             suppressEvents--;
         }
@@ -227,7 +227,7 @@ public class BTextArea extends TextWidget {
     public void replaceRange(String text, int start, int end) {
         try {
             suppressEvents++;
-            getComponent().replaceRange(text, start, end);
+            component.replaceRange(text, start, end);
         } finally {
             suppressEvents--;
         }
@@ -259,12 +259,7 @@ public class BTextArea extends TextWidget {
     protected void textChanged() {
         super.textChanged();
         if (getParent() instanceof BScrollPane) {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    getParent().layoutChildren();
-                }
-            });
+            SwingUtilities.invokeLater(() -> getParent().layoutChildren());
         }
     }
 

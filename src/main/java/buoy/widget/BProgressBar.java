@@ -22,7 +22,7 @@ import javax.swing.*;
  *
  * @author Peter Eastman
  */
-public class BProgressBar extends Widget {
+public class BProgressBar extends Widget<JProgressBar> {
 
     public static final Orientation HORIZONTAL = new Orientation(JProgressBar.HORIZONTAL);
     public static final Orientation VERTICAL = new Orientation(JProgressBar.VERTICAL);
@@ -74,14 +74,14 @@ public class BProgressBar extends Widget {
 
     @Override
     public JProgressBar getComponent() {
-        return (JProgressBar) component;
+        return component;
     }
 
     /**
      * Get the progress bar's current progress value.
      */
     public int getValue() {
-        return getComponent().getValue();
+        return component.getValue();
     }
 
     /**
@@ -95,42 +95,42 @@ public class BProgressBar extends Widget {
      * Get the progress bar's minimum progress value.
      */
     public int getMinimum() {
-        return getComponent().getMinimum();
+        return component.getMinimum();
     }
 
     /**
      * Set the progress bar's minimum progress value.
      */
     public void setMinimum(int min) {
-        getComponent().setMinimum(min);
+        component.setMinimum(min);
     }
 
     /**
      * Get the progress bar's maximum progress value.
      */
     public int getMaximum() {
-        return getComponent().getMaximum();
+        return component.getMaximum();
     }
 
     /**
      * Set the progress bar's maximum progress value.
      */
     public void setMaximum(int max) {
-        getComponent().setMaximum(max);
+        component.setMaximum(max);
     }
 
     /**
      * Get the progress bar's orientation, HORIZONTAL or VERTICAL.
      */
     public Orientation getOrientation() {
-        return (getComponent().getOrientation() == JProgressBar.HORIZONTAL ? HORIZONTAL : VERTICAL);
+        return component.getOrientation() == JProgressBar.HORIZONTAL ? HORIZONTAL : VERTICAL;
     }
 
     /**
      * Set the progress bar's orientation, HORIZONTAL or VERTICAL.
      */
     public void setOrientation(Orientation orient) {
-        getComponent().setOrientation(orient.value);
+        component.setOrientation(orient.value);
     }
 
     /**
@@ -139,7 +139,7 @@ public class BProgressBar extends Widget {
      * being done, but no indication is given of how much remains.
      */
     public boolean isIndeterminate() {
-        return getComponent().isIndeterminate();
+        return component.isIndeterminate();
     }
 
     /**
@@ -148,7 +148,7 @@ public class BProgressBar extends Widget {
      * being done, but no indication is given of how much remains.
      */
     public void setIndeterminate(boolean indeterminate) {
-        getComponent().setIndeterminate(indeterminate);
+        component.setIndeterminate(indeterminate);
     }
 
     /**
@@ -156,7 +156,7 @@ public class BProgressBar extends Widget {
      * operation whose progress is being monitored.
      */
     public boolean getShowProgressText() {
-        return getComponent().isStringPainted();
+        return component.isStringPainted();
     }
 
     /**
@@ -164,23 +164,23 @@ public class BProgressBar extends Widget {
      * operation whose progress is being monitored.
      */
     public void setShowProgressText(boolean show) {
-        getComponent().setStringPainted(show);
+        component.setStringPainted(show);
     }
 
     /**
      * Get the line of text displayed on the progress bar. This text is only
-     * shown if setShowProgessText(true) has been called.
+     * shown if setShowProgressText(true) has been called.
      */
     public String getProgressText() {
-        return getComponent().getString();
+        return component.getString();
     }
 
     /**
      * Set the line of text displayed on the progress bar. This text is only
-     * shown if setShowProgessText(true) has been called.
+     * shown if setShowProgressText(true) has been called.
      */
     public void setProgressText(String text) {
-        getComponent().setString(text);
+        component.setString(text);
     }
 
     /**

@@ -13,7 +13,7 @@ import javax.swing.*;
  */
 public class BMenu extends WidgetContainer<JMenu> implements MenuWidget {
 
-    private List<MenuWidget> elements;
+    private final List<MenuWidget> elements = new ArrayList<>();
 
     static {
         WidgetEncoder.setPersistenceDelegate(BMenu.class, new IndexedContainerDelegate(new String[]{"getChild"}));
@@ -33,8 +33,7 @@ public class BMenu extends WidgetContainer<JMenu> implements MenuWidget {
      */
     public BMenu(String title) {
         component = createComponent();
-        elements = new ArrayList<>();
-        getComponent().setText(title);
+        component.setText(title);
     }
 
     /**
@@ -138,8 +137,8 @@ public class BMenu extends WidgetContainer<JMenu> implements MenuWidget {
      * Get a Collection containing all child Widgets of this container.
      */
     @Override
-    public Collection<Widget> getChildren() {
-        ArrayList<Widget> children = new ArrayList<>(elements.size());
+    public Collection<Widget<?>> getChildren() {
+        List<Widget<?>> children = new ArrayList<>(elements.size());
         for (MenuWidget widget : elements) {
             children.add((Widget) widget);
         }
@@ -152,7 +151,7 @@ public class BMenu extends WidgetContainer<JMenu> implements MenuWidget {
     @Override
     public void remove(Widget widget) {
         elements.remove(widget);
-        getComponent().remove(widget.getComponent());
+        component.remove(widget.getComponent());
         removeAsParent(widget);
     }
 

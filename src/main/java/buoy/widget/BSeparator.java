@@ -13,7 +13,7 @@ import javax.swing.*;
  *
  * @author Peter Eastman
  */
-public class BSeparator extends Widget implements MenuWidget {
+public class BSeparator extends Widget<JSeparator> implements MenuWidget {
 
     public static final Orientation HORIZONTAL = new Orientation(SwingConstants.HORIZONTAL);
     public static final Orientation VERTICAL = new Orientation(SwingConstants.VERTICAL);
@@ -47,22 +47,21 @@ public class BSeparator extends Widget implements MenuWidget {
 
     @Override
     public JSeparator getComponent() {
-        return (JSeparator) component;
+        return component;
     }
 
     /**
      * Get the orientation of this separator.
      */
     public Orientation getOrientation() {
-        int orientation = getComponent().getOrientation();
-        return (orientation == SwingConstants.HORIZONTAL ? HORIZONTAL : VERTICAL);
+        return component.getOrientation() == SwingConstants.HORIZONTAL ? HORIZONTAL : VERTICAL;
     }
 
     /**
      * Set the orientation of this separator.
      */
     public void setOrientation(Orientation orientation) {
-        getComponent().setOrientation(orientation.value);
+        component.setOrientation(orientation.value);
     }
 
     /**

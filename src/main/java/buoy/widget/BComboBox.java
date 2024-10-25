@@ -24,16 +24,16 @@ import javax.swing.*;
  *
  * @author Peter Eastman
  */
-public class BComboBox extends Widget {
+public class BComboBox extends Widget<JComboBox> {
 
     private int suppressEvents;
 
     /**
-     * Create a new uneditable BComboBox containing no objects.
+     * Create a new read-only BComboBox containing no objects.
      */
     public BComboBox() {
         component = createComponent();
-        getComponent().addActionListener(new ActionListener() {
+        component.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
                 if (suppressEvents == 0) {
@@ -52,7 +52,7 @@ public class BComboBox extends Widget {
     }
 
     /**
-     * Create a new uneditable BComboBox containing the objects in a Collection.
+     * Create a new read-only BComboBox containing the objects in a Collection.
      * The objects will be added in the order they are returned by the
      * Collection's Iterator.
      */
@@ -86,7 +86,7 @@ public class BComboBox extends Widget {
 
     @Override
     public JComboBox getComponent() {
-        return (JComboBox) component;
+        return component;
     }
 
     /**
@@ -94,7 +94,7 @@ public class BComboBox extends Widget {
      * values other than those in the popup list.
      */
     public boolean isEditable() {
-        return getComponent().isEditable();
+        return component.isEditable();
     }
 
     /**
@@ -102,7 +102,7 @@ public class BComboBox extends Widget {
      * values other than those in the popup list.
      */
     public void setEditable(boolean editable) {
-        getComponent().setEditable(editable);
+        component.setEditable(editable);
     }
 
     /**
@@ -115,7 +115,7 @@ public class BComboBox extends Widget {
     public void setContents(Object o[]) {
         try {
             suppressEvents++;
-            getComponent().setModel(new DefaultComboBoxModel(o));
+            component.setModel(new DefaultComboBoxModel(o));
         } finally {
             suppressEvents--;
         }
@@ -137,7 +137,7 @@ public class BComboBox extends Widget {
      * Get the ComboBoxModel which controls the contents of this BComboBox.
      */
     public ComboBoxModel getModel() {
-        return getComponent().getModel();
+        return component.getModel();
     }
 
     /**
@@ -146,7 +146,7 @@ public class BComboBox extends Widget {
     public void setModel(ComboBoxModel model) {
         try {
             suppressEvents++;
-            getComponent().setModel(model);
+            component.setModel(model);
         } finally {
             suppressEvents--;
         }
@@ -160,7 +160,7 @@ public class BComboBox extends Widget {
     public void add(Object o) {
         try {
             suppressEvents++;
-            getComponent().addItem(o);
+            component.addItem(o);
         } finally {
             suppressEvents--;
         }
@@ -175,7 +175,7 @@ public class BComboBox extends Widget {
     public void add(int index, Object o) {
         try {
             suppressEvents++;
-            getComponent().insertItemAt(o, index);
+            component.insertItemAt(o, index);
         } finally {
             suppressEvents--;
         }
@@ -200,7 +200,7 @@ public class BComboBox extends Widget {
     public void remove(int index) {
         try {
             suppressEvents++;
-            getComponent().removeItemAt(index);
+            component.removeItemAt(index);
         } finally {
             suppressEvents--;
         }
@@ -212,7 +212,7 @@ public class BComboBox extends Widget {
     public void removeAll() {
         try {
             suppressEvents++;
-            getComponent().removeAllItems();
+            component.removeAllItems();
         } finally {
             suppressEvents--;
         }
@@ -222,14 +222,14 @@ public class BComboBox extends Widget {
      * Get the number of items in the combo box's list.
      */
     public int getItemCount() {
-        return getComponent().getItemCount();
+        return component.getItemCount();
     }
 
     /**
      * Get the item at a specific position in the list.
      */
     public Object getItem(int index) {
-        return getComponent().getItemAt(index);
+        return component.getItemAt(index);
     }
 
     /**
@@ -237,7 +237,7 @@ public class BComboBox extends Widget {
      * menu without using a scrollbar.
      */
     public int getPreferredVisibleRows() {
-        return getComponent().getMaximumRowCount();
+        return component.getMaximumRowCount();
     }
 
     /**
@@ -253,7 +253,7 @@ public class BComboBox extends Widget {
      * the current value is not in the list, this returns -1.
      */
     public int getSelectedIndex() {
-        return getComponent().getSelectedIndex();
+        return component.getSelectedIndex();
     }
 
     /**
@@ -262,7 +262,7 @@ public class BComboBox extends Widget {
     public void setSelectedIndex(int index) {
         try {
             suppressEvents++;
-            getComponent().setSelectedIndex(index);
+            component.setSelectedIndex(index);
         } finally {
             suppressEvents--;
         }
@@ -273,7 +273,7 @@ public class BComboBox extends Widget {
      * is an editable combo box, typed into the box.
      */
     public Object getSelectedValue() {
-        return getComponent().getSelectedItem();
+        return component.getSelectedItem();
     }
 
     /**
@@ -284,7 +284,7 @@ public class BComboBox extends Widget {
     public void setSelectedValue(Object value) {
         try {
             suppressEvents++;
-            getComponent().setSelectedItem(value);
+            component.setSelectedItem(value);
         } finally {
             suppressEvents--;
         }

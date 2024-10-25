@@ -267,7 +267,8 @@ public class DragManager {
         boolean found;
         do {
             found = false;
-            for (Widget w : container.getChildren()) {
+            Collection<Widget<?>> children = container.getChildren();
+            for (Widget w: children) {
                 if (!w.getComponent().isShowing()) {
                     continue;
                 }

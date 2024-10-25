@@ -20,9 +20,9 @@ import javax.swing.event.*;
  *
  * @author Peter Eastman
  */
-public class BTabbedPane extends WidgetContainer {
+public class BTabbedPane extends WidgetContainer<JTabbedPane> {
 
-    private ArrayList<Widget> child;
+    private List<Widget<?>> child;
     private int suppressEvents;
 
     public static final TabPosition TOP = new TabPosition(SwingConstants.TOP);
@@ -106,7 +106,7 @@ public class BTabbedPane extends WidgetContainer {
      * Get a Collection containing all child Widgets of this container.
      */
     @Override
-    public Collection<Widget> getChildren() {
+    public Collection<Widget<?>> getChildren() {
         return new ArrayList<>(child);
     }
 

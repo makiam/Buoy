@@ -51,7 +51,7 @@ import javax.swing.text.html.*;
  *
  * @author Peter Eastman
  */
-public class BDocumentViewer extends Widget {
+public class BDocumentViewer extends Widget<JEditorPane> {
 
     /**
      * Create an empty BDocumentViewer.
@@ -91,7 +91,7 @@ public class BDocumentViewer extends Widget {
     /**
      * Create a new BDocumentViewer displaying the document referenced by a URL.
      * Depending on the location and type of document, it may be loaded either
-     * synchronously or ansynchronously. For this reason, no assumptions should
+     * synchronously or asynchronously. For this reason, no assumptions should
      * be made about whether the document has been loaded when this method
      * returns. This method may throw an IOException if an error occurs while
      * loading the document, but the lack of an exception cannot be taken to
@@ -115,7 +115,7 @@ public class BDocumentViewer extends Widget {
 
     @Override
     public JEditorPane getComponent() {
-        return (JEditorPane) component;
+        return  component;
     }
 
     /**
@@ -129,7 +129,7 @@ public class BDocumentViewer extends Widget {
     /**
      * Set the document to display in this BDocumentViewer. Depending on the
      * location and type of document, it may be loaded either synchronously or
-     * ansynchronously. For this reason, no assumptions should be made about
+     * asynchronously. For this reason, no assumptions should be made about
      * whether the document has been loaded when this method returns. This
      * method may throw an IOException if an error occurs while loading the
      * document, but the lack of an exception cannot be taken to mean that the
@@ -159,7 +159,7 @@ public class BDocumentViewer extends Widget {
      * Get the MIME type of the document currently being displayed.
      */
     public String getContentType() {
-        return getComponent().getContentType();
+        return component.getContentType();
     }
 
     /**

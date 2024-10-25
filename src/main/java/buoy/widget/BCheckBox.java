@@ -17,7 +17,7 @@ import javax.swing.*;
  *
  * @author Peter Eastman
  */
-public class BCheckBox extends Widget {
+public class BCheckBox extends Widget<JCheckBox> {
 
     /**
      * Create a new BCheckBox with no label, which is initially deselected.
@@ -35,7 +35,7 @@ public class BCheckBox extends Widget {
      */
     public BCheckBox(String text, boolean state) {
         component = createComponent(text, state);
-        getComponent().addActionListener(new ActionListener() {
+        component.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
                 dispatchEvent(new ValueChangedEvent(BCheckBox.this));
@@ -56,35 +56,35 @@ public class BCheckBox extends Widget {
 
     @Override
     public JCheckBox getComponent() {
-        return (JCheckBox) component;
+        return component;
     }
 
     /**
      * Get the selection state of this check box.
      */
     public boolean getState() {
-        return getComponent().isSelected();
+        return component.isSelected();
     }
 
     /**
      * Set the selection state of this check box.
      */
     public void setState(boolean selected) {
-        getComponent().setSelected(selected);
+        component.setSelected(selected);
     }
 
     /**
      * Get the text which appears on this check box.
      */
     public String getText() {
-        return getComponent().getText();
+        return component.getText();
     }
 
     /**
      * Set the text which appears on this check box.
      */
     public void setText(String text) {
-        getComponent().setText(text);
+        component.setText(text);
         invalidateSize();
     }
 

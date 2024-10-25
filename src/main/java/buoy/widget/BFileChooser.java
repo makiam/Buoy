@@ -37,7 +37,7 @@ import javax.swing.filechooser.*;
  *
  * @author Peter Eastman
  */
-public class BFileChooser extends Widget {
+public class BFileChooser extends Widget<JFileChooser> {
 
     private SelectionMode selectMode;
     private static File lastDirectory = FileSystemView.getFileSystemView().getDefaultDirectory();
@@ -102,21 +102,21 @@ public class BFileChooser extends Widget {
 
     @Override
     public JFileChooser getComponent() {
-        return (JFileChooser) component;
+        return component;
     }
 
     /**
      * Get the title displayed on the dialog.
      */
     public String getTitle() {
-        return getComponent().getDialogTitle();
+        return component.getDialogTitle();
     }
 
     /**
      * Set the title displayed on the dialog.
      */
     public void setTitle(String title) {
-        getComponent().setDialogTitle(title);
+        component.setDialogTitle(title);
     }
 
     /**
@@ -140,28 +140,28 @@ public class BFileChooser extends Widget {
      * Get whether the user is allowed to select multiple files.
      */
     public boolean isMultipleSelectionEnabled() {
-        return getComponent().isMultiSelectionEnabled();
+        return component.isMultiSelectionEnabled();
     }
 
     /**
      * Set whether the user is allowed to select multiple files.
      */
     public void setMultipleSelectionEnabled(boolean multiple) {
-        getComponent().setMultiSelectionEnabled(multiple);
+        component.setMultiSelectionEnabled(multiple);
     }
 
     /**
      * Get the FileFilter which restricts the list of files shown in the dialog.
      */
     public FileFilter getFileFilter() {
-        return getComponent().getFileFilter();
+        return component.getFileFilter();
     }
 
     /**
      * Set the FileFilter which restricts the list of files shown in the dialog.
      */
     public void setFileFilter(FileFilter filter) {
-        getComponent().setFileFilter(filter);
+        component.setFileFilter(filter);
     }
 
     /**
@@ -175,7 +175,7 @@ public class BFileChooser extends Widget {
      * Set the directory displayed in this file chooser.
      */
     public void setDirectory(File directory) {
-        getComponent().setCurrentDirectory(directory);
+        component.setCurrentDirectory(directory);
         lastDirectory = directory;
     }
 
@@ -188,14 +188,14 @@ public class BFileChooser extends Widget {
      * If no file is selected, this returns null.
      */
     public File getSelectedFile() {
-        return getComponent().getSelectedFile();
+        return component.getSelectedFile();
     }
 
     /**
      * Set the file selected in the file chooser.
      */
     public void setSelectedFile(File file) {
-        getComponent().setSelectedFile(file);
+        component.setSelectedFile(file);
     }
 
     /**
@@ -203,7 +203,7 @@ public class BFileChooser extends Widget {
      * <code>getSelectedFile()</code> when multiple selection is enabled.
      */
     public File[] getSelectedFiles() {
-        return getComponent().getSelectedFiles();
+        return component.getSelectedFiles();
     }
 
     /**
@@ -215,7 +215,7 @@ public class BFileChooser extends Widget {
         if (!isMultipleSelectionEnabled()) {
             throw new IllegalArgumentException();
         }
-        getComponent().setSelectedFiles(files);
+        component.setSelectedFiles(files);
     }
 
     /**
@@ -230,7 +230,7 @@ public class BFileChooser extends Widget {
      * "Open" or "Save"), false if they clicked the cancel button
      */
     public boolean showDialog(Widget parent) {
-        JFileChooser jfc = getComponent();
+        JFileChooser jfc = component;
         Component parentComponent = (parent == null ? null : parent.getComponent());
         int result;
         if (selectMode == SAVE_FILE) {

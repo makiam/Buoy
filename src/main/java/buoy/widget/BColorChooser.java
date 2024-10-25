@@ -31,7 +31,7 @@ import javax.swing.event.*;
  *
  * @author Peter Eastman
  */
-public class BColorChooser extends Widget {
+public class BColorChooser extends Widget<JColorChooser> {
 
     private String dlgTitle;
 
@@ -52,12 +52,7 @@ public class BColorChooser extends Widget {
         component = createComponent();
         setColor(color);
         setTitle(title);
-        getComponent().getSelectionModel().addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent ev) {
-                dispatchEvent(new ValueChangedEvent(BColorChooser.this));
-            }
-        });
+        component.getSelectionModel().addChangeListener(ev -> dispatchEvent(new ValueChangedEvent(BColorChooser.this)));
     }
 
     /**
@@ -66,11 +61,6 @@ public class BColorChooser extends Widget {
      */
     protected JColorChooser createComponent() {
         return new JColorChooser();
-    }
-
-    @Override
-    public JColorChooser getComponent() {
-        return (JColorChooser) component;
     }
 
     /**
@@ -91,14 +81,14 @@ public class BColorChooser extends Widget {
      * Get the color selected in the BColorChooser.
      */
     public Color getColor() {
-        return getComponent().getColor();
+        return component.getColor();
     }
 
     /**
      * Set the color selected in the BColorChooser.
      */
     public void setColor(Color color) {
-        getComponent().setColor(color);
+        component.setColor(color);
     }
 
     /**

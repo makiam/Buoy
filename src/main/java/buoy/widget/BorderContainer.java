@@ -5,6 +5,7 @@ import buoy.xml.*;
 import buoy.xml.delegate.*;
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 import javax.swing.JPanel;
 
 /**
@@ -20,7 +21,7 @@ import javax.swing.JPanel;
  *
  * @author Peter Eastman
  */
-public class BorderContainer extends WidgetContainer {
+public class BorderContainer extends WidgetContainer<JPanel> {
 
     private final Widget child[];
     private final LayoutInfo[] childLayout;
@@ -72,8 +73,8 @@ public class BorderContainer extends WidgetContainer {
      * Get a Collection containing all child Widgets of this container.
      */
     @Override
-    public Collection<Widget> getChildren() {
-        ArrayList<Widget> ls = new ArrayList<>(5);
+    public Collection<Widget<?>> getChildren() {
+        List<Widget<?>> ls = new ArrayList<>(5);
         for (Widget child1 : child) {
             if(child1 == null) continue;
             ls.add(child1);

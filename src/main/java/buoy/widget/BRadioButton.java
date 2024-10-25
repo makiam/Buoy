@@ -21,7 +21,7 @@ import javax.swing.*;
  *
  * @author Peter Eastman
  */
-public class BRadioButton extends Widget {
+public class BRadioButton extends Widget<JRadioButton> {
 
     private RadioButtonGroup group;
 
@@ -70,14 +70,14 @@ public class BRadioButton extends Widget {
 
     @Override
     public JRadioButton getComponent() {
-        return (JRadioButton) component;
+        return component;
     }
 
     /**
      * Get the selection state of this radio button.
      */
     public boolean getState() {
-        return getComponent().isSelected();
+        return component.isSelected();
     }
 
     /**
@@ -97,14 +97,14 @@ public class BRadioButton extends Widget {
      * Get the text which appears on this radio button.
      */
     public String getText() {
-        return getComponent().getText();
+        return component.getText();
     }
 
     /**
      * Set the text which appears on this radio button.
      */
     public void setText(String text) {
-        getComponent().setText(text);
+        component.setText(text);
         invalidateSize();
     }
 

@@ -12,7 +12,7 @@ import javax.swing.*;
  *
  * @author Peter Eastman
  */
-public class BLabel extends Widget {
+public class BLabel extends Widget<JLabel> {
 
     public static final Position CENTER = new Position(0);
     public static final Position NORTH = new Position(1);
@@ -106,21 +106,21 @@ public class BLabel extends Widget {
 
     @Override
     public JLabel getComponent() {
-        return (JLabel) component;
+        return component;
     }
 
     /**
      * Get the text which appears on this label.
      */
     public String getText() {
-        return getComponent().getText();
+        return component.getText();
     }
 
     /**
      * Set the text which appears on this label.
      */
     public void setText(String text) {
-        getComponent().setText(text);
+        component.setText(text);
         invalidateSize();
     }
 
@@ -128,14 +128,14 @@ public class BLabel extends Widget {
      * Get the image which appears on this label.
      */
     public Icon getIcon() {
-        return getComponent().getIcon();
+        return component.getIcon();
     }
 
     /**
      * Set the image which appears on this label.
      */
     public void setIcon(Icon image) {
-        getComponent().setIcon(image);
+        component.setIcon(image);
         invalidateSize();
     }
 
@@ -155,9 +155,9 @@ public class BLabel extends Widget {
      * EAST, etc.
      */
     public Position getAlignment() {
-        int halign = getComponent().getHorizontalAlignment();
-        int valign = getComponent().getVerticalAlignment();
-        return Position.get(halign, valign);
+        int hAlign = component.getHorizontalAlignment();
+        int vAlign = component.getVerticalAlignment();
+        return Position.get(hAlign, vAlign);
     }
 
     /**
@@ -191,9 +191,9 @@ public class BLabel extends Widget {
      * EAST, etc.
      */
     public Position getTextPosition() {
-        int hpos = getComponent().getHorizontalTextPosition();
-        int vpos = getComponent().getVerticalTextPosition();
-        return Position.get(hpos, vpos);
+        int hPos = component.getHorizontalTextPosition();
+        int vPos = component.getVerticalTextPosition();
+        return Position.get(hPos, vPos);
     }
 
     /**

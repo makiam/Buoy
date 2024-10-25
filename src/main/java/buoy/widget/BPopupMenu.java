@@ -133,8 +133,8 @@ public class BPopupMenu extends WidgetContainer<JPopupMenu> implements MenuWidge
      * Get a Collection containing all child Widgets of this container.
      */
     @Override
-    public Collection<Widget> getChildren() {
-        ArrayList<Widget> children = new ArrayList<>(elements.size());
+    public Collection<Widget<?>> getChildren() {
+        List<Widget<?>> children = new ArrayList<>(elements.size());
         for (MenuWidget widget : elements) {
             children.add((Widget) widget);
         }

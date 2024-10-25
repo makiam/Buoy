@@ -29,7 +29,7 @@ import javax.swing.*;
  *
  * @author Peter Eastman
  */
-public class BScrollBar extends Widget {
+public class BScrollBar extends Widget<JScrollBar> {
 
     private DefaultBoundedRangeModel model;
     private int suppressEvents;
@@ -78,7 +78,7 @@ public class BScrollBar extends Widget {
 
     @Override
     public JScrollBar getComponent() {
-        return (JScrollBar) component;
+        return component;
     }
 
     /**
@@ -146,15 +146,14 @@ public class BScrollBar extends Widget {
      * Get the orientation (HORIZONTAL or VERTICAL) of this BScrollBar.
      */
     public Orientation getOrientation() {
-        int orient = getComponent().getOrientation();
-        return (orient == HORIZONTAL.value ? HORIZONTAL : VERTICAL);
+        return component.getOrientation() == HORIZONTAL.value ? HORIZONTAL : VERTICAL;
     }
 
     /**
      * Set the orientation (HORIZONTAL or VERTICAL) of this BScrollBar.
      */
     public void setOrientation(Orientation orientation) {
-        getComponent().setOrientation(orientation.value);
+        component.setOrientation(orientation.value);
         invalidateSize();
     }
 
@@ -186,7 +185,7 @@ public class BScrollBar extends Widget {
      * on one of the arrows at its end.
      */
     public void setUnitIncrement(int increment) {
-        getComponent().setUnitIncrement(increment);
+        component.setUnitIncrement(increment);
     }
 
     /**
@@ -194,7 +193,7 @@ public class BScrollBar extends Widget {
      * in the body of the scrollbar.
      */
     public int getBlockIncrement() {
-        return getComponent().getBlockIncrement();
+        return component.getBlockIncrement();
     }
 
     /**
@@ -217,7 +216,7 @@ public class BScrollBar extends Widget {
      * in the body of the scrollbar.
      */
     public void setBlockIncrement(int increment) {
-        getComponent().setBlockIncrement(increment);
+        component.setBlockIncrement(increment);
     }
 
     /**

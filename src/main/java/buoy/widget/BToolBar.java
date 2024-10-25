@@ -16,9 +16,9 @@ import java.util.*;
  *
  * @author Peter Eastman
  */
-public class BToolBar extends WidgetContainer {
+public class BToolBar extends WidgetContainer<JToolBar> {
 
-    private ArrayList<Widget> child;
+    private final List<Widget<?>> child = new ArrayList<>();
 
     public static final Orientation HORIZONTAL = new Orientation(SwingConstants.HORIZONTAL);
     public static final Orientation VERTICAL = new Orientation(SwingConstants.VERTICAL);
@@ -42,7 +42,6 @@ public class BToolBar extends WidgetContainer {
      */
     public BToolBar(Orientation orientation) {
         component = createComponent();
-        child = new ArrayList<>();
         setOrientation(orientation);
     }
 
@@ -58,22 +57,21 @@ public class BToolBar extends WidgetContainer {
 
     @Override
     public JToolBar getComponent() {
-        return (JToolBar) component;
+        return component;
     }
 
     /**
      * Get the orientation of this toolbar.
      */
     public Orientation getOrientation() {
-        int orientation = getComponent().getOrientation();
-        return (orientation == SwingConstants.HORIZONTAL ? HORIZONTAL : VERTICAL);
+        return component.getOrientation() == SwingConstants.HORIZONTAL ? HORIZONTAL : VERTICAL;
     }
 
     /**
      * Set the orientation of this toolbar.
      */
     public void setOrientation(Orientation orientation) {
-        getComponent().setOrientation(orientation.value);
+        component.setOrientation(orientation.value);
     }
 
     /**
@@ -126,7 +124,7 @@ public class BToolBar extends WidgetContainer {
      * Get a Collection containing all child Widgets of this container.
      */
     @Override
-    public Collection<Widget> getChildren() {
+    public Collection<Widget<?>> getChildren() {
         return new ArrayList<>(child);
     }
 

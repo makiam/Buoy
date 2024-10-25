@@ -26,7 +26,7 @@ import javax.swing.event.*;
  *
  * @author Peter Eastman
  */
-public class BList extends Widget {
+public class BList extends Widget<JList> {
 
     protected DefaultListModel defaultModel;
 
@@ -84,7 +84,7 @@ public class BList extends Widget {
 
     @Override
     public JList getComponent() {
-        return (JList) component;
+        return component;
     }
 
     /**
@@ -193,14 +193,14 @@ public class BList extends Widget {
      * Get the ListModel which controls the contents of this BList.
      */
     public ListModel getModel() {
-        return getComponent().getModel();
+        return component.getModel();
     }
 
     /**
      * Set the ListModel which controls the contents of this BList.
      */
     public void setModel(ListModel model) {
-        getComponent().setModel(model);
+        component.setModel(model);
     }
 
     /**
@@ -227,28 +227,28 @@ public class BList extends Widget {
      * Get the number of items in the list.
      */
     public int getItemCount() {
-        return getComponent().getModel().getSize();
+        return component.getModel().getSize();
     }
 
     /**
      * Get the item at a specific position in the list.
      */
     public Object getItem(int index) {
-        return getComponent().getModel().getElementAt(index);
+        return component.getModel().getElementAt(index);
     }
 
     /**
      * Determine whether this list allows multiple objects to be selected.
      */
     public boolean isMultipleSelectionEnabled() {
-        return (getComponent().getSelectionMode() != ListSelectionModel.SINGLE_SELECTION);
+        return component.getSelectionMode() != ListSelectionModel.SINGLE_SELECTION;
     }
 
     /**
      * Set whether this list should allow multiple objects to be selected.
      */
     public void setMultipleSelectionEnabled(boolean multiple) {
-        getComponent().setSelectionMode(multiple ? ListSelectionModel.MULTIPLE_INTERVAL_SELECTION : ListSelectionModel.SINGLE_SELECTION);
+        component.setSelectionMode(multiple ? ListSelectionModel.MULTIPLE_INTERVAL_SELECTION : ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**
@@ -256,7 +256,7 @@ public class BList extends Widget {
      * scrollbar.
      */
     public int getPreferredVisibleRows() {
-        return getComponent().getVisibleRowCount();
+        return component.getVisibleRowCount();
     }
 
     /**
@@ -264,7 +264,7 @@ public class BList extends Widget {
      * scrollbar.
      */
     public void setPreferredVisibleRows(int rows) {
-        getComponent().setVisibleRowCount(rows);
+        component.setVisibleRowCount(rows);
         invalidateSize();
     }
 
@@ -272,42 +272,42 @@ public class BList extends Widget {
      * Determine whether a particular object in the list is selected.
      */
     public boolean isSelected(int index) {
-        return getComponent().isSelectedIndex(index);
+        return component.isSelectedIndex(index);
     }
 
     /**
      * Get the index of the first selected object, or -1 if nothing is selected.
      */
     public int getSelectedIndex() {
-        return getComponent().getSelectedIndex();
+        return component.getSelectedIndex();
     }
 
     /**
      * Get the indices of all selected objects, in increasing order.
      */
     public int[] getSelectedIndices() {
-        return getComponent().getSelectedIndices();
+        return component.getSelectedIndices();
     }
 
     /**
      * Get the first selected object, or null if nothing is selected.
      */
     public Object getSelectedValue() {
-        return getComponent().getSelectedValue();
+        return component.getSelectedValue();
     }
 
     /**
      * Get an array of all selected objects, in order of increasing index.
      */
     public Object[] getSelectedValues() {
-        return getComponent().getSelectedValues();
+        return component.getSelectedValues();
     }
 
     /**
      * Deselect all objects in the list.
      */
     public void clearSelection() {
-        getComponent().clearSelection();
+        component.clearSelection();
     }
 
     /**
@@ -315,9 +315,9 @@ public class BList extends Widget {
      */
     public void setSelected(int index, boolean selected) {
         if (selected) {
-            getComponent().addSelectionInterval(index, index);
+            component.addSelectionInterval(index, index);
         } else {
-            getComponent().removeSelectionInterval(index, index);
+            component.removeSelectionInterval(index, index);
         }
     }
 
@@ -328,7 +328,7 @@ public class BList extends Widget {
      * all.
      */
     public void scrollToItem(int index) {
-        getComponent().ensureIndexIsVisible(index);
+        component.ensureIndexIsVisible(index);
     }
 
     /**

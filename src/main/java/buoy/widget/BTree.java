@@ -75,7 +75,7 @@ import javax.swing.tree.*;
  *
  * @author Peter Eastman
  */
-public class BTree extends Widget {
+public class BTree extends Widget<JTree> {
 
     private TreeModelListener modelListener;
     private int suppressEvents;

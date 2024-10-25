@@ -66,7 +66,7 @@ import javax.swing.table.*;
  *
  * @author Peter Eastman
  */
-public class BTable extends Widget {
+public class BTable extends Widget<JTable> {
 
     protected DefaultTableModel defaultModel;
     protected BTableHeader tableHeader;
@@ -102,9 +102,9 @@ public class BTable extends Widget {
                 dispatchEvent(new SelectionChangedEvent(BTable.this, ev.getValueIsAdjusting()));
             }
         };
-        getComponent().getSelectionModel().addListSelectionListener(lsl);
-        getComponent().getColumnModel().getSelectionModel().addListSelectionListener(lsl);
-        getComponent().putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+        component.getSelectionModel().addListSelectionListener(lsl);
+        component.getColumnModel().getSelectionModel().addListSelectionListener(lsl);
+        component.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
     }
 
     /**
@@ -170,7 +170,7 @@ public class BTable extends Widget {
 
     @Override
     public JTable getComponent() {
-        return (JTable) component;
+        return component;
     }
 
     /**
@@ -184,14 +184,14 @@ public class BTable extends Widget {
      * Get the TableModel which controls the contents of this BTable.
      */
     public TableModel getModel() {
-        return getComponent().getModel();
+        return component.getModel();
     }
 
     /**
      * Set the TableModel which controls the contents of this BTable.
      */
     public void setModel(TableModel model) {
-        getComponent().setModel(model);
+        component.setModel(model);
         invalidateSize();
     }
 
@@ -370,7 +370,7 @@ public class BTable extends Widget {
      * @param col the column containing the cell
      */
     public Object getCellValue(int row, int col) {
-        return getComponent().getModel().getValueAt(row, col);
+        return component.getModel().getValueAt(row, col);
     }
 
     /**
@@ -381,7 +381,7 @@ public class BTable extends Widget {
      * @param value the value to place into the cell
      */
     public void setCellValue(int row, int col, Object value) {
-        getComponent().getModel().setValueAt(value, row, col);
+        component.getModel().setValueAt(value, row, col);
     }
 
     /**
@@ -420,7 +420,7 @@ public class BTable extends Widget {
      * @param row the row index
      */
     public int getRowHeight(int row) {
-        return getComponent().getRowHeight(row);
+        return component.getRowHeight(row);
     }
 
     /**
@@ -476,7 +476,7 @@ public class BTable extends Widget {
      * headers and dragging.
      */
     public boolean getColumnsResizable() {
-        return getComponent().getTableHeader().getResizingAllowed();
+        return component.getTableHeader().getResizingAllowed();
     }
 
     /**
@@ -484,7 +484,7 @@ public class BTable extends Widget {
      * headers and dragging.
      */
     public void setColumnsResizable(boolean resizable) {
-        getComponent().getTableHeader().setResizingAllowed(resizable);
+        component.getTableHeader().setResizingAllowed(resizable);
     }
 
     /**
@@ -492,7 +492,7 @@ public class BTable extends Widget {
      * headers.
      */
     public boolean getColumnsReorderable() {
-        return getComponent().getTableHeader().getReorderingAllowed();
+        return component.getTableHeader().getReorderingAllowed();
     }
 
     /**
@@ -500,7 +500,7 @@ public class BTable extends Widget {
      * headers.
      */
     public void setColumnsReorderable(boolean reorderable) {
-        getComponent().getTableHeader().setReorderingAllowed(reorderable);
+        component.getTableHeader().setReorderingAllowed(reorderable);
     }
 
     /**
@@ -525,22 +525,22 @@ public class BTable extends Widget {
      * SELECT_NONE, SELECT_ROWS, SELECT_COLUMNS, or SELECT_CELLS.
      */
     public void setSelectionMode(SelectionMode mode) {
-        getComponent().setColumnSelectionAllowed(mode == SELECT_COLUMNS || mode == SELECT_CELLS);
-        getComponent().setRowSelectionAllowed(mode == SELECT_ROWS || mode == SELECT_CELLS);
+        component.setColumnSelectionAllowed(mode == SELECT_COLUMNS || mode == SELECT_CELLS);
+        component.setRowSelectionAllowed(mode == SELECT_ROWS || mode == SELECT_CELLS);
     }
 
     /**
      * Determine whether this table allows multiple cells to be selected.
      */
     public boolean isMultipleSelectionEnabled() {
-        return (getComponent().getSelectionModel().getSelectionMode() != ListSelectionModel.SINGLE_SELECTION);
+        return component.getSelectionModel().getSelectionMode() != ListSelectionModel.SINGLE_SELECTION;
     }
 
     /**
      * Set whether this table should allow multiple cells to be selected.
      */
     public void setMultipleSelectionEnabled(boolean multiple) {
-        getComponent().setSelectionMode(multiple ? ListSelectionModel.MULTIPLE_INTERVAL_SELECTION : ListSelectionModel.SINGLE_SELECTION);
+        component.setSelectionMode(multiple ? ListSelectionModel.MULTIPLE_INTERVAL_SELECTION : ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**
@@ -552,7 +552,7 @@ public class BTable extends Widget {
      * @param row the row index
      */
     public boolean isRowSelected(int row) {
-        return getComponent().isRowSelected(row);
+        return component.isRowSelected(row);
     }
 
     /**
@@ -577,7 +577,7 @@ public class BTable extends Widget {
      * method is meaningless and should be ignored.
      */
     public int[] getSelectedRows() {
-        return getComponent().getSelectedRows();
+        return component.getSelectedRows();
     }
 
     /**
@@ -589,7 +589,7 @@ public class BTable extends Widget {
      * @param col the column index
      */
     public boolean isColumnSelected(int col) {
-        return getComponent().isColumnSelected(col);
+        return component.isColumnSelected(col);
     }
 
     /**
@@ -600,9 +600,9 @@ public class BTable extends Widget {
      */
     public void setColumnSelected(int col, boolean selected) {
         if (selected) {
-            getComponent().addColumnSelectionInterval(col, col);
+            component.addColumnSelectionInterval(col, col);
         } else {
-            getComponent().removeColumnSelectionInterval(col, col);
+            component.removeColumnSelectionInterval(col, col);
         }
     }
 
@@ -614,7 +614,7 @@ public class BTable extends Widget {
      * is meaningless and should be ignored.
      */
     public int[] getSelectedColumns() {
-        return getComponent().getSelectedColumns();
+        return component.getSelectedColumns();
     }
 
     /**
@@ -624,7 +624,7 @@ public class BTable extends Widget {
      * @param col the column index
      */
     public boolean isCellSelected(int row, int col) {
-        return getComponent().isCellSelected(row, col);
+        return component.isCellSelected(row, col);
     }
 
     /**
@@ -636,11 +636,11 @@ public class BTable extends Widget {
      */
     public void setCellSelected(int row, int col, boolean selected) {
         if (selected) {
-            getComponent().addRowSelectionInterval(row, row);
-            getComponent().addColumnSelectionInterval(col, col);
+            component.addRowSelectionInterval(row, row);
+            component.addColumnSelectionInterval(col, col);
         } else {
-            getComponent().removeRowSelectionInterval(row, row);
-            getComponent().removeColumnSelectionInterval(col, col);
+            component.removeRowSelectionInterval(row, row);
+            component.removeColumnSelectionInterval(col, col);
         }
     }
 
@@ -652,16 +652,16 @@ public class BTable extends Widget {
      */
     public Point[] getSelectedCells() {
         int rows[], cols[];
-        if (getComponent().getRowSelectionAllowed()) {
-            rows = getComponent().getSelectedRows();
+        if (component.getRowSelectionAllowed()) {
+            rows = component.getSelectedRows();
         } else {
             rows = new int[getRowCount()];
             for (int i = 0; i < rows.length; i++) {
                 rows[i] = i;
             }
         }
-        if (getComponent().getColumnSelectionAllowed()) {
-            cols = getComponent().getSelectedColumns();
+        if (component.getColumnSelectionAllowed()) {
+            cols = component.getSelectedColumns();
         } else {
             cols = new int[getColumnCount()];
             for (int i = 0; i < cols.length; i++) {
@@ -681,7 +681,7 @@ public class BTable extends Widget {
      * Deselect all rows and columns.
      */
     public void clearSelection() {
-        getComponent().clearSelection();
+        component.clearSelection();
     }
 
     /**
@@ -692,7 +692,7 @@ public class BTable extends Widget {
      * @return the row index, or -1 if the Point is outside the table
      */
     public int findRow(Point pos) {
-        return getComponent().rowAtPoint(pos);
+        return component.rowAtPoint(pos);
     }
 
     /**
@@ -703,7 +703,7 @@ public class BTable extends Widget {
      * @return the column index, or -1 if the Point is outside the table
      */
     public int findColumn(Point pos) {
-        return getComponent().columnAtPoint(pos);
+        return component.columnAtPoint(pos);
     }
 
     /**
@@ -713,35 +713,35 @@ public class BTable extends Widget {
      * @param col the column containing the cell
      */
     public void editCellAt(int row, int col) {
-        getComponent().editCellAt(row, col);
+        component.editCellAt(row, col);
     }
 
     /**
      * Get whether this table displays horizontal lines between the rows.
      */
     public boolean getShowHorizontalLines() {
-        return getComponent().getShowHorizontalLines();
+        return component.getShowHorizontalLines();
     }
 
     /**
      * Set whether this table displays horizontal lines between the rows.
      */
     public void setShowHorizontalLines(boolean show) {
-        getComponent().setShowHorizontalLines(show);
+        component.setShowHorizontalLines(show);
     }
 
     /**
      * Get whether this table displays vertical lines between the columns.
      */
     public boolean getShowVerticalLines() {
-        return getComponent().getShowVerticalLines();
+        return component.getShowVerticalLines();
     }
 
     /**
      * Set whether this table displays vertical lines between the columns.
      */
     public void setShowVerticalLines(boolean show) {
-        getComponent().setShowVerticalLines(show);
+        component.setShowVerticalLines(show);
     }
 
     /**
@@ -753,8 +753,8 @@ public class BTable extends Widget {
      * @param col the column containing the cell
      */
     public void scrollToCell(int row, int col) {
-        Rectangle bounds = getComponent().getCellRect(row, col, true);
-        getComponent().scrollRectToVisible(bounds);
+        Rectangle bounds = component.getCellRect(row, col, true);
+        component.scrollRectToVisible(bounds);
     }
 
     /**

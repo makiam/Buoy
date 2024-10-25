@@ -12,7 +12,7 @@ import javax.swing.text.*;
  *
  * @author Peter Eastman
  */
-public abstract class TextWidget extends Widget {
+public abstract class TextWidget<T extends JTextComponent> extends Widget<T> {
 
     protected CaretListener caretListener;
     protected DocumentListener documentListener;
@@ -49,15 +49,15 @@ public abstract class TextWidget extends Widget {
     }
 
     @Override
-    public JTextComponent getComponent() {
-        return (JTextComponent) component;
+    public T getComponent() {
+        return component;
     }
 
     /**
      * Get the text contained in the Widget.
      */
     public String getText() {
-        return getComponent().getText();
+        return component.getText();
     }
 
     /**
@@ -69,7 +69,7 @@ public abstract class TextWidget extends Widget {
     public void setText(String text) {
         try {
             suppressEvents++;
-            getComponent().setText(text);
+            component.setText(text);
         } finally {
             suppressEvents--;
         }
@@ -79,14 +79,14 @@ public abstract class TextWidget extends Widget {
      * Get the number of characters in the text contained in the Widget.
      */
     public int getLength() {
-        return getComponent().getDocument().getLength();
+        return component.getDocument().getLength();
     }
 
     /**
      * Get the current position of the caret.
      */
     public int getCaretPosition() {
-        return getComponent().getCaretPosition();
+        return component.getCaretPosition();
     }
 
     /**
@@ -95,7 +95,7 @@ public abstract class TextWidget extends Widget {
     public void setCaretPosition(int pos) {
         try {
             suppressEvents++;
-            getComponent().setCaretPosition(pos);
+            component.setCaretPosition(pos);
         } finally {
             suppressEvents--;
         }
@@ -106,7 +106,7 @@ public abstract class TextWidget extends Widget {
      * selected character.
      */
     public int getSelectionStart() {
-        return getComponent().getSelectionStart();
+        return component.getSelectionStart();
     }
 
     /**
@@ -116,7 +116,7 @@ public abstract class TextWidget extends Widget {
     public void setSelectionStart(int pos) {
         try {
             suppressEvents++;
-            getComponent().setSelectionStart(pos);
+            component.setSelectionStart(pos);
         } finally {
             suppressEvents--;
         }
@@ -127,7 +127,7 @@ public abstract class TextWidget extends Widget {
      * character after the end of the selection.
      */
     public int getSelectionEnd() {
-        return getComponent().getSelectionEnd();
+        return component.getSelectionEnd();
     }
 
     /**
@@ -137,7 +137,7 @@ public abstract class TextWidget extends Widget {
     public void setSelectionEnd(int pos) {
         try {
             suppressEvents++;
-            getComponent().setSelectionEnd(pos);
+            component.setSelectionEnd(pos);
         } finally {
             suppressEvents--;
         }
@@ -148,7 +148,7 @@ public abstract class TextWidget extends Widget {
      * selected.
      */
     public String getSelectedText() {
-        return getComponent().getSelectedText();
+        return component.getSelectedText();
     }
 
     /**
@@ -156,14 +156,14 @@ public abstract class TextWidget extends Widget {
      * field.
      */
     public boolean isEditable() {
-        return getComponent().isEditable();
+        return component.isEditable();
     }
 
     /**
      * Set whether the user can edit the text contained in this text field.
      */
     public void setEditable(boolean editable) {
-        getComponent().setEditable(editable);
+        component.setEditable(editable);
     }
 
     /**
@@ -174,12 +174,7 @@ public abstract class TextWidget extends Widget {
      */
     protected void caretMoved() {
         if (suppressEvents == 0) {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    dispatchEvent(new SelectionChangedEvent(TextWidget.this));
-                }
-            });
+            SwingUtilities.invokeLater(() -> dispatchEvent(new SelectionChangedEvent(TextWidget.this)));
         }
     }
 
@@ -192,12 +187,7 @@ public abstract class TextWidget extends Widget {
     protected void textChanged() {
         invalidateSize();
         if (suppressEvents == 0) {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    dispatchEvent(new ValueChangedEvent(TextWidget.this));
-                }
-            });
+            SwingUtilities.invokeLater(() -> dispatchEvent(new ValueChangedEvent(TextWidget.this)));
         }
     }
 }

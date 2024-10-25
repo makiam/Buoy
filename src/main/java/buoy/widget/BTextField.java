@@ -19,7 +19,7 @@ import javax.swing.*;
  *
  * @author Peter Eastman
  */
-public class BTextField extends TextWidget {
+public class BTextField extends TextWidget<JTextField> {
 
     private boolean keepSelection;
 
@@ -109,7 +109,7 @@ public class BTextField extends TextWidget {
 
     @Override
     public JTextField getComponent() {
-        return (JTextField) component;
+        return component;
     }
 
     /**
@@ -117,7 +117,7 @@ public class BTextField extends TextWidget {
      * display.
      */
     public int getColumns() {
-        return getComponent().getColumns();
+        return component.getColumns();
     }
 
     /**
@@ -125,7 +125,7 @@ public class BTextField extends TextWidget {
      * display.
      */
     public void setColumns(int columns) {
-        getComponent().setColumns(columns);
+        component.setColumns(columns);
         invalidateSize();
     }
 }

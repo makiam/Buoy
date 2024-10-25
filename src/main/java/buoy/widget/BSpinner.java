@@ -26,7 +26,7 @@ import javax.swing.event.*;
  *
  * @author Peter Eastman
  */
-public class BSpinner extends Widget {
+public class BSpinner extends Widget<JSpinner> {
 
     private int suppressEvents;
 
@@ -114,14 +114,14 @@ public class BSpinner extends Widget {
 
     @Override
     public JSpinner getComponent() {
-        return (JSpinner) component;
+        return component;
     }
 
     /**
      * Get the current value of the spinner.
      */
     public Object getValue() {
-        return getComponent().getValue();
+        return component.getValue();
     }
 
     /**
@@ -130,7 +130,7 @@ public class BSpinner extends Widget {
     public void setValue(Object value) {
         try {
             suppressEvents++;
-            getComponent().setValue(value);
+            component.setValue(value);
         } finally {
             suppressEvents--;
         }
@@ -145,20 +145,20 @@ public class BSpinner extends Widget {
      * Note: calling commitEdit() will <i>not</i> generate a ValueChangedEvent.
      */
     public void commitEdit() throws ParseException {
-        getComponent().commitEdit();
+        component.commitEdit();
     }
 
     /**
      * Get the model for this spinner.
      */
     public SpinnerModel getModel() {
-        return getComponent().getModel();
+        return component.getModel();
     }
 
     /**
      * Set the model for this spinner.
      */
     public void setModel(SpinnerModel model) {
-        getComponent().setModel(model);
+        component.setModel(model);
     }
 }
