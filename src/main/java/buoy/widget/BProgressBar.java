@@ -24,8 +24,8 @@ import javax.swing.*;
  */
 public class BProgressBar extends Widget<JProgressBar> {
 
-    public static final Orientation HORIZONTAL = new Orientation(JProgressBar.HORIZONTAL);
-    public static final Orientation VERTICAL = new Orientation(JProgressBar.VERTICAL);
+    public static final Orientation HORIZONTAL = new Orientation(SwingConstants.HORIZONTAL);
+    public static final Orientation VERTICAL = new Orientation(SwingConstants.VERTICAL);
 
     static {
         WidgetEncoder.setPersistenceDelegate(Orientation.class, new StaticFieldDelegate(BProgressBar.class));
@@ -118,7 +118,7 @@ public class BProgressBar extends Widget<JProgressBar> {
      * Get the progress bar's orientation, HORIZONTAL or VERTICAL.
      */
     public Orientation getOrientation() {
-        return component.getOrientation() == JProgressBar.HORIZONTAL ? HORIZONTAL : VERTICAL;
+        return component.getOrientation() == SwingConstants.HORIZONTAL ? HORIZONTAL : VERTICAL;
     }
 
     /**

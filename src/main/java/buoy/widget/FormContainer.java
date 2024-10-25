@@ -5,6 +5,7 @@ import buoy.xml.*;
 import buoy.xml.delegate.*;
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 import javax.swing.JPanel;
 
 /**
@@ -32,7 +33,7 @@ public class FormContainer extends WidgetContainer {
 
     private double[] rowWeight, colWeight;
     private int[] minRowSize, prefRowSize, minColSize, prefColSize;
-    private ArrayList<ChildInfo> child;
+    private List<ChildInfo> child = new ArrayList<>();
     private LayoutInfo defaultLayout;
 
     static {
@@ -50,7 +51,7 @@ public class FormContainer extends WidgetContainer {
         this.colWeight = colWeight;
         this.rowWeight = rowWeight;
         component = new WidgetContainerPanel(this);
-        child = new ArrayList<>();
+
         defaultLayout = new LayoutInfo();
     }
 
@@ -96,7 +97,7 @@ public class FormContainer extends WidgetContainer {
      */
     @Override
     public Collection<Widget> getChildren() {
-        ArrayList<Widget> list = new ArrayList<>(child.size());
+        List<Widget> list = new ArrayList<>(child.size());
         for (ChildInfo aChild : child) {
             list.add(aChild.widget);
         }

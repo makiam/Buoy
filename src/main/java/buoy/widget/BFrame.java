@@ -30,7 +30,7 @@ public class BFrame extends WindowWidget<JFrame> {
 
     private BMenuBar menubar;
     private ImageIcon icon;
-    private static WeakHashMap<Frame, WeakReference<BFrame>> frameMap = new WeakHashMap<Frame, WeakReference<BFrame>>();
+    private static WeakHashMap<Frame, WeakReference<BFrame>> frameMap = new WeakHashMap<>();
 
     /**
      * Create a new BFrame.

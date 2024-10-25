@@ -148,7 +148,8 @@ public class BTable extends Widget<JTable> {
         return new JTable(defaultModel) {
             @Override
             public void editingStopped(ChangeEvent ev) {
-                int row = getEditingRow(), col = getEditingColumn();
+                int row = getEditingRow();
+                int col = getEditingColumn();
                 super.editingStopped(ev);
                 BTable.this.dispatchEvent(new CellValueChangedEvent(BTable.this, row, col));
             }
@@ -233,9 +234,9 @@ public class BTable extends Widget<JTable> {
                 columnNames.add(getColumnHeader(i));
             }
         }
-        Vector data = defaultModel.getDataVector();
-        for (Object aData : data) {
-            ((Vector) aData).remove(index);
+        Vector<Vector> data = defaultModel.getDataVector();
+        for (Vector aData : data) {
+             aData.remove(index);
         }
         defaultModel.setDataVector(data, columnNames);
         if (index < columnEditable.size()) {
@@ -641,7 +642,8 @@ public class BTable extends Widget<JTable> {
      * index. If no cells are selected, this returns an empty array.
      */
     public Point[] getSelectedCells() {
-        int[] rows, cols;
+        int[] rows;
+        int[] cols;
         if (component.getRowSelectionAllowed()) {
             rows = component.getSelectedRows();
         } else {

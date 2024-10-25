@@ -62,7 +62,7 @@ public class BScrollBar extends Widget<JScrollBar> {
      */
     public BScrollBar(int value, int extent, int minimum, int maximum, Orientation orientation) {
         component = createComponent(orientation);
-        getComponent().setModel(model = new DefaultBoundedRangeModel(value, extent, minimum, maximum));
+        component.setModel(model = new DefaultBoundedRangeModel(value, extent, minimum, maximum));
     }
 
     /**
