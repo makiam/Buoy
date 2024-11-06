@@ -163,6 +163,11 @@ public class BTree extends Widget<JTree> {
         return new JTree(model);
     }
 
+    @Override
+    public JTree getComponent() {
+        return component;
+    }
+    
     /**
      * Get the TreeModel which controls the contents of this BTree.
      */
